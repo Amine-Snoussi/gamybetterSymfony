@@ -29,6 +29,13 @@ class Personne
     private $nomPersonne;
 
     /**
+     * @var string|null
+     *
+     * @ORM\Column(name="prenom_personne", type="string", length=30, nullable=true)
+     */
+    private $prenomPersonne;
+
+    /**
      * @var int|null
      *
      * @ORM\Column(name="contact", type="integer", nullable=true)
@@ -43,79 +50,79 @@ class Personne
     private $rating;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="role", type="string", length=30, nullable=false)
+     * @ORM\Column(name="role", type="string", length=30, nullable=true)
      */
     private $role;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="mot_de_passe", type="string", length=15, nullable=false)
+     * @ORM\Column(name="mot_de_passe", type="string", length=15, nullable=true)
      */
     private $motDePasse;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="email", type="string", length=50, nullable=false)
+     * @ORM\Column(name="email", type="string", length=50, nullable=true)
      */
     private $email;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="description", type="string", length=500, nullable=false)
+     * @ORM\Column(name="description", type="string", length=500, nullable=true)
      */
     private $description;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="competence", type="string", length=250, nullable=false)
+     * @ORM\Column(name="competence", type="string", length=250, nullable=true)
      */
     private $competence;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="jeux", type="string", length=50, nullable=false)
+     * @ORM\Column(name="jeux", type="string", length=50, nullable=true)
      */
     private $jeux;
 
     /**
-     * @var float
+     * @var float|null
      *
-     * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=false)
+     * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=true)
      */
     private $prix;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="heros", type="string", length=20, nullable=false)
+     * @ORM\Column(name="heros", type="string", length=20, nullable=true)
      */
     private $heros;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="ig_name", type="string", length=20, nullable=false)
+     * @ORM\Column(name="ig_name", type="string", length=20, nullable=true)
      */
     private $igName;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="ig_role", type="string", length=10, nullable=false)
+     * @ORM\Column(name="ig_role", type="string", length=10, nullable=true)
      */
     private $igRole;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="ig_rank", type="integer", nullable=false)
+     * @ORM\Column(name="ig_rank", type="integer", nullable=true)
      */
     private $igRank;
 

@@ -13,13 +13,20 @@ use Doctrine\ORM\Mapping as ORM;
 class Produit
 {
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="itemCode", type="integer", nullable=false)
+     * @ORM\Column(name="itemCode", type="string", length=11, nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $itemcode;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="image", type="string", length=300, nullable=true)
+     */
+    private $image;
 
     /**
      * @var string|null
@@ -38,16 +45,9 @@ class Produit
     /**
      * @var string|null
      *
-     * @ORM\Column(name="categorie", type="string", length=20, nullable=true)
+     * @ORM\Column(name="categorie", type="string", length=30, nullable=true)
      */
     private $categorie;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="prix_unitair", type="decimal", precision=6, scale=2, nullable=true)
-     */
-    private $prixUnitair;
 
     /**
      * @var int|null
@@ -57,11 +57,32 @@ class Produit
     private $quantiteStock;
 
     /**
-     * @var string|null
+     * @var float|null
      *
-     * @ORM\Column(name="image", type="string", length=50, nullable=true)
+     * @ORM\Column(name="prix_unitair", type="float", precision=6, scale=2, nullable=true)
      */
-    private $image;
+    private $prixUnitair;
 
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(name="discount", type="integer", nullable=true)
+     */
+    private $discount;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Commande", mappedBy="itemcode")
+     */
+    private $idCommande;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->idCommande = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
 }
