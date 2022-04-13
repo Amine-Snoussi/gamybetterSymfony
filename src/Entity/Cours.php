@@ -1,162 +1,87 @@
-<?php /** @noinspection ALL */
+<?php
 
 namespace App\Entity;
 
-use App\Repository\CoursRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CoursRepository::class)
+ * Cours
+ *
+ * @ORM\Table(name="cours", indexes={@ORM\Index(name="cours_session", columns={"id_session"}), @ORM\Index(name="cours_coach", columns={"id_coach"})})
+ * @ORM\Entity
  */
 class Cours
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email_coach", type="string", length=50, nullable=false)
+     */
+    private $emailCoach;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="categorie", type="string", length=50, nullable=false)
      */
     private $categorie;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="jeu", type="string", length=50, nullable=false)
      */
     private $jeu;
 
     /**
-     * @ORM\Column(type="float")
+     * @var float
+     *
+     * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=false)
      */
     private $prix;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="cours")
-     * @ORM\JoinColumn(nullable=false)
+     * @var string
+     *
+     * @ORM\Column(name="lien_session", type="string", length=200, nullable=false)
      */
-    private $user;
+    private $lienSession;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Session::class, inversedBy="cours")
+     * @var string
+     *
+     * @ORM\Column(name="liste_personnes", type="string", length=200, nullable=false)
      */
-    private $session;
+    private $listePersonnes;
 
     /**
-     * @ORM\OneToMany(targetEntity=CoursDetails::class, mappedBy="cours")
+     * @var \Session
+     *
+     * @ORM\ManyToOne(targetEntity="Session")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_session", referencedColumnName="id")
+     * })
      */
-    private $coursDetails;
-
-    public function __construct()
-    {
-        $this->coursDetails = new ArrayCollection();
-    }
-
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-
-    public function getCategorie(): ?string
-    {
-        return $this->categorie;
-    }
-
-    public function setCategorie(string $categorie): self
-    {
-        $this->categorie = $categorie;
-
-        return $this;
-    }
-
-    public function getJeu(): ?string
-    {
-        return $this->jeu;
-    }
-
-    public function setJeu(string $jeu): self
-    {
-        $this->jeu = $jeu;
-
-        return $this;
-    }
-
-    public function getPrix(): ?float
-    {
-        return $this->prix;
-    }
-
-    public function setPrix(float $prix): self
-    {
-        $this->prix = $prix;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    public function getSession(): ?Session
-    {
-        return $this->session;
-    }
-
-    public function setSession(?Session $session): self
-    {
-        $this->session = $session;
-
-        return $this;
-    }
+    private $idSession;
 
     /**
-     * @return Collection<int, CoursDetails>
+     * @var \Personne
+     *
+     * @ORM\ManyToOne(targetEntity="Personne")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_coach", referencedColumnName="id_personne")
+     * })
      */
-    public function getCoursDetails(): Collection
-    {
-        return $this->coursDetails;
-    }
-
-    public function addCoursDetail(CoursDetails $coursDetail): self
-    {
-        if (!$this->coursDetails->contains($coursDetail)) {
-            $this->coursDetails[] = $coursDetail;
-            $coursDetail->setCours($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCoursDetail(CoursDetails $coursDetail): self
-    {
-        if ($this->coursDetails->removeElement($coursDetail)) {
-            // set the owning side to null (unless already changed)
-            if ($coursDetail->getCours() === $this) {
-                $coursDetail->setCours(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function __toString()
-    {
-        return $this->getJeu();
-    }
+    private $idCoach;
 
 
 }
