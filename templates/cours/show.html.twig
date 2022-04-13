@@ -1,0 +1,35 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Cours{% endblock %}
+
+{% block body %}
+    <h1>Cours</h1>
+    <a href="{{ path('cours.list') }}" class="ri-arrow-go-back-fill btn btn-outline-primary"> </a>
+    <a href="{{ path('cours.edit', {'id': cour.id}) }}" class=" btn btn-outline-primary bi bi-pencil-square"></a>
+
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ cour.id }}</td>
+        </tr>
+        <tr>
+            <th>Categorie</th>
+            <td>{{ cour.categorie }}</td>
+        </tr>
+        <tr>
+            <th>Jeu</th>
+            <td>{{ cour.jeu }}</td>
+        </tr>
+        <tr>
+            <th>Prix</th>
+            <td>{{ cour.prix }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    {{ include('cours/_delete_form.html.twig') }}
+
+
+{% endblock %}
