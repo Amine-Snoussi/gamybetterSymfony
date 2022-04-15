@@ -1,0 +1,46 @@
+{% extends 'base-back.html.twig' %}
+
+
+{% block title %}Session index{% endblock %}
+
+{% block body %}
+    <h1>Liste des Sessions</h1>
+
+    <table class="table datatable">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Duree</th>
+                <th>Date</th>
+                <th>Jeu</th>
+                <th>Categorie</th>
+                <th>Prix</th>
+                <th>Nom</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for session in sessions %}
+            <tr>
+                <td>{{ session.id }}</td>
+                <td>{{ session.duree ? session.duree|date('H:i:s') : '' }}</td>
+                <td>{{ session.date ? session.date|date('Y-m-d') : '' }}</td>
+                <td>{{ session.jeu }}</td>
+                <td>{{ session.categorie }}</td>
+                <td>{{ session.prix }}</td>
+                <td>{{ session.nom }}</td>
+                <td>
+                    <a href="{{ path('app_session_show', {'id': session.id}) }}" class=" btn btn-outline-primary bi bi-eye-fill"></a>
+                    <a href="{{ path('app_session_edit', {'id': session.id}) }}"  class=" btn btn-outline-primary bi bi-pencil-square"></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_session_new') }}" class="btn btn-outline-primary">Create new</a>
+{% endblock %}

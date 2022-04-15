@@ -38,6 +38,8 @@ class CoursController extends AbstractController
     {
         $cour = new Cours();
         $form = $this->createForm(CoursType::class, $cour);
+
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -77,6 +79,7 @@ class CoursController extends AbstractController
     {
         dump($cour);
         $form = $this->createForm(CoursType::class, $cour);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -96,12 +99,9 @@ class CoursController extends AbstractController
     public function delete(Request $request, Cours $cour, CoursRepository $coursRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$cour->getId(), $request->request->get('_token'))) {
-            try {
-                $coursRepository->remove($cour);
-            } catch (OptimisticLockException|ORMException $e) {
-            }
+            $coursRepository->remove($cour);
         }
 
-        return $this->redirectToRoute('cours.listcours.list', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('cours.list', [], Response::HTTP_SEE_OTHER);
     }
 }
