@@ -3,8 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Cours;
+use App\Entity\Personne;
 use App\Entity\Session;
-use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -35,8 +35,8 @@ class CoursType extends AbstractType
                     'placeholder' => 'prix',
                 ]
             ])
-            ->add('user', EntityType::class, [
-                'class' => User::class,
+            ->add('personne', EntityType::class, [
+                'class' => Personne::class,
                 'multiple' => false,
                 'placeholder' => 'choisir un propriétaire',
                 'expanded' => false,

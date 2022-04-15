@@ -127,7 +127,7 @@ class Personne
     private $igRank;
 
     /**
-     * @var \Equipe
+     * @var Equipe
      *
      * @ORM\ManyToOne(targetEntity="Equipe")
      * @ORM\JoinColumns({
@@ -135,6 +135,283 @@ class Personne
      * })
      */
     private $idEquipe;
+
+    /**
+     * @return int
+     */
+    public function getIdPersonne(): int
+    {
+        return $this->idPersonne;
+    }
+
+    /**
+     * @param int $idPersonne
+     */
+    public function setIdPersonne(int $idPersonne): void
+    {
+        $this->idPersonne = $idPersonne;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getNomPersonne(): ?string
+    {
+        return $this->nomPersonne;
+    }
+
+    /**
+     * @param string|null $nomPersonne
+     */
+    public function setNomPersonne(?string $nomPersonne): void
+    {
+        $this->nomPersonne = $nomPersonne;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPrenomPersonne(): ?string
+    {
+        return $this->prenomPersonne;
+    }
+
+    /**
+     * @param string|null $prenomPersonne
+     */
+    public function setPrenomPersonne(?string $prenomPersonne): void
+    {
+        $this->prenomPersonne = $prenomPersonne;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getContact(): ?int
+    {
+        return $this->contact;
+    }
+
+    /**
+     * @param int|null $contact
+     */
+    public function setContact(?int $contact): void
+    {
+        $this->contact = $contact;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getRating(): ?int
+    {
+        return $this->rating;
+    }
+
+    /**
+     * @param int|null $rating
+     */
+    public function setRating(?int $rating): void
+    {
+        $this->rating = $rating;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param string|null $role
+     */
+    public function setRole(?string $role): void
+    {
+        $this->role = $role;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getMotDePasse(): ?string
+    {
+        return $this->motDePasse;
+    }
+
+    /**
+     * @param string|null $motDePasse
+     */
+    public function setMotDePasse(?string $motDePasse): void
+    {
+        $this->motDePasse = $motDePasse;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string|null $email
+     */
+    public function setEmail(?string $email): void
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string|null $description
+     */
+    public function setDescription(?string $description): void
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCompetence(): ?string
+    {
+        return $this->competence;
+    }
+
+    /**
+     * @param string|null $competence
+     */
+    public function setCompetence(?string $competence): void
+    {
+        $this->competence = $competence;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getJeux(): ?string
+    {
+        return $this->jeux;
+    }
+
+    /**
+     * @param string|null $jeux
+     */
+    public function setJeux(?string $jeux): void
+    {
+        $this->jeux = $jeux;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getPrix(): ?float
+    {
+        return $this->prix;
+    }
+
+    /**
+     * @param float|null $prix
+     */
+    public function setPrix(?float $prix): void
+    {
+        $this->prix = $prix;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getHeros(): ?string
+    {
+        return $this->heros;
+    }
+
+    /**
+     * @param string|null $heros
+     */
+    public function setHeros(?string $heros): void
+    {
+        $this->heros = $heros;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getIgName(): ?string
+    {
+        return $this->igName;
+    }
+
+    /**
+     * @param string|null $igName
+     */
+    public function setIgName(?string $igName): void
+    {
+        $this->igName = $igName;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getIgRole(): ?string
+    {
+        return $this->igRole;
+    }
+
+    /**
+     * @param string|null $igRole
+     */
+    public function setIgRole(?string $igRole): void
+    {
+        $this->igRole = $igRole;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getIgRank(): ?int
+    {
+        return $this->igRank;
+    }
+
+    /**
+     * @param int|null $igRank
+     */
+    public function setIgRank(?int $igRank): void
+    {
+        $this->igRank = $igRank;
+    }
+
+    /**
+     * @return Equipe
+     */
+    public function getIdEquipe(): Equipe
+    {
+        return $this->idEquipe;
+    }
+
+    /**
+     * @param Equipe $idEquipe
+     */
+    public function setIdEquipe(Equipe $idEquipe): void
+    {
+        $this->idEquipe = $idEquipe;
+    }
+
+    public function __toString()
+    {
+        return $this->getNomPersonne();
+    }
 
 
 }
