@@ -2,90 +2,166 @@
 
 namespace App\Entity;
 
+use App\Repository\EvenementRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Evenement
- *
- * @ORM\Table(name="evenement", indexes={@ORM\Index(name="evenement_personne", columns={"id_proprietaire"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=EvenementRepository::class)
  */
 class Evenement
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_event", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idEvent;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="nb_eq", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="integer")
      */
     private $nbEq;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="Nom_event", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $nomEvent;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="description_event", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $descriptionEvent;
 
     /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="date_debut_event", type="date", nullable=true)
+     * @ORM\Column(type="datetime")
      */
     private $dateDebutEvent;
 
     /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="date_fin_event", type="date", nullable=true)
+     * @ORM\Column(type="datetime")
      */
     private $dateFinEvent;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=false)
+     * @ORM\Column(type="float")
      */
     private $prix;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="etat", type="integer", nullable=false)
+     * @ORM\Column(type="integer")
      */
     private $etat;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="liste_equipe", type="string", length=200, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $listeEquipe;
 
-    /**
-     * @var \Personne
-     *
-     * @ORM\ManyToOne(targetEntity="Personne")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_proprietaire", referencedColumnName="id_personne")
-     * })
-     */
-    private $idProprietaire;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+        return $this;
+    }
 
+    public function getNbEq(): ?int
+    {
+        return $this->nbEq;
+    }
+
+    public function setNbEq(int $nbEq): self
+    {
+        $this->nbEq = $nbEq;
+
+        return $this;
+    }
+
+    public function getNomEvent(): ?string
+    {
+        return $this->nomEvent;
+    }
+
+    public function setNomEvent(string $nomEvent): self
+    {
+        $this->nomEvent = $nomEvent;
+
+        return $this;
+    }
+
+    public function getDescriptionEvent(): ?string
+    {
+        return $this->descriptionEvent;
+    }
+
+    public function setDescriptionEvent(string $descriptionEvent): self
+    {
+        $this->descriptionEvent = $descriptionEvent;
+
+        return $this;
+    }
+
+    public function getDateDebutEvent(): ?\DateTimeInterface
+    {
+        return $this->dateDebutEvent;
+    }
+
+    public function setDateDebutEvent(\DateTimeInterface $dateDebutEvent): self
+    {
+        $this->dateDebutEvent = $dateDebutEvent;
+
+        return $this;
+    }
+
+    public function getDateFinEvent(): ?\DateTimeInterface
+    {
+        return $this->dateFinEvent;
+    }
+
+    public function setDateFinEvent(\DateTimeInterface $dateFinEvent): self
+    {
+        $this->dateFinEvent = $dateFinEvent;
+
+        return $this;
+    }
+
+    public function getPrix(): ?float
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(float $prix): self
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getEtat(): ?int
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(int $etat): self
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getListeEquipe(): ?string
+    {
+        return $this->listeEquipe;
+    }
+
+    public function setListeEquipe(string $listeEquipe): self
+    {
+        $this->listeEquipe = $listeEquipe;
+
+        return $this;
+    }
 }
