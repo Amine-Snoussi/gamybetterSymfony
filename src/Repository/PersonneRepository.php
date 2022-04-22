@@ -2,30 +2,30 @@
 
 namespace App\Repository;
 
-use App\Entity\Session;
+use App\Entity\Personne;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Session|null find($id, $lockMode = null, $lockVersion = null)
- * @method Session|null findOneBy(array $criteria, array $orderBy = null)
- * @method Session[]    findAll()
- * @method Session[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Personne|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Personne|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Personne[]    findAll()
+ * @method Personne[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class SessionRepository extends ServiceEntityRepository
+class PersonneRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Session::class);
+        parent::__construct($registry, Personne::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Session $entity, bool $flush = true): void
+    public function add(Personne $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -37,7 +37,7 @@ class SessionRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Session $entity, bool $flush = true): void
+    public function remove(Personne $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -46,15 +46,15 @@ class SessionRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Session[] Returns an array of Session objects
+    //  * @return Personne[] Returns an array of Personne objects
     //  */
     /*
     public function findByExampleField($value)
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.exampleField = :val')
             ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
+            ->orderBy('p.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
@@ -63,10 +63,10 @@ class SessionRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Session
+    public function findOneBySomeField($value): ?Personne
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()

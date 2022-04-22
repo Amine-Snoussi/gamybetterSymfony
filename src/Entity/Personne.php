@@ -3,138 +3,212 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PersonneRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
- * Personne
- *
- * @ORM\Table(name="personne", indexes={@ORM\Index(name="personne_equipe", columns={"id_equipe"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=PersonneRepository::class)
+ * @UniqueEntity(
+ *  fields={"email"},
+ *  message = "l'email que vous avez tapez existe déjà !"
+ * )
+ * 
  */
-class Personne
+  class Personne implements UserInterface
+
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_personne", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
-    private $idPersonne;
+    private $id;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="nom_personne", type="string", length=20, nullable=true)
+     * @ORM\Column(name="nom_personne" , type="string", length=255)
      */
-    private $nomPersonne;
+    private $username;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="prenom_personne", type="string", length=30, nullable=true)
-     */
-    private $prenomPersonne;
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="contact", type="integer", nullable=true)
+     * @ORM\Column(type="integer")
      */
     private $contact;
 
     /**
-     * @var int|null
-     *
-     * @ORM\Column(name="rating", type="integer", nullable=true)
+     * @ORM\Column(name="mot_de_passe" , type="string", length=255)
+     * @Assert\Length(min="8",minMessage="Votre mot de passe doit faire minimum 8 caractères")
      */
-    private $rating;
+    private $password;
+
+/**
+ * @Assert\EqualTo(propertyPath="password",message="vous n'avez pas tapez le même mot de passe")
+ */
+    public $confirm_password;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="role", type="string", length=30, nullable=true)
-     */
-    private $role;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="mot_de_passe", type="string", length=15, nullable=true)
-     */
-    private $motDePasse;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="email", type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Email()
      */
     private $email;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="description", type="string", length=500, nullable=true)
+     * @ORM\Column(type="string", length=255)
+     */
+    private $role;
+
+    /**
+     * @ORM\Column(type="string", length=500)
      */
     private $description;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="competence", type="string", length=250, nullable=true)
+     * @ORM\OneToMany(targetEntity=Reclamation::class, mappedBy="personne",cascade={"all"},orphanRemoval=true)
      */
-    private $competence;
+    private $reclamations;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="jeux", type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $jeux;
+    private $image;
+
+    public function __construct()
+    {
+        $this->reclamations = new ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    public function getContact(): ?int
+    {
+        return $this->contact;
+    }
+
+    public function setContact(int $contact): self
+    {
+        $this->contact = $contact;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
 
     /**
-     * @var float|null
-     *
-     * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=true)
+     * @return Collection<int, Reclamation>
      */
-    private $prix;
+    public function getReclamations(): Collection
+    {
+        return $this->reclamations;
+    }
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="heros", type="string", length=20, nullable=true)
-     */
-    private $heros;
+    public function addReclamation(Reclamation $reclamation): self
+    {
+        if (!$this->reclamations->contains($reclamation)) {
+            $this->reclamations[] = $reclamation;
+            $reclamation->setPersonne($this);
+        }
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="ig_name", type="string", length=20, nullable=true)
-     */
-    private $igName;
+        return $this;
+    }
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="ig_role", type="string", length=10, nullable=true)
-     */
-    private $igRole;
+    public function removeReclamation(Reclamation $reclamation): self
+    {
+        if ($this->reclamations->removeElement($reclamation)) {
+            // set the owning side to null (unless already changed)
+            if ($reclamation->getPersonne() === $this) {
+                $reclamation->setPersonne(null);
+            }
+        }
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="ig_rank", type="integer", nullable=true)
-     */
-    private $igRank;
+        return $this;
+    }
+   
 
-    /**
-     * @var \Equipe
-     *
-     * @ORM\ManyToOne(targetEntity="Equipe")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_equipe", referencedColumnName="id_equipe")
-     * })
-     */
-    private $idEquipe;
+  
 
 
+    public function eraseCredentials(){}
+    
+    public function getSalt(){}
+    
+    public function getRoles (){
+        return ['ROLE_USER'];
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
 }
