@@ -20,7 +20,7 @@ class ReclamationType extends AbstractType
             ->add('email_sender')
             ->add('personne',EntityType::class,[
                 'class'=>Personne::class,
-                'choice_label'=>"nom_personne"
+                'choice_label'=>"username"
             ])
         ;
     }
