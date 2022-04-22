@@ -15,7 +15,7 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <a href="{{ path('add_evenement') }}" class="btn btn-outline-success" ><li class="bi bi-pen">Créer</li> </a>
+                                <a href="{{ path('add_evenement') }}"  >Create new</a>
                             </div>
                             <div class="col-sm-6">
 
@@ -65,8 +65,8 @@
                                         <td>{{ evenements.listeEquipe }} </td>
                                         <td>
                                             <a href="{{ path('details_evenement',{'id':evenements.id }) }}" class="btn btn-outline-primary"> <i class="bi bi-eye"></i> </a>
-                                            <a href="{{ path('edit_evenement',{'id':evenements.id }) }}" class="btn btn-outline-warning"> <i class="bi bi-pencil-square"></i> </a>
-                                            <a href="{{ path('delete_evenement',{'id':evenements.id }) }}" class="btn btn-outline-danger" onclick="return confirm('Voulez vous vraiment supprimer cet évènement ?')"> <i class="bi bi-trash"></i> </a>
+                                            <a href="{{ path('edit_evenement',{'id':evenements.id }) }}" class="btn btn-outline-primary"> <i class="bi bi-pencil-square"></i> </a>
+                                            <a href="{{ path('delete_evenement',{'id':evenements.id }) }}" class="btn btn-outline-primary" onclick="return confirm('Voulez vous vraiment supprimer cet évènement ?')"> <i class="bi bi-trash"></i> </a>
                                         </td>
 
                                     </tr>

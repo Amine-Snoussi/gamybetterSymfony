@@ -3,6 +3,7 @@
 namespace App\Entity;
 use App\Repository\EquipeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=EquipeRepository::class)
@@ -21,6 +22,7 @@ class Equipe
      * @var string
      *
      * @ORM\Column(name="nom_eq", type="string", length=255, nullable=true)
+     * @Assert\NotBlank
      */
     private $nomEq;
 
@@ -28,6 +30,7 @@ class Equipe
      * @var string
      *
      * @ORM\Column(name="description_equipe", type="string", length=255, nullable=true)
+     * @Assert\NotBlank
      */
     private $descriptionEquipe;
 
