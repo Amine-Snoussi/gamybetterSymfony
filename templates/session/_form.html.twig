@@ -1,5 +1,71 @@
-{{ form_start(form, {'attr':{novalidate:'novalidate'}}) }}
-{{ form_widget(form) }}
+{{ form_start(form, {'attr':{novalidate:'novalidate', class:'needs-validation'}}) }}
+
+<div class="row g-3">
+    <!-- Nom -->
+    <div class="col-md-3">
+        <label for="inputNom" class="form-label">
+            {{ form_label(form.nom) }}
+        </label>
+        {{ form_errors(form.nom) }}
+        {{ form_widget(form.nom) }}
+        {{ form_help(form.nom) }}
+    </div>
+    <!-- Categorie -->
+    <div class="col-md-3">
+        <label for="inputCategorie" class="form-label">
+            {{ form_label(form.categorie) }}
+        </label>
+        {{ form_errors(form.categorie) }}
+        {{ form_widget(form.categorie) }}
+        {{ form_help(form.categorie) }}
+    </div>
+    <!-- Jeu -->
+    <div class="col-md-3">
+        <label for="inputJeu" class="form-label">
+            {{ form_label(form.jeu) }}
+        </label>
+        {{ form_errors(form.jeu) }}
+        {{ form_widget(form.jeu) }}
+        {{ form_help(form.jeu) }}
+    </div>
+    <!-- Prix -->
+    <div class="col-md-3">
+        <label for="inputPrix" class="form-label">
+            {{ form_label(form.prix) }}
+        </label>
+        {{ form_errors(form.prix) }}
+        {{ form_widget(form.prix) }}
+        {{ form_help(form.prix) }}
+    </div>
+    <div class="col-md-6">
+        <label for="inputDate" class="form-label">
+            {{ form_label(form.date) }}
+        </label>
+        {{ form_errors(form.date) }}
+        {{ form_widget(form.date) }}
+        {{ form_help(form.date) }}
+    </div>
+    <div class="col-md-6">
+        <label for="inputDuree" class="form-label">
+            {{ form_label(form.duree) }}
+        </label>
+        {{ form_errors(form.duree) }}
+        {{ form_widget(form.duree) }}
+        {{ form_help(form.duree) }}
+    </div>
+    <div class="col-md-12">
+        <label for="inputCours" class="form-label">
+            {{ form_label(form.cours) }}
+        </label>
+        {{ form_errors(form.cours) }}
+        {{ form_widget(form.cours) }}
+        {{ form_help(form.cours) }}
+    </div>
+
+
+</div>
+
 <button class="btn btn-primary"
         style="float: right; margin-top: 15px; margin-bottom: 15px">{{ button_label|default('Save') }}</button>
+
 {{ form_end(form) }}

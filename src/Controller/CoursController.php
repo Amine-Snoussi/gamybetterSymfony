@@ -3,15 +3,21 @@
 namespace App\Controller;
 
 use App\Entity\Cours;
-use App\Form\Cours2Type;
 use App\Form\CoursType;
 use App\Repository\CoursRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Imagine\Image\Box;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Intervention\Image\ImageManager;
 use Symfony\Component\Routing\Annotation\Route;
+use Imagine\Image;
+
+
 
 /**
  * @Route("/cours", name="cours.")
@@ -34,22 +40,41 @@ class CoursController extends AbstractController
      * @param CoursRepository $coursRepository
      * @return Response
      */
-    public function new(Request $request, CoursRepository $coursRepository): Response
+    public function new(Request $request, CoursRepository $coursRepository, UserRepository $userRepository): Response
     {
         $cour = new Cours();
-        $form = $this->createForm(CoursType::class, $cour);
-
-
+        $formOptions = ['users' => $userRepository->findAll()];
+        $form = $this->createForm(CoursType::class, $cour, $formOptions);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-            try {
-                $coursRepository->add($cour);
-            } catch (OptimisticLockException|ORMException $e) {
+            /** @var UploadedFile $file */
+            /** @var UploadedFile $video */
+            $file = ($request->files->get('cours')['fileName']);
+            $video = ($request->files->get('cours')['video']);
+            dump($request->files->get('cours'));
+
+            if ($file && $video) {
+                $newfilename = md5(uniqid()) . '.' . $file->guessClientExtension();
+                $newVideoName = md5(uniqid()) . '.' . $video->guessClientExtension();
+                $file->move(
+                    $this->getParameter('uploads_dir'),
+                    $newfilename
+                );
+                $video->move(
+                    $this->getParameter('uploads_dir'),
+                    $newVideoName
+                );
+
+                $cour->setFileName($newfilename);
+                $cour->setVideo($newVideoName);
+                try {
+
+                    $coursRepository->add($cour);
+                } catch (OptimisticLockException|ORMException $e) {
+                }
             }
             return $this->redirectToRoute('cours.list', [], Response::HTTP_SEE_OTHER);
         }
-
         return $this->render('cours/new.html.twig', [
             'cour' => $cour,
             'form' => $form->createView(),
@@ -77,16 +102,13 @@ class CoursController extends AbstractController
      */
     public function edit(Request $request, Cours $cour, CoursRepository $coursRepository): Response
     {
-        dump($cour);
         $form = $this->createForm(CoursType::class, $cour);
 
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $coursRepository->add($cour);
             return $this->redirectToRoute('cours.list', [], Response::HTTP_SEE_OTHER);
         }
-
         return $this->render('cours/edit.html.twig', [
             'cour' => $cour,
             'form' => $form->createView(),
@@ -98,10 +120,16 @@ class CoursController extends AbstractController
      */
     public function delete(Request $request, Cours $cour, CoursRepository $coursRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$cour->getId(), $request->request->get('_token'))) {
-            $coursRepository->remove($cour);
+        if ($this->isCsrfTokenValid('delete' . $cour->getId(), $request->request->get('_token'))) {
+            try {
+                $coursRepository->remove($cour);
+            } catch (OptimisticLockException|ORMException $e) {
+            }
         }
-
         return $this->redirectToRoute('cours.list', [], Response::HTTP_SEE_OTHER);
     }
+
+
+
+
 }

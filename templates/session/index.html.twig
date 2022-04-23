@@ -29,10 +29,12 @@
                 <td>{{ session.categorie }}</td>
                 <td>{{ session.prix }}</td>
                 <td>{{ session.nom }}</td>
+
                 <td>
                     <a href="{{ path('app_session_show', {'id': session.id}) }}" class=" btn btn-outline-primary bi bi-eye-fill"></a>
                     <a href="{{ path('app_session_edit', {'id': session.id}) }}"  class=" btn btn-outline-primary bi bi-pencil-square"></a>
                 </td>
+
             </tr>
         {% else %}
             <tr>
@@ -43,4 +45,9 @@
     </table>
 
     <a href="{{ path('app_session_new') }}" class="btn btn-outline-primary">Create new</a>
+    <a href={{ path('pdf')}}" class="btn btn-outline-primary"> wop</a>
+
+    <div>
+        <div id="calendar-holder"></div>
+    </div>
 {% endblock %}

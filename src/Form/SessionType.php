@@ -7,6 +7,7 @@ use App\Entity\Session;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -36,10 +37,21 @@ class SessionType extends AbstractType
                     'class' => 'form-control',
                 ]
             ])
-            ->add('jeu', TextType::class, [
+            ->add('jeu', ChoiceType::class, [
+                'label' => 'Jeu* :',
+                'placeholder' => false,
+                'choices' => [
+                    'Choose a game' => 'Choose a game',
+                    'Valorant' => 'Valorant',
+                    'League of legends' => 'League of legends',
+                    'Fifa' => 'Fifa'
+                ],
+                'choice_attr' =>
+                    function ($key, $val, $index) {
+                        return $key == 'Choose a game' ? ['disabled' => true] : ['disabled' => false];
+                    },
                 'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'Jeu'
+                    'class' => 'form-select',
                 ]
             ])
             ->add('categorie', TextType::class, [

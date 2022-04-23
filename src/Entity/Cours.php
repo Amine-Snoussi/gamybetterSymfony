@@ -20,6 +20,11 @@ class Cours
      */
     private $id;
 
+    /**
+     * @Assert\NotBlank(message="veillez entrer un nom")
+     * @ORM\Column(type="string", length=255)
+     */
+    private $nom;
 
     /**
      * @Assert\NotBlank(message="veillez entrer une catégorie")
@@ -58,6 +63,20 @@ class Cours
      */
     private $session;
 
+    /**
+     * mimeTypes = {"image/jpeg", "image/png", "image/jpg"},
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $fileName;
+
+    /**
+     * mimeTypes = {"video/mp4"}
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $video;
+
+
+
     public function __construct()
     {
         $this->coursDetails = new ArrayCollection();
@@ -67,6 +86,18 @@ class Cours
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
     }
 
 
@@ -165,6 +196,32 @@ class Cours
 
         return $this;
     }
+
+    public function getFileName(): ?string
+    {
+        return $this->fileName;
+    }
+
+    public function setFileName(?string $fileName): self
+    {
+        $this->fileName = $fileName;
+
+        return $this;
+    }
+
+    public function getVideo(): ?string
+    {
+        return $this->video;
+    }
+
+    public function setVideo(?string $video): self
+    {
+        $this->video = $video;
+
+        return $this;
+    }
+
+
 
 
 

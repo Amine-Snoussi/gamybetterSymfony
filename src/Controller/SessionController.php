@@ -4,9 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Session;
 use App\Form\SessionType;
+use App\Repository\CoursRepository;
 use App\Repository\SessionRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -84,7 +87,7 @@ class SessionController extends AbstractController
      */
     public function delete(Request $request, Session $session, SessionRepository $sessionRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$session->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $session->getId(), $request->request->get('_token'))) {
             try {
                 $sessionRepository->remove($session);
             } catch (OptimisticLockException|ORMException $e) {
@@ -92,5 +95,24 @@ class SessionController extends AbstractController
         }
 
         return $this->redirectToRoute('app_session_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/session/pdf", name="pdf",methods="GET")
+     */
+    public function pdf(SessionRepository $sessionRepository)
+    {
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFront', 'Arial');
+        $dompdf = new Dompdf($pdfOptions);
+        $cours = $sessionRepository->findAll();
+        $html = $this->renderView('session/pdfSession.html.twig',
+            ['sessions' => $cours]);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => true
+        ]);
     }
 }

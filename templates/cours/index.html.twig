@@ -3,36 +3,44 @@
 {% block title %}Cours index{% endblock %}
 
 {% block body %}
-    <h1>Liste des Cours</h1>
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">Liste des Cours</h1>
+            <table class="table datatable ">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Categorie</th>
+                    <th>Jeu</th>
+                    <th>Prix</th>
+                    <th>actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for cour in cours %}
+                    <tr>
+                        <td>{{ cour.nom }}</td>
+                        <td>{{ cour.categorie }}</td>
+                        <td>{{ cour.jeu }}</td>
+                        <td>{{ cour.prix }}</td>
+                        <td>
+                            <a href="{{ path('cours.show', {'id': cour.id}) }}"
+                               class=" btn btn-outline-primary bi bi-eye-fill"></a>
+                            <a href="{{ path('cours.edit', {'id': cour.id}) }}"
+                               class=" btn btn-outline-primary bi bi-pencil-square"></a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{ path('cours.create') }}" class="btn btn-outline-primary">Create new</a>
+        </div>
+    </div>
 
-    <table class="table datatable ">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Categorie</th>
-                <th>Jeu</th>
-                <th>Prix</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for cour in cours %}
-            <tr>
-                <td>{{ cour.id }}</td>
-                <td>{{ cour.categorie }}</td>
-                <td>{{ cour.jeu }}</td>
-                <td>{{ cour.prix }}</td>
-                <td>
-                    <a href="{{ path('cours.show', {'id': cour.id}) }}" class=" btn btn-outline-primary bi bi-eye-fill"></a>
-                    <a href="{{ path('cours.edit', {'id': cour.id}) }}" class=" btn btn-outline-primary bi bi-pencil-square"></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <a href="{{ path('cours.create') }}"  class="btn btn-outline-primary">Create new</a>
+
+
 {% endblock %}
