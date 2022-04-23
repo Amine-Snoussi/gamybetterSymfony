@@ -6,6 +6,7 @@ use App\Entity\Publication;
 use App\Form\PublicationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -32,33 +33,32 @@ class PublicationController extends AbstractController
     }
 
 
- /**
+    /**
      * @Route("/Liste_pdf", name="app_publication_index_pdf", methods={"GET"})
      */
     public function listepdf(EntityManagerInterface $entityManager): Response
     {
-        
+
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
-        
+
         // Instantiate Dompdf with our options
         $dompdf = new Dompdf($pdfOptions);
-           
-        
+
+
         $publications = $entityManager
             ->getRepository(Publication::class)
             ->findAll();
 
-       
-        
+
         // Retrieve the HTML generated in our twig file
         $html = $this->renderView('publication/Liste_pdf.html.twig', [
             'publications' => $publications,
         ]);
-        
+
         // Load HTML to Dompdf
         $dompdf->loadHtml($html);
-        
+
         // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
         $dompdf->setPaper('A4', 'portrait');
 
@@ -70,11 +70,6 @@ class PublicationController extends AbstractController
             "Attachment" => true
         ]);
     }
-        
-        
-        
-     
-    
 
 
     /**
@@ -92,7 +87,7 @@ class PublicationController extends AbstractController
                 $originalFilename = pathinfo($ImageFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
                 //$safeFilename = $slugger->slug($originalFilename);
-                $newFilename = md5(uniqid()).'.'.$ImageFile->guessExtension();
+                $newFilename = md5(uniqid()) . '.' . $ImageFile->guessExtension();
 
                 // Move the file to the directory where brochures are stored
                 try {
@@ -148,7 +143,7 @@ class PublicationController extends AbstractController
                 $originalFilename = pathinfo($ImageFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
                 //$safeFilename = $slugger->slug($originalFilename);
-                $newFilename = md5(uniqid()).'.'.$ImageFile->guessExtension();
+                $newFilename = md5(uniqid()) . '.' . $ImageFile->guessExtension();
 
                 // Move the file to the directory where brochures are stored
                 try {
@@ -184,7 +179,7 @@ class PublicationController extends AbstractController
      */
     public function delete(Request $request, Publication $publication, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$publication->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $publication->getId(), $request->request->get('_token'))) {
             $entityManager->remove($publication);
             $entityManager->flush();
         }

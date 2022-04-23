@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Publication
  *
- * @ORM\Table(name="publication", indexes={@ORM\Index(name="id_perssonne", columns={"id_perssonne"})})
+ * @ORM\Table(name="publication", indexes={@ORM\Index(name="id_personne", columns={"id_personne"})})
  * @ORM\Entity
  */
 class Publication
@@ -71,10 +71,10 @@ class Publication
      *
      * @ORM\ManyToOne(targetEntity="Personne")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_perssonne", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_personne", referencedColumnName="id_personne")
      * })
      */
-    private $idPerssonne;
+    private $idPersonne;
 
     public function getId(): ?int
     {
@@ -153,14 +153,14 @@ class Publication
         return $this;
     }
 
-    public function getIdPerssonne(): ?Personne
+    public function getIdPersonne(): \Personne
     {
-        return $this->idPerssonne;
+        return $this->idPersonne;
     }
 
-    public function setIdPerssonne(?Personne $idPerssonne): self
+    public function setIdPersonne(?Personne $idPersonne): self
     {
-        $this->idPerssonne = $idPerssonne;
+        $this->idPersonne = $idPersonne;
 
         return $this;
     }
