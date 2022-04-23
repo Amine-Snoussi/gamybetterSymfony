@@ -1,0 +1,10 @@
+{% extends 'base-back.html.twig' %}
+
+
+{% block title %}Edit Session{% endblock %}
+
+{% block body %}
+    <h1>Modifier Session</h1>
+    <a href="{{ path('app_session_index') }}" class="ri-arrow-go-back-fill btn btn-outline-primary"></a>
+    {{ include('session/_form.html.twig', {'button_label': 'Update'}) }}
+{% endblock %}
