@@ -313,12 +313,12 @@
                 </a>
                 <ul id="cours-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="{{ path('cours.create') }}">
+                        <a href="#">
                             <i class="bi bi-circle"></i><span>Nouveau cours</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ path('cours.list') }}">
+                        <a href="#">
                             <i class="bi bi-circle"></i><span>Consulter liste cours</span>
                         </a>
                     </li>
@@ -355,13 +355,13 @@
                 </a>
                 <ul id="interactions-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="#">
-                            <i class="bi bi-circle"></i><span>Créer un blog</span>
+                         <a href="{{ path('app_publication_index')}}">
+                            <i class="bi bi-circle"></i><span>Consulter forum</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="bi bi-circle"></i><span>Consulter forum</span>
+                        <a href="{{ path('app_commentaire_index') }}">
+                            <i class="bi bi-circle"></i><span>Commentaires</span>
                         </a>
                     </li>
                     <li>

@@ -3,11 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Commentaire
  *
- * @ORM\Table(name="commentaire", indexes={@ORM\Index(name="fk_personne_commentaire", columns={"id_personne"}), @ORM\Index(name="commentaire_publication", columns={"id_publication"})})
+ * @ORM\Table(name="commentaire", indexes={@ORM\Index(name="id_Publication", columns={"id_Publication"}), @ORM\Index(name="id_Personne", columns={"id_Personne"})})
  * @ORM\Entity
  */
 class Commentaire
@@ -15,11 +16,11 @@ class Commentaire
     /**
      * @var int
      *
-     * @ORM\Column(name="id_commentaire", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idCommentaire;
+    private $id;
 
     /**
      * @var \DateTime|null
@@ -31,29 +32,83 @@ class Commentaire
     /**
      * @var string
      *
-     * @ORM\Column(name="cont_commentaire", type="string", length=300, nullable=false)
+     * @ORM\Column(name="contCommentaire", type="string", length=50, nullable=false)
+     * @Assert\NotBlank (message="veuillez remplir tous les champs")
      */
-    private $contCommentaire;
-
-    /**
-     * @var \Publication
-     *
-     * @ORM\ManyToOne(targetEntity="Publication")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_publication", referencedColumnName="id_publication")
-     * })
-     */
-    private $idPublication;
+    private $contcommentaire;
 
     /**
      * @var \Personne
      *
      * @ORM\ManyToOne(targetEntity="Personne")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_personne", referencedColumnName="id_personne")
+     *   @ORM\JoinColumn(name="id_Personne", referencedColumnName="id")
      * })
      */
     private $idPersonne;
+
+    /**
+     * @var \Publication
+     *
+     * @ORM\ManyToOne(targetEntity="Publication")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_Publication", referencedColumnName="id")
+     * })
+     */
+    private $idPublication;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(?\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getContcommentaire(): ?string
+    {
+        return $this->contcommentaire;
+    }
+
+    public function setContcommentaire(string $contcommentaire): self
+    {
+        $this->contcommentaire = $contcommentaire;
+
+        return $this;
+    }
+
+    public function getIdPersonne(): ?Personne
+    {
+        return $this->idPersonne;
+    }
+
+    public function setIdPersonne(?Personne $idPersonne): self
+    {
+        $this->idPersonne = $idPersonne;
+
+        return $this;
+    }
+
+    public function getIdPublication(): ?Publication
+    {
+        return $this->idPublication;
+    }
+
+    public function setIdPublication(?Publication $idPublication): self
+    {
+        $this->idPublication = $idPublication;
+
+        return $this;
+    }
 
 
 }
