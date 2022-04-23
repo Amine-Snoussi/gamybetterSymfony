@@ -19,7 +19,7 @@ class Personne
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idPersonne;
+    private $id;
 
     /**
      * @var string
@@ -42,9 +42,9 @@ class Personne
      */
     private $age;
 
-    public function getIdPersonne(): ?int
+    public function getId(): ?int
     {
-        return $this->idPersonne;
+        return $this->id;
     }
 
     public function getNom(): ?string
@@ -88,9 +88,7 @@ class Personne
      */
     public function __toString()
     {
-        // TODO: Implement __toString() method.
         return $this->nom;
     }
-
 
 }
