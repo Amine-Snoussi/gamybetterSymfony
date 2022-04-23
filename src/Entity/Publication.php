@@ -153,7 +153,7 @@ class Publication
         return $this;
     }
 
-    public function getIdPersonne(): \Personne
+    public function getIdPersonne(): Personne
     {
         return $this->idPersonne;
     }
@@ -166,8 +166,6 @@ class Publication
     }
     public function __toString()
     {
-        // TODO: Implement __toString() method.
         return $this->titre;
-    }   
-
+    }
 }
