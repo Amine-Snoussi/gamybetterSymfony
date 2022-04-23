@@ -58,7 +58,7 @@ class PublicationType extends AbstractType
                 ],
             ])
             
-            ->add('idPerssonne')
+            ->add('idPersonne')
         ;
     }
 

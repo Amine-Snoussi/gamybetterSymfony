@@ -19,7 +19,7 @@ class Personne
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    private $idPersonne;
 
     /**
      * @var string
@@ -44,7 +44,7 @@ class Personne
 
     public function getId(): ?int
     {
-        return $this->id;
+        return $this->idPersonne;
     }
 
     public function getNom(): ?string
