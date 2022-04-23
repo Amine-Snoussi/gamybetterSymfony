@@ -12,6 +12,7 @@
 
         <!-- Google Fonts -->
         <link href="https://fonts.gstatic.com" rel="preconnect">
+
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
               rel="stylesheet">
 
@@ -380,13 +381,31 @@
                             class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="tournois-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li class="nav-item" id="az">
+                        <a href="{{ path('list_equipe') }}" class="nav-link" id="equipes" >
+                            <i class="nav-icon fas fa-user-plus"></i>
+                            <p>
+                                Équipes
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item" id="az">
+                        <a href="{{ path('list_evenement') }}" class="nav-link" id="evenements" >
+                            <i class="nav-icon fas fa-user-plus"></i>
+                            <p>
+                                Évenements
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                    </li>
                     <li>
                         <a href="#">
                             <i class="bi bi-circle"></i><span>Créer tournoi</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{{ path('list_evenement') }}" id="evenements">
                             <i class="bi bi-circle"></i><span>Consulter liste tournois</span>
                         </a>
                     </li>
@@ -441,7 +460,7 @@
 {% endblock %}
 
 <main id="main" class="main">
-{% block body %}{% endblock %}
+    {% block body %}{% endblock %}
 </main><!-- End #main -->
 {% block footer %}
     <!-- ======= Footer ======= -->
