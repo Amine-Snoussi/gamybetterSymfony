@@ -25,7 +25,7 @@
         <link href="{{ asset('assets-back/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
         <link href="{{ asset('assets-back/vendor/simple-datatables/style.css') }}" rel="stylesheet">ù
 
-        <!-- Template Main CSS File -->
+                                                                                                    <!-- Template Main CSS File -->
         <link href="{{ asset('assets-back/css/style.css') }}" rel="stylesheet">
         <!-- Calendar css -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.css">
@@ -317,12 +317,12 @@
                 </a>
                 <ul id="cours-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="#">
+                        <a href="{{ path('cours.create') }}">
                             <i class="bi bi-circle"></i><span>Nouveau cours</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{{ path('cours.list') }}">
                             <i class="bi bi-circle"></i><span>Consulter liste cours</span>
                         </a>
                     </li>
@@ -359,7 +359,7 @@
                 </a>
                 <ul id="interactions-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                         <a href="{{ path('app_publication_index')}}">
+                        <a href="{{ path('app_publication_index') }}">
                             <i class="bi bi-circle"></i><span>Consulter forum</span>
                         </a>
                     </li>
@@ -385,7 +385,7 @@
                 </a>
                 <ul id="tournois-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li class="nav-item" id="az">
-                        <a href="{{ path('list_equipe') }}" class="nav-link" id="equipes" >
+                        <a href="{{ path('list_equipe') }}" class="nav-link" id="equipes">
                             <i class="nav-icon fas fa-user-plus"></i>
                             <p>
                                 Équipes
@@ -394,7 +394,7 @@
                         </a>
                     </li>
                     <li class="nav-item" id="az">
-                        <a href="{{ path('list_evenement') }}" class="nav-link" id="evenements" >
+                        <a href="{{ path('list_evenement') }}" class="nav-link" id="evenements">
                             <i class="nav-icon fas fa-user-plus"></i>
                             <p>
                                 Évenements
@@ -461,7 +461,7 @@
             </li><!-- End Coach d'équipe Nav -->
             <!-- PDF Nav -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ path('pdf')}}">
+                <a class="nav-link collapsed" href="{{ path('pdf') }}">
                     <i class="bi bi-question-circle"></i>
                     <span>PDF</span>
                 </a>
@@ -531,7 +531,7 @@
                     center: 'title',
                     right: 'dayGridMonth,timeGridWeek,timeGridDay',
                 },
-                plugins: [ 'interaction', 'dayGrid', 'timeGrid' ], // https://fullcalendar.io/docs/plugin-index
+                plugins: ['interaction', 'dayGrid', 'timeGrid'], // https://fullcalendar.io/docs/plugin-index
                 timeZone: 'UTC',
             });
             calendar.render();
