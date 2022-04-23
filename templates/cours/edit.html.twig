@@ -1,9 +1,0 @@
-{% extends 'base-back.html.twig' %}
-
-{% block title %}Edit Cours{% endblock %}
-
-{% block body %}
-    <h1>Edit Cours</h1>
-    <a href="{{ path('cours.list') }}" class="ri-arrow-go-back-fill btn btn-outline-primary"> </a>
-    {{ include('cours/_form.html.twig', {'button_label': 'Update'}) }}
-{% endblock %}
