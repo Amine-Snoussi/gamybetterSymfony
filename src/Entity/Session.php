@@ -201,5 +201,35 @@ class Session
         return $this;
     }
 
+    /**
+     * @return Collection<int, Cours>
+     */
+    public function getCoursRelated(): Collection
+    {
+        return $this->cours_related;
+    }
+
+    public function addCoursRelated(Cours $coursRelated): self
+    {
+        if (!$this->cours_related->contains($coursRelated)) {
+            $this->cours_related[] = $coursRelated;
+            $coursRelated->setSession($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCoursRelated(Cours $coursRelated): self
+    {
+        if ($this->cours_related->removeElement($coursRelated)) {
+            // set the owning side to null (unless already changed)
+            if ($coursRelated->getSession() === $this) {
+                $coursRelated->setSession(null);
+            }
+        }
+
+        return $this;
+    }
+
 
 }

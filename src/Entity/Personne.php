@@ -29,6 +29,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @ORM\Column(name="id_personne", type="integer", nullable=false)
+
      */
     private $idPersonne;
 
@@ -45,6 +47,16 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
      * @ORM\Column(name="prenom", type="string", length=255, nullable=false)
      */
     private $prenom;
+
+      /**
+       * @ORM\Column(name="username" , type="string", length=255)
+       */
+      private $username;
+
+      /**
+       * @ORM\Column(type="integer")
+       */
+      private $contact;
 
     /**
      * @var int
