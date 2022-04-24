@@ -12,7 +12,6 @@
 
         <!-- Google Fonts -->
         <link href="https://fonts.gstatic.com" rel="preconnect">
-
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
               rel="stylesheet">
 
@@ -25,7 +24,7 @@
         <link href="{{ asset('assets-back/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
         <link href="{{ asset('assets-back/vendor/simple-datatables/style.css') }}" rel="stylesheet">ù
 
-                                                                                                    <!-- Template Main CSS File -->
+        <!-- Template Main CSS File -->
         <link href="{{ asset('assets-back/css/style.css') }}" rel="stylesheet">
         <!-- Calendar css -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.css">
@@ -218,7 +217,7 @@
                 <!-- Profile Nav -->
                 <li class="nav-item dropdown pe-3">
                     <!-- Profile Image Icon -->
-                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="{{ path('personne') }}" data-bs-toggle="dropdown">
+                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                         <img src="{{ asset('assets-back/img/profile-img.jpg') }}" alt="Profile" class="rounded-circle">
                         <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
                     </a><!-- End Profile Image Icon -->
@@ -283,7 +282,7 @@
         <ul class="sidebar-nav" id="sidebar-nav">
             <!-- Dashboard Nav -->
             <li class="nav-item">
-                <a class="nav-link " href="{{ path('personne') }}">
+                <a class="nav-link " href="{{ path('app_default') }}">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
@@ -297,23 +296,17 @@
                 </a>
                 <ul id="utilisateurs-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a  href="{{ path('addPersonne') }}">
+                        <a href="#">
                             <i class="bi bi-circle"></i><span>Nouveau utilisateur</span>
                         </a>
                     </li>
                     <li>
-                        <a  href="{{ path('affichePersonne') }}">
+                        <a href="#">
                             <i class="bi bi-circle"></i><span>Consulter liste utilisateurs</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a  href="{{ path('afficheReclamation') }}">
-                            <i class="bi bi-circle"></i><span>Consulter liste reclamations</span>
                         </a>
                     </li>
                 </ul>
             </li><!-- End Utilisateurs Nav -->
-
 
             <!-- Cours Nav -->
             <li class="nav-item">
@@ -322,17 +315,16 @@
                             class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="cours-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-{#                    <li>#}
-{#                        <a href="{{ path('cours.create') }}">#}
-{#                            <i class="bi bi-circle"></i><span>Nouveau cours</span>#}
-{#                            TODO PUT THE name of the route  #}
-{#                        </a>#}
-{#                    </li>#}
-{#                    <li>#}
-{#                        <a href="{{ path('cours.list') }}">#}
-{#                            <i class="bi bi-circle"></i><span>Consulter liste cours</span>#}
-{#                        </a>#}
-{#                    </li>#}
+                    <li>
+                        <a href="{{ path('cours.create') }}">
+                            <i class="bi bi-circle"></i><span>Nouveau cours</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('cours.list') }}">
+                            <i class="bi bi-circle"></i><span>Consulter liste cours</span>
+                        </a>
+                    </li>
 
                 </ul>
             </li><!-- End Cours Nav -->
@@ -366,13 +358,13 @@
                 </a>
                 <ul id="interactions-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="{{ path('app_publication_index') }}">
-                            <i class="bi bi-circle"></i><span>Consulter forum</span>
+                        <a href="#">
+                            <i class="bi bi-circle"></i><span>Créer un blog</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ path('app_commentaire_index') }}">
-                            <i class="bi bi-circle"></i><span>Commentaires</span>
+                        <a href="#">
+                            <i class="bi bi-circle"></i><span>Consulter forum</span>
                         </a>
                     </li>
                     <li>
@@ -391,31 +383,13 @@
                             class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="tournois-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li class="nav-item" id="az">
-                        <a href="{{ path('list_equipe') }}" class="nav-link" id="equipes">
-                            <i class="nav-icon fas fa-user-plus"></i>
-                            <p>
-                                Équipes
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item" id="az">
-                        <a href="{{ path('list_evenement') }}" class="nav-link" id="evenements">
-                            <i class="nav-icon fas fa-user-plus"></i>
-                            <p>
-                                Évenements
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                    </li>
                     <li>
                         <a href="#">
                             <i class="bi bi-circle"></i><span>Créer tournoi</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ path('list_evenement') }}" id="evenements">
+                        <a href="#">
                             <i class="bi bi-circle"></i><span>Consulter liste tournois</span>
                         </a>
                     </li>
@@ -436,13 +410,13 @@
                 </a>
                 <ul id="actualite-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="{{ path('app_actualite_index') }}">
+                        <a href="#">
                             <i class="bi bi-circle"></i><span>Créer actualité</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ path('app_game_index') }}">
-                            <i class="bi bi-circle"></i><span>Créer un match</span>
+                        <a href="#">
+                            <i class="bi bi-circle"></i><span>Consulter statistiques</span>
                         </a>
                     </li>
 
@@ -468,7 +442,7 @@
             </li><!-- End Coach d'équipe Nav -->
             <!-- PDF Nav -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ path('pdf') }}">
+                <a class="nav-link collapsed" href="{{ path('pdf')}}">
                     <i class="bi bi-question-circle"></i>
                     <span>PDF</span>
                 </a>
@@ -538,7 +512,7 @@
                     center: 'title',
                     right: 'dayGridMonth,timeGridWeek,timeGridDay',
                 },
-                plugins: ['interaction', 'dayGrid', 'timeGrid'], // https://fullcalendar.io/docs/plugin-index
+                plugins: [ 'interaction', 'dayGrid', 'timeGrid' ], // https://fullcalendar.io/docs/plugin-index
                 timeZone: 'UTC',
             });
             calendar.render();
