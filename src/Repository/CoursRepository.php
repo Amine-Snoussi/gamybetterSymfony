@@ -2,30 +2,30 @@
 
 namespace App\Repository;
 
-use App\Entity\Corus;
+use App\Entity\Cours;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Corus|null find($id, $lockMode = null, $lockVersion = null)
- * @method Corus|null findOneBy(array $criteria, array $orderBy = null)
- * @method Corus[]    findAll()
- * @method Corus[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Cours|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Cours|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Cours[]    findAll()
+ * @method Cours[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CorusRepository extends ServiceEntityRepository
+class CoursRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Corus::class);
+        parent::__construct($registry, Cours::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Corus $entity, bool $flush = true): void
+    public function add(Cours $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -37,7 +37,7 @@ class CorusRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Corus $entity, bool $flush = true): void
+    public function remove(Cours $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -46,7 +46,7 @@ class CorusRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Corus[] Returns an array of Corus objects
+    //  * @return Cours[] Returns an array of Cours objects
     //  */
     /*
     public function findByExampleField($value)
@@ -63,7 +63,7 @@ class CorusRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Corus
+    public function findOneBySomeField($value): ?Cours
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.exampleField = :val')

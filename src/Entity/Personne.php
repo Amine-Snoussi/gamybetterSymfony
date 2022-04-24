@@ -30,7 +30,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private $idPersonne;
 
     /**
      * @var string
@@ -53,10 +53,51 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
      */
     private $age;
 
-    public function getId(): ?int
-    {
-        return $this->idPersonne;
-    }
+      /**
+       * @ORM\Column(name="mot_de_passe" , type="string", length=255)
+       * @Assert\Length(min="8",minMessage="Votre mot de passe doit faire minimum 8 caractères")
+       */
+      private $password;
+
+      /**
+       * @Assert\EqualTo(propertyPath="password",message="vous n'avez pas tapez le même mot de passe")
+       */
+      public $confirm_password;
+
+      /**
+       * @ORM\Column(type="string", length=255)
+       * @Assert\Email()
+       */
+      private $email;
+
+      /**
+       * @ORM\Column(type="string", length=255)
+       */
+      private $role;
+
+      /**
+       * @ORM\Column(type="string", length=500)
+       */
+      private $description;
+
+      /**
+       * @ORM\OneToMany(targetEntity=Reclamation::class, mappedBy="personne",cascade={"all"},orphanRemoval=true)
+       */
+      private $reclamations;
+
+      /**
+       * @ORM\Column(type="string", length=255)
+       */
+      private $image;
+
+
+      /**
+       * @return mixed
+       */
+      public function getIdPersonne()
+      {
+          return $this->idPersonne;
+      }
 
     public function getNom(): ?string
     {
@@ -93,43 +134,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
         return $this;
     }
-
-    /**
-     * @ORM\Column(name="mot_de_passe" , type="string", length=255)
-     * @Assert\Length(min="8",minMessage="Votre mot de passe doit faire minimum 8 caractères")
-     */
-    private $password;
-
-/**
- * @Assert\EqualTo(propertyPath="password",message="vous n'avez pas tapez le même mot de passe")
- */
-    public $confirm_password;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Email()
-     */
-    private $email;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $role;
-
-    /**
-     * @ORM\Column(type="string", length=500)
-     */
-    private $description;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Reclamation::class, mappedBy="personne",cascade={"all"},orphanRemoval=true)
-     */
-    private $reclamations;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $image;
 
     public function __construct()
     {
@@ -244,9 +248,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
     }
    
 
-  
-
-
     public function eraseCredentials(){}
     
     public function getSalt(){}
@@ -266,4 +267,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
         return $this;
     }
-}
+
+
+  }
