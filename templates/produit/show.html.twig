@@ -1,0 +1,51 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Produit{% endblock %}
+
+{% block body %}
+    <h1>Produit</h1>
+    <a href="{{ path('app_produit_index') }}" class="ri-arrow-go-back-fill btn btn-outline-primary"></a>
+
+    <a href="{{ path('app_produit_edit', {'idProduit': produit.idProduit}) }}" class=" btn btn-outline-primary bi bi-pencil-square"></a>
+    <table class="table">
+        <tbody>
+        {#     <tr>
+                <th>IdProduit</th>
+                <td>{{ produit.idProduit }}</td>
+            </tr>#}
+        <tr>
+                <th>Image</th>
+                <td><img src="{{ asset('uploads/images/' ~ produit.image ) }}" width="200" height="200"></td>
+            </tr>
+            <tr>
+                <th>NomProduit</th>
+                <td class="text-primary fw-bold">{{ produit.nomProduit }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td class="text-primary fw-bold">{{ produit.description }}</td>
+            </tr>
+            <tr>
+                <th>Categorie</th>
+                <td class="text-primary fw-bold">{{ produit.categorie }}</td>
+            </tr>
+            <tr>
+                <th>QuantiteStock</th>
+
+                <td class="text-primary fw-bold ">{{ produit.quantiteStock }}</td>
+            </tr>
+            <tr>
+                <th>PrixUnitair</th>
+                <td class="text-primary fw-bold">{{ produit.prixUnitair }} DT</td>
+            </tr>
+            <tr>
+                <th>Discount</th>
+                <td class="text-primary fw-bold ">{{ produit.discount }} %</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+    {{ include('produit/_delete_form.html.twig') }}
+{% endblock %}

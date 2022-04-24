@@ -20,4 +20,5 @@ return [
     Knp\Bundle\MenuBundle\KnpMenuBundle::class => ['all' => true],
     Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle::class => ['all' => true],
     CalendarBundle\CalendarBundle::class => ['all' => true],
+    //blackknight467\StarRatingBundle\StarRatingBundle::class => ['all' => true],
 ];
