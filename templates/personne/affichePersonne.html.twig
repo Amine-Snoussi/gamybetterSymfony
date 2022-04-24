@@ -1,0 +1,34 @@
+{% extends('base-back.html.twig') %}
+
+{% block body%}
+    <h1>liste des personnes</h1>
+    
+   <table border="1">
+   <tr> 
+   
+    <th>IMAGE</th>
+    <th>Name</th> 
+    <th>CONTACT</th>
+    <th>MOT DE PASSE</th>
+    <th>EMAIL</th>
+    <th>ROLE</th>
+    <th>DESCRIPTION</th>
+    <th>Delete</th>
+    <th>Update</th>
+</tr>
+{%for n in personne %}
+<td><img src="{{ asset('uploads/images/' ~ n.image ) }}" width="70" height="70"></td>
+<td>{{n.username}}</td>
+<td>{{n.contact}}</td>
+<td>{{n.password}}</td>
+<td>{{n.email}}</td>
+<td>{{n.role}}</td>
+<td>{{n.description}}</td>
+<td><a href="{{ path('deletePersonne',{'id':n.id} )}}" >Delete</a></td>
+<td><a href="{{ path('updatePersonne',{'id':n.id} )}}" >Update</a></td>
+
+<tr >
+</tr>
+ {%endfor%}
+   </table> 
+ {% endblock %}
