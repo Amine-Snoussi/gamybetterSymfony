@@ -1,0 +1,49 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Produit index{% endblock %}
+
+{% block body %}
+    <h1>List Produits</h1>
+<div class="card-body pb-0">
+    <table class="table table-borderless">
+        <thead>
+            <tr>
+                {# <th>IdProduit</th> #}
+                <th scope="col" class="text-primary fw-bol">Image</th>
+                <th scope="col" class="text-primary fw-bol">NomProduit</th>
+                <th scope="col" class="text-primary fw-bol">Description</th>
+                <th scope="col" class="text-primary fw-bol">Categorie</th>
+
+                <th scope="col" class="text-primary fw-bol">QuantiteStock</th>
+                <th scope="col" class="text-primary fw-bol">PrixUnitair</th>
+                <th scope="col" class="text-primary fw-bol">Discount</th>
+                {# <th scope="row" class="text-primary fw-bol">actions</th>#}
+            </tr>
+        </thead>
+        <tbody>
+        {% for produit in produits %}
+            <tr>
+                {# <td>{{ produit.idProduit }}</td> #}
+                <td><img src="{{ asset('uploads/images/' ~ produit.image ) }}" width="70" height="70"></td>
+                <td  class="fw-bold">{{ produit.nomProduit }}</td>
+                <td class="fw-bold">{{ produit.description }}</td>
+                <td class=" fw-bold">{{ produit.categorie }}</td>
+
+                <td class=" fw-bold">{{ produit.quantiteStock }}</td>
+                <td class=" fw-bold">{{ produit.prixUnitair }} DT</td>
+                <td class=" fw-bold">{{ produit.discount }} %</td>
+                <td class="text-primary fw-bold">
+                    <a href="{{ path('app_produit_show', {'idProduit': produit.idProduit}) }}" class=" btn btn-outline-primary bi bi-eye-fill"></a>
+                    <a href="{{ path('app_produit_edit', {'idProduit': produit.idProduit}) }}" class=" btn btn-outline-primary bi bi-pencil-square"></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+    <a href="{{ path('app_produit_new') }}" class="btn btn-outline-primary" >Create new</a>
+{% endblock %}

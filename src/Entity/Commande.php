@@ -7,19 +7,19 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Commande
  *
- * @ORM\Table(name="commande", indexes={@ORM\Index(name="commande_personne", columns={"IDpersonne"})})
+ * @ORM\Table(name="commande", indexes={@ORM\Index(name="fk_com_pers", columns={"IDpersonne"})})
  * @ORM\Entity
  */
 class Commande
 {
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(name="id", type="string", length=6, nullable=false)
+     * @ORM\Column(name="id_commande", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    private $idCommande;
 
     /**
      * @var \DateTime
@@ -29,39 +29,39 @@ class Commande
     private $dateCommande = 'CURRENT_TIMESTAMP';
 
     /**
-     * @var string|null
+     * @var string
      *
-     * @ORM\Column(name="nom_personne", type="string", length=70, nullable=true)
+     * @ORM\Column(name="nom_personne", type="string", length=60, nullable=false)
      */
     private $nomPersonne;
 
     /**
-     * @var string|null
+     * @var string
      *
-     * @ORM\Column(name="address_personne", type="string", length=50, nullable=true, options={"default"="No Client Adress"})
+     * @ORM\Column(name="address_personne", type="string", length=100, nullable=false)
      */
-    private $addressPersonne = 'No Client Adress';
+    private $addressPersonne;
 
     /**
-     * @var string|null
+     * @var string
      *
-     * @ORM\Column(name="email_personne", type="string", length=60, nullable=true)
+     * @ORM\Column(name="email_personne", type="string", length=100, nullable=false)
      */
     private $emailPersonne;
 
     /**
-     * @var float|null
+     * @var string
      *
-     * @ORM\Column(name="prix_totale", type="float", precision=6, scale=2, nullable=true, options={"default"="0.00"})
+     * @ORM\Column(name="prix_totale", type="decimal", precision=6, scale=3, nullable=false)
      */
-    private $prixTotale = 0.00;
+    private $prixTotale;
 
     /**
-     * @var int|null
+     * @var int
      *
-     * @ORM\Column(name="discount", type="integer", nullable=true)
+     * @ORM\Column(name="discount", type="integer", nullable=false)
      */
-    private $discount = '0';
+    private $discount;
 
     /**
      * @var \Personne
@@ -73,27 +73,94 @@ class Commande
      */
     private $idpersonne;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Produit", inversedBy="idCommande")
-     * @ORM\JoinTable(name="panier",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="id_commande", referencedColumnName="id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="itemCode", referencedColumnName="itemCode")
-     *   }
-     * )
-     */
-    private $itemcode;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
+    public function getIdCommande(): ?int
     {
-        $this->itemcode = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->idCommande;
     }
+
+    public function getDateCommande(): ?\DateTimeInterface
+    {
+        return $this->dateCommande;
+    }
+
+    public function setDateCommande(\DateTimeInterface $dateCommande): self
+    {
+        $this->dateCommande = $dateCommande;
+
+        return $this;
+    }
+
+    public function getNomPersonne(): ?string
+    {
+        return $this->nomPersonne;
+    }
+
+    public function setNomPersonne(string $nomPersonne): self
+    {
+        $this->nomPersonne = $nomPersonne;
+
+        return $this;
+    }
+
+    public function getAddressPersonne(): ?string
+    {
+        return $this->addressPersonne;
+    }
+
+    public function setAddressPersonne(string $addressPersonne): self
+    {
+        $this->addressPersonne = $addressPersonne;
+
+        return $this;
+    }
+
+    public function getEmailPersonne(): ?string
+    {
+        return $this->emailPersonne;
+    }
+
+    public function setEmailPersonne(string $emailPersonne): self
+    {
+        $this->emailPersonne = $emailPersonne;
+
+        return $this;
+    }
+
+    public function getPrixTotale(): ?string
+    {
+        return $this->prixTotale;
+    }
+
+    public function setPrixTotale(string $prixTotale): self
+    {
+        $this->prixTotale = $prixTotale;
+
+        return $this;
+    }
+
+    public function getDiscount(): ?int
+    {
+        return $this->discount;
+    }
+
+    public function setDiscount(int $discount): self
+    {
+        $this->discount = $discount;
+
+        return $this;
+    }
+
+    public function getIdpersonne(): ?Personne
+    {
+        return $this->idpersonne;
+    }
+
+    public function setIdpersonne(?Personne $idpersonne): self
+    {
+        $this->idpersonne = $idpersonne;
+
+        return $this;
+    }
+
 
 }

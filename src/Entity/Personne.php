@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Personne
  *
- * @ORM\Table(name="personne", indexes={@ORM\Index(name="personne_equipe", columns={"id_equipe"})})
+ * @ORM\Table(name="personne")
  * @ORM\Entity
  */
 class Personne
@@ -22,119 +22,66 @@ class Personne
     private $idPersonne;
 
     /**
-     * @var string|null
+     * @var string
      *
-     * @ORM\Column(name="nom_personne", type="string", length=20, nullable=true)
+     * @ORM\Column(name="nom_prenom_personne", type="string", length=255, nullable=false)
      */
-    private $nomPersonne;
+    private $nomPrenomPersonne;
 
     /**
-     * @var string|null
+     * @var string
      *
-     * @ORM\Column(name="prenom_personne", type="string", length=30, nullable=true)
+     * @ORM\Column(name="adresse_personne", type="string", length=100, nullable=false)
      */
-    private $prenomPersonne;
+    private $adressePersonne;
 
     /**
-     * @var int|null
+     * @var string
      *
-     * @ORM\Column(name="contact", type="integer", nullable=true)
+     * @ORM\Column(name="email_personne", type="string", length=150, nullable=false)
      */
-    private $contact;
+    private $emailPersonne;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="rating", type="integer", nullable=true)
-     */
-    private $rating;
+    public function getIdPersonne(): ?int
+    {
+        return $this->idPersonne;
+    }
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="role", type="string", length=30, nullable=true)
-     */
-    private $role;
+    public function getNomPrenomPersonne(): ?string
+    {
+        return $this->nomPrenomPersonne;
+    }
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="mot_de_passe", type="string", length=15, nullable=true)
-     */
-    private $motDePasse;
+    public function setNomPrenomPersonne(string $nomPrenomPersonne): self
+    {
+        $this->nomPrenomPersonne = $nomPrenomPersonne;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="email", type="string", length=50, nullable=true)
-     */
-    private $email;
+        return $this;
+    }
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="description", type="string", length=500, nullable=true)
-     */
-    private $description;
+    public function getAdressePersonne(): ?string
+    {
+        return $this->adressePersonne;
+    }
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="competence", type="string", length=250, nullable=true)
-     */
-    private $competence;
+    public function setAdressePersonne(string $adressePersonne): self
+    {
+        $this->adressePersonne = $adressePersonne;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="jeux", type="string", length=50, nullable=true)
-     */
-    private $jeux;
+        return $this;
+    }
 
-    /**
-     * @var float|null
-     *
-     * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=true)
-     */
-    private $prix;
+    public function getEmailPersonne(): ?string
+    {
+        return $this->emailPersonne;
+    }
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="heros", type="string", length=20, nullable=true)
-     */
-    private $heros;
+    public function setEmailPersonne(string $emailPersonne): self
+    {
+        $this->emailPersonne = $emailPersonne;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="ig_name", type="string", length=20, nullable=true)
-     */
-    private $igName;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="ig_role", type="string", length=10, nullable=true)
-     */
-    private $igRole;
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="ig_rank", type="integer", nullable=true)
-     */
-    private $igRank;
-
-    /**
-     * @var \Equipe
-     *
-     * @ORM\ManyToOne(targetEntity="Equipe")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_equipe", referencedColumnName="id_equipe")
-     * })
-     */
-    private $idEquipe;
+        return $this;
+    }
 
 
 }

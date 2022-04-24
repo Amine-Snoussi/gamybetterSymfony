@@ -14,8 +14,111 @@ class DefaultController extends AbstractController
      */
     public function index(): Response
     {
+        return $this->render('default/index-front.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+    /**
+     * @Route("/profile", name="profile")
+     * @return Response
+     */
+    public function profile(): Response
+    {
+        return $this->render('profile.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+    /**
+     * @Route("/blog", name="blog")
+     * @return Response
+     */
+    public function blog(): Response
+    {
+        return $this->render('blog-grid.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+    /**
+     * @Route("/gallery", name="galery")
+     * @return Response
+     */
+    public function gallery(): Response
+    {
+        return $this->render('gallery.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+    /**
+     * @Route("/store", name="store")
+     * @return Response
+     */
+    public function store(): Response
+    {
+        return $this->render('store.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+    /**
+     * @Route("/product", name="product")
+     * @return Response
+     */
+    public function product(): Response
+    {
+        return $this->render('product.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+    /**
+     * @Route("/", name="admin")
+     * @return Response
+     */
+    public function admin(): Response
+    {
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
         ]);
     }
+    /**
+     * @Route("/watch", name="watch")
+     * @return Response
+     */
+    public function watch(): Response
+    {
+        return $this->render('watchStream.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+    /**
+     * @Route("/team", name="team")
+     * @return Response
+     */
+    public function team(): Response
+    {
+        return $this->render('team.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+    /**
+     * @Route("/signup", name="signup")
+     * @return Response
+     */
+    public function signup(): Response
+    {
+        return $this->render('signup.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+    /**
+     * @Route("/blog_details", name="blog_details")
+     * @return Response
+     */
+    public function blog_details(): Response
+    {
+        return $this->render('blog_details.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+
+
+
 }
