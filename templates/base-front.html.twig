@@ -58,16 +58,7 @@
 
 </head>
 
-
-<!--
-    Additional Classes:
-        .nk-page-boxed
--->
 <body>
-
-
-
-
 
 <!--
     Additional Classes:
@@ -249,7 +240,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ path('profile') }}">
+                                <a href="{{ path('teammate') }}">
                                     Teammate
 
                                 </a>
@@ -399,8 +390,10 @@ Additional Classes:
     <div class="container">
 
         {% block store  %}  {% endblock %}
+
         {% block blog  %}  {% endblock %}
-            {% block blog_details  %}  {% endblock %}
+
+        {% block blog_details  %}  {% endblock %}
 
         {% block homepage %}  {% endblock %}
 
@@ -718,7 +711,7 @@ Additional Classes:
                                 <div class="nk-gap"></div>
                                 <textarea class="form-control required" name="message" rows="5" placeholder="Message *"></textarea>
                                 <div class="nk-gap-1"></div>
-                                <button class="nk-btn nk-btn-rounded nk-btn-color-white">
+                                <button  class="nk-btn nk-btn-rounded nk-btn-color-white">
                                     <span>Send</span>
                                     <span class="icon"><i class="ion-paper-airplane"></i></span>
                                 </button>
@@ -777,7 +770,7 @@ Additional Classes:
         <div class="nk-copyright">
             <div class="container">
                 <div class="nk-copyright-left">
-                    <a target="_blank" href="https://www.templateshub.net">Templates Hub</a>
+                    <a target="_blank" href="{{ path('admin') }}">Templates Hub</a>
                 </div>
                 <div class="nk-copyright-right">
                     <ul class="nk-social-links-2">

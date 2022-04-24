@@ -19,7 +19,7 @@ class DefaultController extends AbstractController
         ]);
     }
     /**
-     * @Route("/profile", name="profile")
+     * @Route("/teammate", name="teammate")
      * @return Response
      */
     public function profile(): Response
@@ -69,7 +69,7 @@ class DefaultController extends AbstractController
         ]);
     }
     /**
-     * @Route("/", name="admin")
+     * @Route("/admin", name="admin")
      * @return Response
      */
     public function admin(): Response
