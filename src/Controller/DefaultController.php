@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Produit;
+use App\Repository\ProduitRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,7 +21,7 @@ class DefaultController extends AbstractController
         ]);
     }
     /**
-     * @Route("/profile", name="profile")
+     * @Route("/teammate", name="teammate")
      * @return Response
      */
     public function profile(): Response
@@ -58,18 +60,9 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
         ]);
     }
+
     /**
-     * @Route("/product", name="product")
-     * @return Response
-     */
-    public function product(): Response
-    {
-        return $this->render('product.html.twig', [
-            'controller_name' => 'DefaultController',
-        ]);
-    }
-    /**
-     * @Route("/", name="admin")
+     * @Route("/admin", name="admin")
      * @return Response
      */
     public function admin(): Response
@@ -118,6 +111,17 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
         ]);
     }
+    /**
+     * @Route("/checkout_form", name="checkout_form")
+     * @return Response
+     */
+    public function checkout(): Response
+    {
+        return $this->render('checkout.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+
 
 
 

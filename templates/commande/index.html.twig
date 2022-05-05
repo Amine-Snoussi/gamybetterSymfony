@@ -3,43 +3,50 @@
 {% block title %}Commande index{% endblock %}
 
 {% block body %}
-    <h1>Commandes List</h1>
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">Commandes List</h1>
 
-    <table class="table table-borderless">
-        <thead>
-            <tr>
-                {#  <th>IdCommande</th>#}
-                <th>DateCommande</th>
-                <th>NomPersonne</th>
-                <th>AddressPersonne</th>
-                <th>EmailPersonne</th>
-                <th>PrixTotale</th>
-                <th>Discount</th>
+            <table class="table datatable">
+                <thead>
+                <tr>
+                    {#  <th>IdCommande</th> #}
+                    <th>DateCommande</th>
+                    <th>NomPersonne</th>
+                    <th>AddressPersonne</th>
+                    <th>EmailPersonne</th>
+                    <th>PrixTotale</th>
+                    <th>Discount</th>
 
-            </tr>
-        </thead>
-        <tbody>
-        {% for commande in commandes %}
-            <tr>
-               {# {{ commande.idCommande }}</td> #}
-                <td class="text-primary fw-bold">{{ commande.dateCommande ? commande.dateCommande|date('Y-m-d H:i:s') : '' }}</td>
-                <td class="text-primary fw-bold">{{ commande.nomPersonne }}</td>
-                <td class="text-primary fw-bold">{{ commande.addressPersonne }}</td>
-                <td class="text-primary fw-bold">{{ commande.emailPersonne }}</td>
-                <td class="text-primary fw-bold">{{ commande.prixTotale }}</td>
-                <td class="text-primary fw-bold">{{ commande.discount }}</td>
-                <td class="text-primary fw-bold">
-                    <a href="{{ path('app_commande_show', {'idCommande': commande.idCommande}) }}" class=" btn btn-outline-primary bi bi-eye-fill"></a>
-                    <a href="{{ path('app_commande_edit', {'idCommande': commande.idCommande}) }}"class=" btn btn-outline-primary bi bi-pencil-square"></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                </tr>
+                </thead>
+                <tbody>
+                {% for commande in commandes %}
+                    <tr>
+                        {# {{ commande.idCommande }}</td> #}
+                        <td class="text-primary fw-bold">{{ commande.dateCommande ? commande.dateCommande|date('Y-m-d H:i:s') : '' }}</td>
+                        <td class="text-primary fw-bold">{{ commande.nomPersonne }}</td>
+                        <td class="text-primary fw-bold">{{ commande.addressPersonne }}</td>
+                        <td class="text-primary fw-bold">{{ commande.emailPersonne }}</td>
+                        <td class="text-primary fw-bold">{{ commande.prixTotale }}</td>
+                        <td class="text-primary fw-bold">{{ commande.discount }}</td>
+                        <td class="text-primary fw-bold">
+                            <a href="{{ path('app_commande_show', {'idCommande': commande.idCommande}) }}"
+                               class=" btn btn-outline-primary bi bi-eye-fill"></a>
+                            <a href="{{ path('app_commande_edit', {'idCommande': commande.idCommande}) }}"
+                               class=" btn btn-outline-primary bi bi-pencil-square"></a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="8">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
 
-    <a href="{{ path('app_commande_new') }}"  class="btn btn-outline-primary">Create new</a>
+            <a href="{{ path('app_commande_new') }}" class="btn btn-outline-primary">Create new</a>
+        </div>
+    </div>
+
 {% endblock %}

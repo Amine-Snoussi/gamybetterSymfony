@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -40,11 +41,24 @@ class ProduitType extends AbstractType
                     'class'=>'form-control'
                 ]
             ])
-            ->add('categorie',TextType::class,[
-                'attr'=>[
-                    'placeholder' =>"categorie Produit",
-                    'class'=>'form-control'
-                ]
+            ->add('categorie',ChoiceType::class,[
+                'choices'=>[
+                    'Merch'=>'Merch',
+                    'Hardware'=>'Hardware',
+                    'Gift Cards'=>'Gift Cards',
+                ],
+                'multiple'=>false,
+                'expanded'=>false,
+            ])
+            ->add('game',ChoiceType::class,[
+                'choices'=>[
+                    'League Of Legends'=>'League Of Legends',
+                    'Valorant'=>'Valorant',
+                    'FIFA'=>'FIFA',
+                    'None'=>'None',
+                ],
+                'multiple'=>false,
+                'expanded'=>false,
             ])
             ->add('quantiteStock', NumberType::class, [
                 'attr' => [

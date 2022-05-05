@@ -1,0 +1,39 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Actualite index{% endblock %}
+
+{% block body %}
+    <h1>Actualite index</h1>
+
+    <table class="table datatable ">
+        <thead>
+            <tr>
+                <th>IdActualite</th>
+                <th>Image</th>
+                <th>Video</th>
+                <th>IdPersonne</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for actualite in actualites %}
+            <tr>
+                <td>{{ actualite.idActualite }}</td>
+                <td><img src="{{ asset('uploads/images/' ~ actualite.image ) }}" height="70" width="70" ></td>
+                <td>{{ actualite.video }}</td>
+                <td>{{ actualite.idPersonne }}</td>
+                <td>
+                    <a href="{{ path('app_actualite_show', {'idActualite': actualite.idActualite}) }}" class=" btn btn-outline-primary bi bi-eye-fill"></a>
+                    <a href="{{ path('app_actualite_edit', {'idActualite': actualite.idActualite}) }}" class=" btn btn-outline-primary bi bi-pencil-square"></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_actualite_new') }}" class="btn btn-outline-primary">Create new</a>
+{% endblock %}

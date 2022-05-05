@@ -1,0 +1,177 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Catalog | GamyBetter{% endblock %}
+
+
+{% block breadcrumbs %}
+    <div class="nk-gap-1"></div>
+    <div class="container">
+        <ul class="nk-breadcrumbs">
+
+
+            <li><a href="index.html">Home</a></li>
+
+
+            <li><span class="fa fa-angle-right"></span></li>
+
+            <li><a href="{{ path('catalog') }}">Store</a></li>
+
+
+            <li><span class="fa fa-angle-right"></span></li>
+
+            <li><span>Our Products</span></li>
+
+        </ul>
+    </div>
+    <div class="nk-gap-1"></div>
+{% endblock %}
+
+{% block blog_details %}
+    <!-- START: Categories -->
+    <div class="row vertical-gap">
+        <div class="col-lg-4">
+            <div class="nk-feature-1">
+                <div class="nk-feature-icon">
+                    <img src="{{asset('front/assets//images/tshirt.png')}}" alt="">
+                </div>
+                <div class="nk-feature-cont">
+                    <h3 class="nk-feature-title"><a href="{{ path('category', {'category': 'Merch'}) }}">Merch</a></h3>
+                    <h3 class="nk-feature-title text-main-1"><a href="{{ path('category', {'category': 'Merch'}) }}">View Products</a></h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="nk-feature-1">
+                <div class="nk-feature-icon">
+                    <img src="{{asset('front/assets//images/joystick.png')}}" alt="">
+                </div>
+                <div class="nk-feature-cont">
+                    <h3 class="nk-feature-title"><a href="{{ path('category', {'category': 'Hardware'}) }}">Hardware</a></h3>
+                    <h3 class="nk-feature-title text-main-1"><a href="{{ path('category', {'category': 'Hardware'}) }}">View Products</a></h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="nk-feature-1">
+                <div class="nk-feature-icon">
+                    <img src="{{asset('front/assets//images/gift-card.png')}}" alt="">
+                </div>
+                <div class="nk-feature-cont">
+                    <h3 class="nk-feature-title"><a href="{{ path('category', {'category': 'Gift Cards'}) }}">Gift Cards</a></h3>
+                    <h3 class="nk-feature-title text-main-1"><a href="{{ path('category', {'category': 'Gift Cards'}) }}">View Products</a></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Categories -->
+
+    <!-- START: Products Filter -->
+    <div class="nk-gap-2"></div>
+    <div class="row vertical-gap">
+        <div class="col-lg-8">
+            <div class="row vertical-gap">
+                <div class="row-cols-md-auto">
+
+                        {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                </div>
+                <div class="row-cols-md-auto">
+                    <div class="col-md-3">    {{ form_row(form.game) }}</div>
+
+                </div>
+                <div class="col-md-3"><button class="nk-btn nk-btn-rounded nk-btn-color-white">{{ form_row(form.slider) }}{{ button_label|default('apply') }}</button></div>
+                {{ form_end(form) }}
+
+
+
+                {#<div class="col-md-8">
+                    <div class="nk-input-slider-inline">
+                        <div class="nk-input-slider">
+                            <div class="nk-input-slider-content text-white">
+                                PRICE:
+                                <strong class="text-main-1">€ <span class="nk-input-slider-value-0"></span></strong>
+                                -
+                                <strong class="text-main-1">€ <span class="nk-input-slider-value-1"></span></strong>
+                            </div>
+                            <div class="nk-input-slider-input">
+                                <input
+                                        type="text"
+                                        name="price-filter"
+                                        data-slider-min="0"
+                                        data-slider-max="1800"
+                                        data-slider-step="1"
+                                        data-slider-value="[200, 1200]"
+                                        data-slider-tooltip="hide"
+                                >
+                            </div>
+                        </div>
+                        <div>
+                            <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-white">Apply</a>
+                        </div>
+                    </div>
+                </div>#}
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <form action="#" class="nk-form" novalidate="novalidate">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Type something...">
+                    <button class="nk-btn nk-btn-color-main-1"><span class="ion-search"></span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- END: Products Filter -->
+
+    <div class="nk-gap-2"></div>
+    <!-- START: Products -->
+    <div class="row vertical-gap">
+        {%for produit in produits%}
+        <div class="col-lg-6">
+            <div class="nk-product-cat-2">
+                <a class="nk-product-image" href="{{ path('product', {'idProduit': produit.idProduit}) }}">
+                    <img src="{{ asset('uploads/images/' ~ produit.image ) }}" alt="So saying he unbuckled">
+                </a>
+                <div class="nk-product-cont">
+                    <h3 class="nk-product-title h5"><a href="store-product.html">{{ produit.nomProduit }}</a></h3>
+                    <div class="nk-gap-1"></div>
+                    <div class="nk-product-rating" data-rating="4"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="far fa-star"></i></div>
+                    <div class="nk-gap-1"></div>
+                    {{ produit.description }}                    <div class="nk-gap-2"></div>
+                    <div class="nk-product-price">{{produit.prixUnitair}} DT</div>
+                    <div class="nk-gap-1"></div>
+                    <a href="{{path('add',{id: produit.idProduit})}}" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+
+    <!-- END: Products -->
+
+    <!-- START: Pagination -->
+    <div class="nk-gap-3"></div>
+    <div class="nk-pagination nk-pagination-center">
+        <a href="#" class="nk-pagination-prev">
+            <span class="ion-ios-arrow-back"></span>
+        </a>
+        <nav>
+            {{ knp_pagination_render(produits) }}
+        </nav>
+        <a href="#" class="nk-pagination-next">
+            <span class="ion-ios-arrow-forward"></span>
+        </a>
+    </div>
+    <!-- END: Pagination -->
+
+{% endblock %}
+
+    {% block sidebar %}{% endblock %}
+{% block bg %}
+    <!-- START: Page Background -->
+
+    <img class="nk-page-background-fixed" src="{{ asset('front/assets/images/bg-fixed-3.jpg') }}" alt="">
+
+
+    <!-- END: Page Background -->
+{% endblock %}

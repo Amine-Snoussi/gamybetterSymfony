@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 use App\Entity\Produit;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryuse;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
@@ -43,32 +43,66 @@ class ProduitRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return Produit[] Returns an array of Produit objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Produit[] Returns an array of Produit objects
+     */
+
+    public function findByExampleField($value): array
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
+            ->andWhere('c.categorie = :val')
             ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
+           // ->orderBy('c.id', 'ASC')
+           // ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
-    /*
+    /**
+     * @return Produit[] Returns an array of Produit objects
+     */
+
+    public function findByGame($value): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.game = :val')
+            ->setParameter('val', $value)
+            // ->orderBy('c.id', 'ASC')
+            // ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    /**
+     * @return Produit[] Returns an array of Produit objects
+     */
+
+    public function findBySlider($value,$game): array
+    {
+        return $this->createQueryBuilder('c')
+            ->Where('c.game = :gam')
+            ->andWhere('c.prixUnitair between 0 and :val')
+            ->setParameter('val', $value)
+            ->setParameter('gam', $game)
+            // ->orderBy('c.id', 'ASC')
+            // ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+
+/*
     public function findOneBySomeField($value): ?Produit
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
+                ->andWhere('c.categorie = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
         ;
-    }
-    */
+    }*/
+
 }

@@ -1,0 +1,42 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Commentaire index{% endblock %}
+
+{% block body %}
+    <h1>Commentaire index</h1>
+    {% for message in app.flashes('info')%}
+    <div class="alert alert-success">
+    {{message}}
+    </div>
+    {%endfor%}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Contcommentaire</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commentaire in commentaires %}
+            <tr>
+                <td>{{ commentaire.id }}</td>
+                <td>{{ commentaire.date ? commentaire.date|date('Y-m-d') : '' }}</td>
+                <td>{{ commentaire.contcommentaire }}</td>
+                <td>
+                    <a href="{{ path('app_commentaire_show', {'id': commentaire.id})}}" class=" btn btn-outline-primary bi bi-eye-fill"</a>
+                    <a href="{{ path('app_commentaire_edit', {'id': commentaire.id})  }}" class=" btn btn-outline-primary bi bi-pencil-square"</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_commentaire_new') }}" class="btn btn-outline-primary">Create new</a>
+{% endblock %}

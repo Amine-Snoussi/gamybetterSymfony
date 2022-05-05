@@ -50,6 +50,13 @@ class Produit
     private $categorie;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="game", type="string", length=50, nullable=false)
+     */
+    private $game;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="quantite_stock", type="integer", nullable=false)
@@ -176,6 +183,16 @@ class Produit
         $this->stars = $stars;
 
         return $this;
+    }
+
+    public function getGame(): ?string
+    {
+        return $this->game;
+    }
+
+    public function setGame(string $game): void
+    {
+        $this->game = $game;
     }
 
 

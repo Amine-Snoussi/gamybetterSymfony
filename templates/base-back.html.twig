@@ -13,6 +13,7 @@
 
         <!-- Google Fonts -->
         <link href="https://fonts.gstatic.com" rel="preconnect">
+
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
               rel="stylesheet">
 
@@ -28,6 +29,12 @@
         <!-- Template Main CSS File -->
         <link href="{{ asset('back/assets/css/style.css') }}" rel="stylesheet">
 
+                                                                                                    <!-- Template Main CSS File -->
+        <link href="{{ asset('assets-back/css/style.css') }}" rel="stylesheet">
+        <!-- Calendar css -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.css">
     {% endblock %}
 
 </head>
@@ -294,17 +301,23 @@
                 </a>
                 <ul id="utilisateurs-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="#">
+                        <a  href="{{ path('addPersonne') }}">
                             <i class="bi bi-circle"></i><span>Nouveau utilisateur</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a  href="{{ path('affichePersonne') }}">
                             <i class="bi bi-circle"></i><span>Consulter liste utilisateurs</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a  href="{{ path('afficheReclamation') }}">
+                            <i class="bi bi-circle"></i><span>Consulter liste reclamations</span>
                         </a>
                     </li>
                 </ul>
             </li><!-- End Utilisateurs Nav -->
+
 
             <!-- Cours Nav -->
             <li class="nav-item">
@@ -335,12 +348,12 @@
                 </a>
                 <ul id="session-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="#">
+                        <a href="{{ path('app_session_new') }}">
                             <i class="bi bi-circle"></i><span>Nouvelle session</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{{ path('app_session_index') }}">
                             <i class="bi bi-circle"></i><span>Consulter liste sessions</span>
                         </a>
                     </li>
@@ -356,13 +369,13 @@
                 </a>
                 <ul id="interactions-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="#">
-                            <i class="bi bi-circle"></i><span>Créer un blog</span>
+                        <a href="{{ path('app_publication_index') }}">
+                            <i class="bi bi-circle"></i><span>Consulter forum</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="bi bi-circle"></i><span>Consulter forum</span>
+                        <a href="{{ path('app_commentaire_index') }}">
+                            <i class="bi bi-circle"></i><span>Commentaires</span>
                         </a>
                     </li>
                     <li>
@@ -381,13 +394,31 @@
                             class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="tournois-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li class="nav-item" id="az">
+                        <a href="{{ path('list_equipe') }}" class="nav-link" id="equipes">
+                            <i class="nav-icon fas fa-user-plus"></i>
+                            <p>
+                                Équipes
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item" id="az">
+                        <a href="{{ path('list_evenement') }}" class="nav-link" id="evenements">
+                            <i class="nav-icon fas fa-user-plus"></i>
+                            <p>
+                                Évenements
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                    </li>
                     <li>
                         <a href="#">
                             <i class="bi bi-circle"></i><span>Créer tournoi</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{{ path('list_evenement') }}" id="evenements">
                             <i class="bi bi-circle"></i><span>Consulter liste tournois</span>
                         </a>
                     </li>
@@ -401,18 +432,20 @@
 
             <!-- Actualité Nav -->
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#actualite-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-gem"></i><span>Gestion actualité</span><i class="bi bi-chevron-down ms-auto"></i>
+                <a class="nav-link collapsed" data-bs-target="#actualite-nav" data-bs-toggle="collapse"
+                   href="#">
+                    <i class="bi bi-gem"></i><span>Gestion actualité</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="actualite-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="#">
+                        <a href="{{ path('app_actualite_index') }}">
                             <i class="bi bi-circle"></i><span>Créer actualité</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="bi bi-circle"></i><span>Consulter statistiques</span>
+                        <a href="{{ path('app_game_index') }}">
+                            <i class="bi bi-circle"></i><span>Créer un match</span>
                         </a>
                     </li>
 
@@ -435,11 +468,7 @@
                             <i class="bi bi-circle"></i><span>Gestion Produits</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ path('app_panier_index') }}">
-                            <i class="bi bi-circle"></i><span>Gestion Panier</span>
-                        </a>
-                    </li>
+
 
                 </ul>
             </li><!-- End Services Nav -->
@@ -460,6 +489,13 @@
                     <span>Liste des coachs d'équipe</span>
                 </a>
             </li><!-- End Coach d'équipe Nav -->
+            <!-- PDF Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ path('pdf') }}">
+                    <i class="bi bi-question-circle"></i>
+                    <span>PDF</span>
+                </a>
+            </li><!-- End PDF Nav -->
         </ul>
     </aside><!-- End Sidebar-->
 
@@ -494,6 +530,44 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('back/assets/js/main.js') }}"></script>
+
+    <!-- Calendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            var calendarEl = document.getElementById('calendar-holder');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                defaultView: 'dayGridMonth',
+                editable: true,
+                eventSources: [
+                    {
+                        url: "{{ path('fc_load_events') }}",
+                        method: "POST",
+                        extraParams: {
+                            filters: JSON.stringify({})
+                        },
+                        failure: () => {
+                            // alert("There was an error while fetching FullCalendar!");
+                        },
+                    },
+                ],
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay',
+                },
+                plugins: ['interaction', 'dayGrid', 'timeGrid'], // https://fullcalendar.io/docs/plugin-index
+                timeZone: 'UTC',
+            });
+            calendar.render();
+        });
+    </script>
+    <!-- end Calendar JS -->
 
 {% endblock %}
 </body>
