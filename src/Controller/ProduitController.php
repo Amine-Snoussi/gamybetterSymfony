@@ -14,10 +14,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class ProduitController extends AbstractController
 {
@@ -173,7 +175,7 @@ class ProduitController extends AbstractController
         'attr' => [
             'min' => 20,
             'max' => 500,
-            'class' => 'solid #293139',
+            'class' => 'nk-input-slider-input',
         ],
 
     ])
@@ -236,6 +238,36 @@ class ProduitController extends AbstractController
         );
         return $this->render('produit/catalog.html.twig', [
             'produits' => $produits,
+        ]);
+    }
+
+
+
+
+    /**
+     * Search action.
+     * @Route("/search/{search}", name="search")
+     * @param  Request               $request Request instance
+     * @param  string                $search  Search term
+     * @return Response|JsonResponse          Response instance
+     */
+    public function searchAction(Request $request, string $search)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            return $this->render("search.html.twig");
+        }
+
+        if (!$searchTerm = trim($request->query->get("search", $search))) {
+            return new JsonResponse(["error" => "Search term not specified."], Response::HTTP_BAD_REQUEST);
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        if (!($results = $em->getRepository(User::class)->findOneByEmail($searchTerm))) {
+            return new JsonResponse(["error" => "No results found."], Response::HTTP_NOT_FOUND);
+        }
+
+        return new JsonResponse([
+            "html" => $this->renderView("search.ajax.twig", ["results" => $results]),
         ]);
     }
 }

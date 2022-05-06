@@ -92,7 +92,16 @@ class ProduitRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
-
+    public function findEntitiesByString($str){
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT e
+                FROM AppBundle:Entity e
+                WHERE e.nom_produit LIKE :str'
+            )
+            ->setParameter('str', '%'.$str.'%')
+            ->getResult();
+    }
 
 /*
     public function findOneBySomeField($value): ?Produit
