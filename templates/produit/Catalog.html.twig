@@ -73,14 +73,36 @@
                 <div class="row-cols-md-auto">
 
                         {{ form_start(form) }}
-                        {{ form_widget(form) }}
-                </div>
-                <div class="row-cols-md-auto">
-                    <div class="col-md-3">    {{ form_row(form.game) }}</div>
 
                 </div>
-                <div class="col-md-3"><button class="nk-btn nk-btn-rounded nk-btn-color-white">{{ form_row(form.slider) }}{{ button_label|default('apply') }}</button></div>
+                <div class="row-cols-md-auto">
+
+                    <div class="col-md-12">   {{ form_row(form.game) }} </div>
+
+                </div>
+
+                <div class="col-md-3"><button class="nk-btn nk-btn-rounded nk-btn-color-white">{{ button_label|default('apply') }}</button></div>
+
                 {{ form_end(form) }}
+                <div class="nk-input-slider">
+                    <div class="nk-input-slider-content text-white">
+                        PRICE:
+                        <strong class="text-main-1"><span class="nk-input-slider-value-0"></span> DT </strong>
+                        -
+                        <strong class="text-main-1"> <span class="nk-input-slider-value-1"></span> DT</strong>
+                    </div>
+                    <div class="nk-input-slider-input">
+                        <input
+                                type="text"
+                                name="price-filter"
+                                data-slider-min="0"
+                                data-slider-max="500"
+                                data-slider-step="1"
+                                data-slider-value="[200, 1200]"
+                                data-slider-tooltip="hide"
+                        >
+                    </div>
+                </div>
 
 
 
@@ -104,7 +126,7 @@
                                         data-slider-tooltip="hide"
                                 >
                             </div>
-                        </div>
+                         </div>
                         <div>
                             <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-white">Apply</a>
                         </div>
@@ -113,20 +135,23 @@
             </div>
         </div>
         <div class="col-lg-4">
-            <form action="#" class="nk-form" novalidate="novalidate">
+            <form role="search" method="get" action="{{ path('search') }}" class="nk-form" novalidate="novalidate">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Type something...">
-                    <button class="nk-btn nk-btn-color-main-1"><span class="ion-search"></span></button>
+                    <input type="text" class="form-control" placeholder="Type something..." name="search">
+                    <button type="submit" name="sub" class="nk-btn nk-btn-color-main-1" ><span class="ion-search"></span></button>
                 </div>
+
             </form>
         </div>
+        <div id="search-results" class="example-wrapper"></div>
+
     </div>
     <!-- END: Products Filter -->
 
     <div class="nk-gap-2"></div>
     <!-- START: Products -->
     <div class="row vertical-gap">
-        {%for produit in produits%}
+        {%for produit in produits %}
         <div class="col-lg-6">
             <div class="nk-product-cat-2">
                 <a class="nk-product-image" href="{{ path('product', {'idProduit': produit.idProduit}) }}">
@@ -162,7 +187,52 @@
             <span class="ion-ios-arrow-forward"></span>
         </a>
     </div>
+
     <!-- END: Pagination -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+
+        jQuery(document).ready(function($){
+
+            $('#search-form').submit(function(e){
+
+                e.preventDefault();
+                $('#search-results').html("");
+
+                $.get("{{ path('search') }}/" + input, function(data, textStatus, xhr){
+
+                    if ("object" !== typeof data || null === data) {
+                        alert("Unexpected response from server.");
+                        return;
+                    }
+
+                    if (!data.hasOwnProperty("html") || typeof data.html != "string" || (data.html = data.html.trim()).length < 1) {
+                        alert("Empty response from server.");
+                        return;
+                    }
+
+                    $('#search-results').html(data.html);
+
+                }).fail(function(xhr, textStatus, errorThrown){
+
+                    var error = "Unknown error occurred.";
+                    if ("object" === typeof xhr && null !== xhr && xhr.hasOwnProperty("responseJSON") && "object" === typeof xhr.responseJSON && xhr.responseJSON.hasOwnProperty("error") && "string" === typeof xhr.responseJSON.error && xhr.responseJSON.error.trim().length >= 1) {
+                        error = xhr.responseJSON.error.trim();
+                    } else if ("string" === typeof errorThrown && errorThrown.trim().length >= 1) {
+                        error = errorThrown.trim();
+                    }
+
+                    alert(error);
+
+                });
+
+            });
+
+        });
+
+        </script>
+
 
 {% endblock %}
 
