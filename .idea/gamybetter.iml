@@ -147,6 +147,34 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/phenx/php-svg-lib" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/dompdf/dompdf" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sabberworm/php-css-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/jms/serializer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/jms/metadata" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/php-translation/symfony-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/php-translation/symfony-storage" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sonata-project/form-extensions" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sonata-project/twig-extensions" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/php-translation/common" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/php-translation/extractor" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sonata-project/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sonata-project/doctrine-extensions" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sonata-project/doctrine-orm-admin-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sonata-project/exporter" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/blackknight467/star-rating-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sonata-project/admin-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sonata-project/block-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/swiftmailer/swiftmailer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpstan/phpdoc-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/knplabs/knp-paginator-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/knplabs/knp-components" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/knplabs/knp-menu" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/knplabs/knp-menu-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/nyholm/nsa" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/twig/string-extra" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/swiftmailer-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/security-acl" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/stripe/stripe-php" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/google-mailer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/event-dispatcher" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
