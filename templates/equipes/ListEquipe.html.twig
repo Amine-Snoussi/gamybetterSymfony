@@ -38,8 +38,8 @@
                                         </div>
                                     </form>
                                 </li>
-                              <div class="card-body table-responsive p-0">
-                                <table id="#example1" class="table table-bordered table-striped">
+                                <div class="dataTable-container">
+                                    <table id="#example1" class="table datatable dataTable-table">
                                     <thead>
                                     <tr>
                                         <th>nom Equipe</th>
@@ -51,7 +51,7 @@
                                     <tbody id="tab">
                                     {% for equipes in equipes %}
                                         <tr>
-                                            <td>{{ equipes.nomEq }} </td>
+                                            <td>{{ equipes.nom }} </td>
                                             <td>{{ equipes.descriptionEquipe }} </td>
                                             <td>
                                                 <a href="{{ path('details_equipe',{'id':equipes.idEquipe }) }}" class="btn btn-outline-primary"> <i class="bi bi-eye"></i> </a>

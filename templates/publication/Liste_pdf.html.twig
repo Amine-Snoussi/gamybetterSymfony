@@ -1,0 +1,38 @@
+
+
+{% block body %}
+    <h1>Listes des Publication </h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Publication</th>
+                <th>Titre</th>
+                <th>Nbrcommentaire</th>
+                <th>Date</th>
+                <th>Image</th> 
+                <th>Nbrlike</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for publication in publications %}
+            <tr>
+                <td>{{ publication.id }}</td>
+                <td>{{ publication.publication }}</td>
+                <td>{{ publication.titre }}</td>
+                <td>{{ publication.nbrcommentaire }}</td>
+                <td>{{ publication.date ? publication.date|date('Y-m-d') : '' }}</td>
+                <td>{{ publication.image }}</td>
+                <td>{{ publication.nbrlike }}</td>
+            
+            </tr>
+           
+           
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

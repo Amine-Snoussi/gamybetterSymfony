@@ -14,7 +14,7 @@ class EquipeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nomEq' , TextType::class, array('attr' => array('class' => 'form-control', 'required' => true)))
+            ->add('nom' , TextType::class, array('attr' => array('class' => 'form-control', 'required' => true)))
             ->add('descriptionEquipe',TextType::class, array('attr' => array('class' => 'form-control', 'required' => true)))
             ->add('save', SubmitType::class, array(
                 'label' => 'Enregistrer',

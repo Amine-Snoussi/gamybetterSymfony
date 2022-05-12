@@ -1,0 +1,68 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Team | GamyBetter{% endblock %}
+
+
+{% block breadcrumbs %}
+
+    <div class="nk-gap-1"></div>
+    <div class="container">
+        <ul class="nk-breadcrumbs">
+
+
+            <li><a href="index.html">Home</a></li>
+
+
+            <li><span class="fa fa-angle-right"></span></li>
+
+            <li><a href="tournaments.html">Tournaments</a></li>
+
+
+            <li><span class="fa fa-angle-right"></span></li>
+
+            <li><span>Teams</span></li>
+
+        </ul>
+    </div>
+    <div class="nk-gap-1"></div>
+{% endblock %}
+
+{% block body %}
+    <tr>
+
+    {% for equipes in boucle %}
+        <!-- START: Teams -->
+        <div class="nk-team">
+            <div class="nk-team-logo">
+                <img src={{ asset('front/assets/images/team-1-lg.jpg' ) }} alt="">
+            </div>
+            <div class="nk-team-cont">
+                <h3 class="h5 mb-20"><span class="text-main-1">Team:</span> {{ equipes.nom }}</h3>
+                <h4 class="h6 mb-5">Description:</h4>
+                <a href="#"></a> <a
+                        href="#">{{ equipes.descriptionEquipe }}</a>
+
+
+                <div class="nk-team-photo"
+                     style="background-image: url({{ '/uploads/front/assets/images/team-photo.png' }})" > </div>
+
+            </div>
+        </div>
+        </tr>
+
+    {% endfor %}
+    <li><a href="{{ path('calendar_index') }}" title=""><i class="la la-envelope"></i> </a></li>
+    <a href=""{{ path('calendar_index') }}">
+
+    <a class="fcc-btn" href="{{ path('calendar_index') }}">Calendar</a>
+
+    </a>
+
+
+
+
+
+
+
+    <!-- END: Teams -->
+{% endblock %}

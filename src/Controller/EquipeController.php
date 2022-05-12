@@ -11,6 +11,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\EquipeRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
 
 /**
  * @Route ("/equipe")
@@ -30,6 +33,17 @@ class EquipeController extends AbstractController
             4 // Nombre de résultats par page
         );
         return $this->render('/equipes/ListEquipe.html.twig', ['equipes'=>$equipes]);
+
+    }
+    /**
+     * @Route("/team", name="list_f", methods={"GET"})
+     */
+    public function listf(Request $request , EquipeRepository  $er)
+    {
+        $list_commande = $er->findAll();
+        return $this->render('team.html.twig', ['boucle' => $list_commande,
+        ]);
+
 
     }
 

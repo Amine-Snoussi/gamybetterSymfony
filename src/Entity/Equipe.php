@@ -1,11 +1,15 @@
 <?php
 
 namespace App\Entity;
+
 use App\Repository\EquipeRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * Equipe
+ *
+ * @ORM\Table(name="equipe")
  * @ORM\Entity(repositoryClass=EquipeRepository::class)
  */
 class Equipe
@@ -21,10 +25,10 @@ class Equipe
     /**
      * @var string
      *
-     * @ORM\Column(name="nom_eq", type="string", length=255, nullable=true)
+     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
      * @Assert\NotBlank
      */
-    private $nomEq;
+    private $nom;
 
     /**
      * @var string
@@ -38,7 +42,6 @@ class Equipe
 
     public function __construct()
     {
-
     }
 
     public function getIdEquipe(): int
@@ -47,21 +50,18 @@ class Equipe
     }
 
 
-    public function setIdEquipe(int $idEquipe): void
+
+
+
+    public function getNom(): ?string
     {
-        $this->idEquipe = $idEquipe;
+        return $this->nom;
     }
 
 
-    public function getNomEq(): ?string
+    public function setNom(string $nom): void
     {
-        return $this->nomEq;
-    }
-
-
-    public function setNomEq(string $nomEq): void
-    {
-        $this->nomEq = $nomEq;
+        $this->nom = $nom;
     }
 
 
@@ -77,6 +77,22 @@ class Equipe
     }
 
 
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        // TODO: Implement __toString() method.
+        return $this->nom;
+    }
+    public function getEquipe(): ?Equipe
+    {
+        return $this->Equipe;
+    }
+    public function setEquipe(?Equipe $equipe): self
+    {
+        $this->equipe = $equipe;
 
-
+        return $this;
+    }
 }

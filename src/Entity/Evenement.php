@@ -173,4 +173,22 @@ class Evenement
 
         return $this;
     }
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        // TODO: Implement __toString() method.
+        return $this->nomEvent;
+    }
+    public function getEvenement(): ?Evenement
+    {
+        return $this->Evenement;
+    }
+    public function setEvenement(?Evenement $evenement): self
+    {
+        $this->evenement = $evenement;
+
+        return $this;
+    }
 }

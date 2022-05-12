@@ -89,5 +89,17 @@ class EvenementController extends AbstractController
     {
         return $this->render('Evenements/DetailsEvenement.html.twig', ['evenement'=> $evenement] );
     }
+    /**
+     * @Route("/tournaments", name="tournaments", methods={"GET"})
+     */
+    public function listf(Request $request , EvenementRepository  $er)
+    {
+        $list_evenements = $er->findAll();
+        return $this->render('tournaments.html.twig', ['boucle' => $list_evenements,
+        ]);
+
+
+    }
+
 
 }
