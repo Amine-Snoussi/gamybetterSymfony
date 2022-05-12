@@ -4,6 +4,13 @@
 
 {% block body %}
     <h1>Publication index</h1>
+
+    <form method="POST">
+    <input type="text" name="titre" >
+    <input type="submit" value="recherche">
+    </form>
+
+    
     {% for message in app.flashes('info')%}
     <div class="alert alert-success">
     {{message}}

@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\CommentaireRepository;
 
 /**
  * @Route("/commentaire")
@@ -35,6 +36,7 @@ class CommentaireController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $commentaire = new Commentaire();
+        $commentaire->setDate(new \DateTime('now'));
         $form = $this->createForm(CommentaireType::class, $commentaire);
         $form->handleRequest($request);
 
@@ -97,4 +99,7 @@ class CommentaireController extends AbstractController
 
         return $this->redirectToRoute('app_commentaire_index', [], Response::HTTP_SEE_OTHER);
     }
+
+  
+
 }

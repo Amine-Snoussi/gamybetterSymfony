@@ -1,0 +1,105 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Liste Des Évenements{% endblock %}
+
+{% block body %}
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Table des Évenements</h3>
+                </div>
+
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <a href="{{ path('add_evenement') }}"  >Create new</a>
+                            </div>
+                            <div class="col-sm-6">
+
+
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <li class="nav-item nav-search border-0 ml-1 ml-md-3 ml-lg-5 d-none d-md-flex">
+
+                                <form class="nav-link form-inline mt-2 mt-md-0">
+                                    <div class="input-group" >
+                                        <input  id="myInput"  type="text" class="form-control" placeholder="search">
+                                        <div class="input-group-append">
+
+                                            <i class="mdi mdi-magnify"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </li>
+                        <div class="card-body table-responsive p-0">
+                            <table id="#example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Nom Évenement </th>
+                                    <th>Nombre Équipe</th>
+                                    <th>Description Évenement</th>
+                                    <th>Date Début Évenement</th>
+                                    <th>Date Fin Évenement </th>
+                                    <th>Prix</th>
+                                    <th>État</th>
+                                    <th>Liste Équipe</th>
+                                    <th>Actions</th>
+
+                                </tr>
+                                </thead>
+                                <tbody id="tab">
+                                {% for evenements in evenements %}
+                                    <tr>
+                                        <td>{{ evenements.nomEvent }} </td>
+                                        <td>{{ evenements.nbEq }} </td>
+                                        <td>{{ evenements.descriptionEvent }} </td>
+                                        <td>{{ evenements.dateDebutEvent|date('Y-m-d') }} </td>
+                                        <td>{{ evenements.dateFinEvent|date('Y-m-d ')  }} </td>
+                                        <td>{{ evenements.prix }} </td>
+                                        <td>{{ evenements.etat }} </td>
+                                        <td>{{ evenements.listeEquipe }} </td>
+                                        <td>
+                                            <a href="{{ path('details_evenement',{'id':evenements.id }) }}" class="btn btn-outline-primary"> <i class="bi bi-eye"></i> </a>
+                                            <a href="{{ path('edit_evenement',{'id':evenements.id }) }}" class="btn btn-outline-primary"> <i class="bi bi-pencil-square"></i> </a>
+                                            <a href="{{ path('delete_evenement',{'id':evenements.id }) }}" class="btn btn-outline-primary" onclick="return confirm('Voulez vous vraiment supprimer cet évènement ?')"> <i class="bi bi-trash"></i> </a>
+                                        </td>
+
+                                    </tr>
+                                    <td>
+                                    </td>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<aside class="control-sidebar control-sidebar-dark">
+</aside>
+    {{ knp_pagination_render(evenements) }}
+{% endblock %}
+
+    {% block javascripts %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#myInput").on("keyup", function() {
+                    var value = $(this).val().toLowerCase();
+                    $("#tab tr").filter(function() {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+        </script>
+    {% endblock %}
+
+

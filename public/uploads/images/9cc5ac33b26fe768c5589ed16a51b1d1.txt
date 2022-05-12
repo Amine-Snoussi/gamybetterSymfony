@@ -1,0 +1,32 @@
+﻿EX2 serie 3
+1)
+On considère la grammaire G = (T1, N, S, R) où
+T1 = { a, b }
+N={S}
+R={ S->aSb|ε }
+
+2)
+On considère la grammaire G = (T2, N, S, R) où
+T2 = { a, b }
+N={S}
+R={ S->aSbb | ε }
+
+3)
+On considère la grammaire G = (T3, N, S, R) où
+T3 = { a, b }
+N={S}
+R={ S->aSa | bSb | ε }
+
+
+4)
+On considère la grammaire G = (T, N, S, R) où
+T = { a, b, c }
+N = { S, D, E }
+R = { S->aSDE | ε
+aD->ab
+bE->bc
+cD->DE
+bD->bb
+cE->cc }
+
+5)

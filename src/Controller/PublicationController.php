@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Controller;
-
+use App\Entity\Personne;
 use App\Entity\Publication;
+use App\Entity\Commentaire;
 use App\Form\PublicationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,8 +11,14 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use App\Repository\PublicationRepository;
+use App\Repository\CommentaireRepository;
 
 /**
  * @Route("/publication")
@@ -31,6 +38,44 @@ class PublicationController extends AbstractController
             'publications' => $publications,
         ]);
     }
+
+     
+    public function LastPost()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $query=$em 
+        ->createQuery("Select p From App\Entity\Publication p 
+        order By p.date DESC"); 
+        return $query->getResult();
+
+         
+
+    }
+
+
+    /**
+     * @Route("/triLike_poste", name="tri_nbr_like")
+     */
+    public function TriIDPOSTE(PublicationRepository $rep)
+    {
+        $publication= $rep->TriParLike();
+        return $this->render('blog-grid.html.twig', [
+            'publications' => $publication,
+        ]);
+    }
+
+  /**
+     * @Route("/triLikeD_poste", name="tri_nbr_likeD")
+     */
+
+    public function TriIDPOSTED(PublicationRepository $rep)
+    {
+        $publication=$rep->TriParLikeD();
+        return $this->render('blog-grid.html.twig', [
+            'publications' => $publication,
+        ]);
+    }
+   
 
 
     /**
@@ -78,6 +123,7 @@ class PublicationController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $publication = new Publication();
+        $publication->setDate(new \DateTime('now'));
         $form = $this->createForm(PublicationType::class, $publication);
         $form->handleRequest($request);
 
@@ -186,4 +232,111 @@ class PublicationController extends AbstractController
 
         return $this->redirectToRoute('app_publication_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    /**
+     * @Route("/blog_details/{id}", name="blog_details")
+     * @return Response
+     */
+    public function blog_details($id, PublicationRepository $publicationRepository, CommentaireRepository $commentaireRepository,Request $request): Response
+    {
+        $commentaire = new Commentaire();
+        $commentaire->setDate(new \DateTime('now'));
+        $form = $this->createFormBuilder()
+        ->add('contCommentaire',TextType::class,[
+            'attr'=> [
+                'placeholder' => 'add something',
+                'class' => 'form-control required'
+            ]
+        ])
+        ->add('add',SubmitType::class)
+        ->getForm();
+        
+    
+    $publication = $publicationRepository->find($id);
+        if ($form->isSubmitted()) {
+
+            dump($request->getContent());
+            $commentaire->setContcommentaire($content);
+            $entityManager->persist($commentaire);
+            $entityManager->flush();
+            $this->addFlash(
+                'info',
+                'Added successfully!'
+            );
+            return $this->render('blog_details.html.twig', [
+                'publ   ication' => $publication,
+                'commentaires'=> $commentaires,
+                'form'=>$form->createView(),
+            ]);
+        }
+
+        
+        $commentaires = $commentaireRepository->findBy(['idPublication'=>$publication->getId()]);
+        return $this->render('blog_details.html.twig', [
+            'controller_name' => 'DefaultController',
+            'publication' => $publication,
+            'commentaires'=> $commentaires,
+            'form'=>$form->createView(),
+        ]);
+    }
+
+
+  /**
+     * @Route("/", name="rechercheTitre")
+     */
+    public function rechercheByTitre(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $publications =$em ->getRepository( Publication::class) ->findAll();
+
+if ($request->isMethod("POST")){
+  
+    $titre =$request ->get('titre');
+   
+    $publications =$em ->getRepository( Publication::class) ->findBy(array('titre'=>$titre));
+    dump($publications);
+
 }
+  return $this->render('publication/index.html.twig', [
+            'publications' => $publications,
+        ]);
+        
+        
+    }
+
+    /**
+     * @Route("/rechercheByTitreFront", name="rechercheTitreFront")
+     */
+    public function rechercheByTitreFront(Request $request,PaginatorInterface $paginator,PublicationRepository $publicationRepository): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        
+if ($request->isMethod("POST")){
+  
+    $titre =$request ->get('titre');
+   
+    $publications =$em ->getRepository( Publication::class) ->findBy(array('titre'=>$titre));
+    dump($publications);
+    
+}
+return $this->render('blog-grid.html.twig', [
+    'publications' => $publications,
+ ]);
+        
+        
+    }
+
+
+
+
+    }
+
+
+        
+    
+
+
+
+
+
+
+
