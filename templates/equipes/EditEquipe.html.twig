@@ -1,0 +1,36 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Modifier Équipes{% endblock %}
+
+{% block body %}
+
+
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-outline card-info">
+                    <div class="card-header">
+                        <br>
+                        <div class="card-body pad">
+                            {% form_theme format 'bootstrap_4_layout.html.twig' %}
+                            {% form_theme format 'bootstrap_4_layout.html.twig' %}
+                            {{ form_start(format) }}
+                            {{ form_errors(format) }}
+                            <div class="form-group">
+                                {{ form_label(format.nom) }}
+                                {{ form_widget(format.nom) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(format.descriptionEquipe) }}
+                                {{ form_widget(format.descriptionEquipe) }}
+                            </div>
+
+                            {{ form_end(format) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

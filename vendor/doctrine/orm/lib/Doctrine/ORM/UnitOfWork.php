@@ -19,6 +19,7 @@ use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Event\PostFlushEventArgs;
 use Doctrine\ORM\Event\PreFlushEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
+use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\Exception\UnexpectedAssociationValue;
 use Doctrine\ORM\Id\AssignedGenerator;
 use Doctrine\ORM\Internal\CommitOrderCalculator;
@@ -103,7 +104,7 @@ class UnitOfWork implements PropertyChangedListener
      * Hint used to collect all primary keys of associated entities during hydration
      * and execute it in a dedicated query afterwards
      *
-     * @see https://www.doctrine-project.org/projects/doctrine-orm/en/latest/reference/dql-doctrine-query-language.html#temporarily-change-fetch-mode-in-dql
+     * @see https://www.doctrine-project.org/projects/doctrine-orm/en/stable/reference/dql-doctrine-query-language.html#temporarily-change-fetch-mode-in-dql
      */
     public const HINT_DEFEREAGERLOAD = 'deferEagerLoad';
 
@@ -1603,7 +1604,7 @@ class UnitOfWork implements PropertyChangedListener
             return self::STATE_NEW;
         }
 
-        if ($class->containsForeignIdentifier) {
+        if ($class->containsForeignIdentifier || $class->containsEnumIdentifier) {
             $id = $this->identifierFlattener->flattenIdentifier($class, $id);
         }
 
@@ -1984,7 +1985,7 @@ class UnitOfWork implements PropertyChangedListener
                 $this->mergeEntityStateIntoManagedCopy($entity, $managedCopy);
                 $this->persistNew($class, $managedCopy);
             } else {
-                $flatId = $class->containsForeignIdentifier
+                $flatId = $class->containsForeignIdentifier || $class->containsEnumIdentifier
                     ? $this->identifierFlattener->flattenIdentifier($class, $id)
                     : $id;
 

@@ -2,9 +2,13 @@
 
 namespace App\Controller;
 
+use App\Repository\CoursRepository;
+use App\Repository\SessionRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Controller\CoursController;
 
 class DefaultController extends AbstractController
 {
@@ -14,8 +18,134 @@ class DefaultController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('default/index.html.twig', [
+
+        return $this->render('default/index-front.html.twig', [
+            'controller_name' => 'DefaultController',
+
+        ]);
+    }
+
+    /**
+     * @Route("/profile", name="profile")
+     * @return Response
+     */
+    public function profile(): Response
+    {
+        return $this->render('profile.html.twig', [
             'controller_name' => 'DefaultController',
         ]);
     }
+
+    /**
+     * @Route("/blog", name="blog")
+     * @return Response
+     */
+    public function blog(): Response
+    {
+        return $this->render('blog-grid.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+
+    /**
+     * @Route("/gallery", name="galery")
+     * @return Response
+     */
+    public function gallery(): Response
+    {
+        return $this->render('gallery.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+
+    /**
+     * @Route("/store", name="store")
+     * @return Response
+     */
+    public function store(): Response
+    {
+        return $this->render('store.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+
+    /**
+     * @Route("/product", name="product")
+     * @return Response
+     */
+    public function product(): Response
+    {
+        return $this->render('product.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+
+    /**
+     * @Route("/admin", name="admin")
+     * @param SessionRepository $sessionRepository
+     * @param EntityManagerInterface $em
+     * @return Response
+     */
+    public function admin(SessionRepository $sessionRepository, EntityManagerInterface $em): Response
+    {
+        $cours = $sessionRepository->findAll();
+        $coursToday = $sessionRepository->createQueryBuilder('a')
+            ->andWhere('a.date > :val')
+            ->setParameter('val', new \DateTime())
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+        dump($coursToday);
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController',
+            'cours' => $cours
+        ]);
+    }
+
+    /**
+     * @Route("/watch", name="watch")
+     * @return Response
+     */
+    public function watch(): Response
+    {
+        return $this->render('watchStream.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+
+    /**
+     * @Route("/team", name="team")
+     * @return Response
+     */
+    public function team(): Response
+    {
+        return $this->render('team.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+
+    /**
+     * @Route("/signup", name="signup")
+     * @return Response
+     */
+    public function signup(): Response
+    {
+        return $this->render('signup.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+
+    /**
+     * @Route("/blog_details", name="blog_details")
+     * @return Response
+     */
+    public function blog_details(): Response
+    {
+        return $this->render('blog_details.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+
+
 }

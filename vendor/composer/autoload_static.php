@@ -4,26 +4,27 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit25f009c09ddddbc0818cc2b0f89c59ee
+class ComposerStaticInitc3bb072725268642e58904c41198cf5a
 {
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
-        'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
-        'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
-        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         '23c18046f52bef3eea034657bafda50f' => __DIR__ . '/..' . '/symfony/polyfill-php81/bootstrap.php',
+        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
+        'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
+        '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
+        'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
+        '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
+        '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
+        'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         'c2aad8997a98dfc4771bdbffea3d62b7' => __DIR__ . '/..' . '/laminas/laminas-code/polyfill/ReflectionEnumPolyfill.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
-        '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
-        '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
+        '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
         '92c8763cd6170fce6fcfe7e26b4e8c10' => __DIR__ . '/..' . '/symfony/phpunit-bridge/bootstrap.php',
-        'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -38,7 +39,12 @@ class ComposerStaticInit25f009c09ddddbc0818cc2b0f89c59ee
         'T' => 
         array (
             'Twig\\Extra\\TwigExtraBundle\\' => 27,
+            'Twig\\Extra\\String\\' => 18,
             'Twig\\' => 5,
+            'Translation\\SymfonyStorage\\' => 27,
+            'Translation\\Extractor\\' => 22,
+            'Translation\\Common\\' => 19,
+            'Translation\\Bundle\\' => 19,
         ),
         'S' => 
         array (
@@ -52,7 +58,6 @@ class ComposerStaticInit25f009c09ddddbc0818cc2b0f89c59ee
             'Symfony\\Polyfill\\Intl\\Idn\\' => 26,
             'Symfony\\Polyfill\\Intl\\Icu\\' => 26,
             'Symfony\\Polyfill\\Intl\\Grapheme\\' => 31,
-            'Symfony\\Flex\\' => 13,
             'Symfony\\Contracts\\Translation\\' => 30,
             'Symfony\\Contracts\\Service\\' => 26,
             'Symfony\\Contracts\\HttpClient\\' => 29,
@@ -71,12 +76,14 @@ class ComposerStaticInit25f009c09ddddbc0818cc2b0f89c59ee
             'Symfony\\Component\\Security\\Guard\\' => 33,
             'Symfony\\Component\\Security\\Csrf\\' => 32,
             'Symfony\\Component\\Security\\Core\\' => 32,
+            'Symfony\\Component\\Security\\Acl\\' => 31,
             'Symfony\\Component\\Routing\\' => 26,
             'Symfony\\Component\\PropertyInfo\\' => 31,
             'Symfony\\Component\\PropertyAccess\\' => 33,
             'Symfony\\Component\\Process\\' => 26,
             'Symfony\\Component\\OptionsResolver\\' => 34,
             'Symfony\\Component\\Mime\\' => 23,
+            'Symfony\\Component\\Mailer\\Bridge\\Google\\' => 39,
             'Symfony\\Component\\Mailer\\' => 25,
             'Symfony\\Component\\Intl\\' => 23,
             'Symfony\\Component\\Inflector\\' => 28,
@@ -102,6 +109,7 @@ class ComposerStaticInit25f009c09ddddbc0818cc2b0f89c59ee
             'Symfony\\Bundle\\WebServerBundle\\' => 31,
             'Symfony\\Bundle\\WebProfilerBundle\\' => 33,
             'Symfony\\Bundle\\TwigBundle\\' => 26,
+            'Symfony\\Bundle\\SwiftmailerBundle\\' => 33,
             'Symfony\\Bundle\\SecurityBundle\\' => 30,
             'Symfony\\Bundle\\MonologBundle\\' => 29,
             'Symfony\\Bundle\\MakerBundle\\' => 27,
@@ -113,6 +121,18 @@ class ComposerStaticInit25f009c09ddddbc0818cc2b0f89c59ee
             'Symfony\\Bridge\\Monolog\\' => 23,
             'Symfony\\Bridge\\Doctrine\\' => 24,
             'Svg\\' => 4,
+            'Stripe\\' => 7,
+            'Sonata\\Twig\\Bridge\\Symfony\\' => 27,
+            'Sonata\\Twig\\' => 12,
+            'Sonata\\Form\\' => 12,
+            'Sonata\\Exporter\\Bridge\\Symfony\\' => 31,
+            'Sonata\\Exporter\\' => 16,
+            'Sonata\\Doctrine\\Bridge\\Symfony\\' => 31,
+            'Sonata\\Doctrine\\' => 16,
+            'Sonata\\DoctrineORMAdminBundle\\' => 30,
+            'Sonata\\Cache\\' => 13,
+            'Sonata\\BlockBundle\\' => 19,
+            'Sonata\\AdminBundle\\' => 19,
             'Sensio\\Bundle\\FrameworkExtraBundle\\' => 35,
             'Sabberworm\\CSS\\' => 15,
         ),
@@ -121,19 +141,37 @@ class ComposerStaticInit25f009c09ddddbc0818cc2b0f89c59ee
             'Psr\\Log\\' => 8,
             'Psr\\Link\\' => 9,
             'Psr\\Http\\Message\\' => 17,
+            'Psr\\EventDispatcher\\' => 20,
             'Psr\\Container\\' => 14,
             'Psr\\Cache\\' => 10,
             'ProxyManager\\' => 13,
             'Prophecy\\' => 9,
             'PhpParser\\' => 10,
+            'PHPStan\\PhpDocParser\\' => 21,
+        ),
+        'N' => 
+        array (
+            'Nyholm\\' => 7,
         ),
         'M' => 
         array (
             'Monolog\\' => 8,
+            'Metadata\\' => 9,
         ),
         'L' => 
         array (
             'Laminas\\Code\\' => 13,
+        ),
+        'K' => 
+        array (
+            'Knp\\Menu\\' => 9,
+            'Knp\\Component\\' => 14,
+            'Knp\\Bundle\\PaginatorBundle\\' => 27,
+            'Knp\\Bundle\\MenuBundle\\' => 22,
+        ),
+        'J' => 
+        array (
+            'JMS\\Serializer\\' => 15,
         ),
         'I' => 
         array (
@@ -198,9 +236,29 @@ class ComposerStaticInit25f009c09ddddbc0818cc2b0f89c59ee
         array (
             0 => __DIR__ . '/..' . '/twig/extra-bundle',
         ),
+        'Twig\\Extra\\String\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/twig/string-extra',
+        ),
         'Twig\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
+        ),
+        'Translation\\SymfonyStorage\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-translation/symfony-storage/src',
+        ),
+        'Translation\\Extractor\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-translation/extractor/src',
+        ),
+        'Translation\\Common\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-translation/common/src',
+        ),
+        'Translation\\Bundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-translation/symfony-bundle',
         ),
         'Symfony\\WebpackEncoreBundle\\' => 
         array (
@@ -241,10 +299,6 @@ class ComposerStaticInit25f009c09ddddbc0818cc2b0f89c59ee
         'Symfony\\Polyfill\\Intl\\Grapheme\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme',
-        ),
-        'Symfony\\Flex\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/flex/src',
         ),
         'Symfony\\Contracts\\Translation\\' => 
         array (
@@ -318,6 +372,10 @@ class ComposerStaticInit25f009c09ddddbc0818cc2b0f89c59ee
         array (
             0 => __DIR__ . '/..' . '/symfony/security-core',
         ),
+        'Symfony\\Component\\Security\\Acl\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/security-acl',
+        ),
         'Symfony\\Component\\Routing\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/routing',
@@ -341,6 +399,10 @@ class ComposerStaticInit25f009c09ddddbc0818cc2b0f89c59ee
         'Symfony\\Component\\Mime\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/mime',
+        ),
+        'Symfony\\Component\\Mailer\\Bridge\\Google\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/google-mailer',
         ),
         'Symfony\\Component\\Mailer\\' => 
         array (
@@ -442,6 +504,10 @@ class ComposerStaticInit25f009c09ddddbc0818cc2b0f89c59ee
         array (
             0 => __DIR__ . '/..' . '/symfony/twig-bundle',
         ),
+        'Symfony\\Bundle\\SwiftmailerBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/swiftmailer-bundle',
+        ),
         'Symfony\\Bundle\\SecurityBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/security-bundle',
@@ -486,6 +552,54 @@ class ComposerStaticInit25f009c09ddddbc0818cc2b0f89c59ee
         array (
             0 => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg',
         ),
+        'Stripe\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
+        ),
+        'Sonata\\Twig\\Bridge\\Symfony\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sonata-project/twig-extensions/src/Bridge/Symfony',
+        ),
+        'Sonata\\Twig\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sonata-project/twig-extensions/src',
+        ),
+        'Sonata\\Form\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sonata-project/form-extensions/src',
+        ),
+        'Sonata\\Exporter\\Bridge\\Symfony\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sonata-project/exporter/src/Bridge/Symfony',
+        ),
+        'Sonata\\Exporter\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sonata-project/exporter/src',
+        ),
+        'Sonata\\Doctrine\\Bridge\\Symfony\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sonata-project/doctrine-extensions/src/Bridge/Symfony',
+        ),
+        'Sonata\\Doctrine\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sonata-project/doctrine-extensions/src',
+        ),
+        'Sonata\\DoctrineORMAdminBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sonata-project/doctrine-orm-admin-bundle/src',
+        ),
+        'Sonata\\Cache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sonata-project/cache/src',
+        ),
+        'Sonata\\BlockBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sonata-project/block-bundle/src',
+        ),
+        'Sonata\\AdminBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sonata-project/admin-bundle/src',
+        ),
         'Sensio\\Bundle\\FrameworkExtraBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/sensio/framework-extra-bundle/src',
@@ -507,6 +621,10 @@ class ComposerStaticInit25f009c09ddddbc0818cc2b0f89c59ee
             0 => __DIR__ . '/..' . '/psr/http-factory/src',
             1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
+        'Psr\\EventDispatcher\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/event-dispatcher/src',
+        ),
         'Psr\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
@@ -527,13 +645,45 @@ class ComposerStaticInit25f009c09ddddbc0818cc2b0f89c59ee
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
         ),
+        'PHPStan\\PhpDocParser\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src',
+        ),
+        'Nyholm\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nyholm/nsa/src',
+        ),
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
+        'Metadata\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jms/metadata/src',
+        ),
         'Laminas\\Code\\' => 
         array (
             0 => __DIR__ . '/..' . '/laminas/laminas-code/src',
+        ),
+        'Knp\\Menu\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/knplabs/knp-menu/src/Knp/Menu',
+        ),
+        'Knp\\Component\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/knplabs/knp-components/src/Knp/Component',
+        ),
+        'Knp\\Bundle\\PaginatorBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/knplabs/knp-paginator-bundle/src',
+        ),
+        'Knp\\Bundle\\MenuBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/knplabs/knp-menu-bundle/src',
+        ),
+        'JMS\\Serializer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jms/serializer/src',
         ),
         'Intervention\\Image\\' => 
         array (
@@ -636,6 +786,16 @@ class ComposerStaticInit25f009c09ddddbc0818cc2b0f89c59ee
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+    );
+
+    public static $prefixesPsr0 = array (
+        'b' => 
+        array (
+            'blackknight467\\StarRatingBundle' => 
+            array (
+                0 => __DIR__ . '/..' . '/blackknight467/star-rating-bundle',
+            ),
         ),
     );
 
@@ -1286,9 +1446,10 @@ class ComposerStaticInit25f009c09ddddbc0818cc2b0f89c59ee
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit25f009c09ddddbc0818cc2b0f89c59ee::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit25f009c09ddddbc0818cc2b0f89c59ee::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit25f009c09ddddbc0818cc2b0f89c59ee::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitc3bb072725268642e58904c41198cf5a::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitc3bb072725268642e58904c41198cf5a::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitc3bb072725268642e58904c41198cf5a::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitc3bb072725268642e58904c41198cf5a::$classMap;
 
         }, null, ClassLoader::class);
     }

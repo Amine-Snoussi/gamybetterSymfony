@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * @Route("/session")
@@ -30,6 +31,8 @@ class SessionController extends AbstractController
         ]);
     }
 
+
+
     /**
      * @Route("/new", name="app_session_new", methods={"GET", "POST"})
      */
@@ -40,7 +43,10 @@ class SessionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $sessionRepository->add($session);
+            try {
+                $sessionRepository->add($session);
+            } catch (OptimisticLockException|ORMException $e) {
+            }
             return $this->redirectToRoute('app_session_index', [], Response::HTTP_SEE_OTHER);
         }
 

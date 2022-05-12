@@ -3,63 +3,67 @@
 {% block title %}Cours{% endblock %}
 
 {% block body %}
-    <h1>Cours</h1>
-    <a href="{{ path('cours.list') }}" class="ri-arrow-go-back-fill btn btn-outline-primary"> </a>
-    <a href="{{ path('cours.edit', {'id': cour.id}) }}" class=" btn btn-outline-primary bi bi-pencil-square"></a>
+
+    <div class="card">
+        <div class="card-body">
+            <h1>Cours</h1>
+            <a href="{{ path('cours.list') }}" class="ri-arrow-go-back-fill btn btn-outline-primary"> </a>
+            <a href="{{ path('cours.edit', {'id': cour.id}) }}"
+               class=" btn btn-outline-primary bi bi-pencil-square"></a>
 
 
-    <table class="table">
-        <tbody>
-        <tr>
-            <th>Nom</th>
-            <td>{{ cour.nom }}</td>
-        </tr>
-        <tr>
-            <th>Categorie</th>
-            <td>{{ cour.categorie }}</td>
-        </tr>
-        <tr>
-            <th>Jeu</th>
-            <td>{{ cour.jeu }}</td>
-        </tr>
-        <tr>
-            <th>Prix</th>
-            <td>{{ cour.prix }}</td>
-        </tr>
-        <tr>
-            <th>Image</th>
-            <td>
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ cour.nom }}</td>
+                </tr>
+                <tr>
+                    <th>Categorie</th>
+                    <td>{{ cour.categorie }}</td>
+                </tr>
+                <tr>
+                    <th>Jeu</th>
+                    <td>{{ cour.jeu }}</td>
+                </tr>
+                <tr>
+                    <th>Prix</th>
+                    <td>{{ cour.prix }}</td>
+                </tr>
+                <tr>
+                    <th>Image</th>
+                    <td>
 
-                <img id="imageId" src="{{ '/uploads/' ~ cour.fileName }}" alt="">
-            </td>
-        </tr>
-        <tr>
-            <th>Video</th>
-            <td>
-                <video controls id="videoId">
-                    <source src="{{ '/uploads/' ~ cour.video }}">
-                    Sorry, your browser doesn't support embedded videos.
-                </video>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+                       <img id="imageId" src="{{ '/uploads/' ~ cour.fileName }}" alt="">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Video</th>
+                    <td>
+                        <video controls id="videoId">
+                            <source src="{{ '/uploads/' ~ cour.video }}">
+                            Sorry, your browser doesn't support embedded videos.
+                        </video>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
 
-    {{ include('cours/_delete_form.html.twig') }}
+            {{ include('cours/_delete_form.html.twig') }}
 
-    <script>
-        //Resize image
-        let img = document.querySelector('#imageId');
-        let imgResize = document.getElementById('imageId');
-        let width = img.naturalWidth / 5 ;
-        let height = img.naturalHeight / 5;
-        imgResize.style.width = width + 'px';
-        imgResize.style.height = height + 'px';
-        console.log(width, height, "hello");
-
-
-
-    </script>
+            <script>
+                //Resize image
+                let img = document.querySelector('#imageId');
+                let imgResize = document.getElementById('imageId');
+                let width = 25 ;
+                let height = 25;
+                imgResize.style.width = width + '%';
+                imgResize.style.height = height + '%';
+                console.log(width, height, "hello");
 
 
+            </script>
+
+        </div>
+    </div>
 {% endblock %}

@@ -5,6 +5,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <title>{% block title %}Welcome to Gamybetter{% endblock %}</title>
+
     {% block stylesheets %}
         <!-- Favicons -->
         <link href="{{ asset('img/favicon.png') }}" rel="icon">
@@ -12,17 +13,21 @@
 
         <!-- Google Fonts -->
         <link href="https://fonts.gstatic.com" rel="preconnect">
+
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
               rel="stylesheet">
 
         <!-- Vendor CSS Files -->
-        <link href="{{ asset('assets-back/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('assets-back/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-        <link href="{{ asset('assets-back/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('assets-back/vendor/quill/quill.snow.css') }}" rel="stylesheet">
-        <link href="{{ asset('assets-back/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
-        <link href="{{ asset('assets-back/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
-        <link href="{{ asset('assets-back/vendor/simple-datatables/style.css') }}" rel="stylesheet">ù
+        <link href="{{ asset('back/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('back/assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+        <link href="{{ asset('back/assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('back/assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
+        <link href="{{ asset('back/assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
+        <link href="{{ asset('back/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
+        <link href="{{ asset('back/assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
+
+        <!-- Template Main CSS File -->
+        <link href="{{ asset('back/assets/css/style.css') }}" rel="stylesheet">
 
         <!-- Template Main CSS File -->
         <link href="{{ asset('assets-back/css/style.css') }}" rel="stylesheet">
@@ -41,8 +46,8 @@
 
         <!-- Logo -->
         <div class="d-flex align-items-center justify-content-between">
-            <a href="{{ path('app_default') }}" class="logo d-flex align-items-center">
-                <img src="{{ asset('assets-back/img/logo.png') }}" alt="">
+            <a href="{{ path('admin') }}" class="logo d-flex align-items-center">
+                <img src="{{ asset('back/assets/img/logo.png') }}" alt="">
                 <span class="d-none d-lg-block">Gamybetter-Admin</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -166,7 +171,7 @@
 
                         <li class="message-item">
                             <a href="#">
-                                <img src="/public/assets-back/img/messages-1.jpg" alt="" class="rounded-circle">
+                                <img src="/public/back/assets/img/messages-1.jpg" alt="" class="rounded-circle">
                                 <div>
                                     <h4>Maria Hudson</h4>
                                     <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -180,7 +185,7 @@
 
                         <li class="message-item">
                             <a href="#">
-                                <img src="/public/assets-back/img/messages-2.jpg" alt="" class="rounded-circle">
+                                <img src="/public/back/assets/img/messages-2.jpg" alt="" class="rounded-circle">
                                 <div>
                                     <h4>Anna Nelson</h4>
                                     <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -194,7 +199,7 @@
 
                         <li class="message-item">
                             <a href="#">
-                                <img src="/public/assets-back/img/messages-3.jpg" alt="" class="rounded-circle">
+                                <img src="/public/back/assets/img/messages-3.jpg" alt="" class="rounded-circle">
                                 <div>
                                     <h4>David Muldon</h4>
                                     <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -218,7 +223,7 @@
                 <li class="nav-item dropdown pe-3">
                     <!-- Profile Image Icon -->
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="{{ asset('assets-back/img/profile-img.jpg') }}" alt="Profile" class="rounded-circle">
+                        <img src="{{ asset('back/assets/img/profile-img.jpg') }}" alt="Profile" class="rounded-circle">
                         <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
                     </a><!-- End Profile Image Icon -->
 
@@ -282,7 +287,7 @@
         <ul class="sidebar-nav" id="sidebar-nav">
             <!-- Dashboard Nav -->
             <li class="nav-item">
-                <a class="nav-link " href="{{ path('app_default') }}">
+                <a class="nav-link " href="{{ path('admin') }}">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
@@ -296,17 +301,23 @@
                 </a>
                 <ul id="utilisateurs-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="#">
+                        <a href="{{ path('addPersonne') }}">
                             <i class="bi bi-circle"></i><span>Nouveau utilisateur</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{{ path('affichePersonne') }}">
                             <i class="bi bi-circle"></i><span>Consulter liste utilisateurs</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('afficheReclamation') }}">
+                            <i class="bi bi-circle"></i><span>Consulter liste reclamations</span>
                         </a>
                     </li>
                 </ul>
             </li><!-- End Utilisateurs Nav -->
+
 
             <!-- Cours Nav -->
             <li class="nav-item">
@@ -358,13 +369,13 @@
                 </a>
                 <ul id="interactions-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="#">
-                            <i class="bi bi-circle"></i><span>Créer un blog</span>
+                        <a href="{{ path('app_publication_index') }}">
+                            <i class="bi bi-circle"></i><span>Consulter forum</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="bi bi-circle"></i><span>Consulter forum</span>
+                        <a href="{{ path('app_commentaire_index') }}">
+                            <i class="bi bi-circle"></i><span>Commentaires</span>
                         </a>
                     </li>
                     <li>
@@ -383,13 +394,31 @@
                             class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="tournois-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li class="nav-item" id="az">
+                        <a href="{{ path('list_equipe') }}" class="nav-link" id="equipes">
+                            <i class="nav-icon fas fa-user-plus"></i>
+                            <p>
+                                Équipes
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item" id="az">
+                        <a href="{{ path('list_evenement') }}" class="nav-link" id="evenements">
+                            <i class="nav-icon fas fa-user-plus"></i>
+                            <p>
+                                Évenements
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                    </li>
                     <li>
                         <a href="#">
                             <i class="bi bi-circle"></i><span>Créer tournoi</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{{ path('list_evenement') }}" id="evenements">
                             <i class="bi bi-circle"></i><span>Consulter liste tournois</span>
                         </a>
                     </li>
@@ -410,19 +439,44 @@
                 </a>
                 <ul id="actualite-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="#">
+                        <a href="{{ path('app_actualite_index') }}">
                             <i class="bi bi-circle"></i><span>Créer actualité</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="bi bi-circle"></i><span>Consulter statistiques</span>
+                        <a href="{{ path('app_game_index') }}">
+                            <i class="bi bi-circle"></i><span>Créer un match</span>
                         </a>
                     </li>
 
                 </ul>
             </li><!-- End Actualité Nav -->
 
+            <!-- Service Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#service-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bx bxl-shopify"></i><span>Gestion services</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="service-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="{{ path('app_commande_index') }}">
+                            <i class="bi bi-circle"></i><span>Gestion Commandes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_produit_index') }}">
+                            <i class="bi bi-circle"></i><span>Gestion Produits</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="bi bi-circle"></i><span>Gestion Panier</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li><!-- End Services Nav -->
             <li class="nav-heading">Les coachs</li>
 
             <!-- Coach Personnel Nav -->
@@ -442,7 +496,7 @@
             </li><!-- End Coach d'équipe Nav -->
             <!-- PDF Nav -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ path('pdf')}}">
+                <a class="nav-link collapsed" href="{{ path('pdf') }}">
                     <i class="bi bi-question-circle"></i>
                     <span>PDF</span>
                 </a>
@@ -470,17 +524,17 @@
 {% block javascripts %}
 
     <!-- Vendor JS Files -->
-    <script src="{{ asset('assets-back/vendor/apexcharts/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('assets-back/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets-back/vendor/chart.js/chart.min.js') }}"></script>
-    <script src="{{ asset('assets-back/vendor/echarts/echarts.min.js') }}"></script>
-    <script src="{{ asset('assets-back/vendor/quill/quill.min.js') }}"></script>
-    <script src="{{ asset('assets-back/vendor/simple-datatables/simple-datatables.js') }}"></script>
-    <script src="{{ asset('assets-back/vendor/tinymce/tinymce.min.js') }}"></script>
-    <script src="{{ asset('assets-back/vendor/php-email-form/validate.js') }}"></script>
+    <script src="{{ asset('back/assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('back/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('back/assets/vendor/chart.js/chart.min.js') }}"></script>
+    <script src="{{ asset('back/assets/vendor/echarts/echarts.min.js') }}"></script>
+    <script src="{{ asset('back/assets/vendor/quill/quill.min.js') }}"></script>
+    <script src="{{ asset('back/assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
+    <script src="{{ asset('back/assets/vendor/tinymce/tinymce.min.js') }}"></script>
+    <script src="{{ asset('back/assets/vendor/php-email-form/validate.js') }}"></script>
 
     <!-- Template Main JS File -->
-    <script src="{{ asset('assets-back/js/main.js') }}"></script>
+    <script src="{{ asset('back/assets/js/main.js') }}"></script>
 
     <!-- Calendar JS -->
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>
@@ -512,7 +566,7 @@
                     center: 'title',
                     right: 'dayGridMonth,timeGridWeek,timeGridDay',
                 },
-                plugins: [ 'interaction', 'dayGrid', 'timeGrid' ], // https://fullcalendar.io/docs/plugin-index
+                plugins: ['interaction', 'dayGrid', 'timeGrid'], // https://fullcalendar.io/docs/plugin-index
                 timeZone: 'UTC',
             });
             calendar.render();
