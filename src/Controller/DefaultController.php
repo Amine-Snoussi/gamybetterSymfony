@@ -24,23 +24,27 @@ class DefaultController extends AbstractController
 {
     /**
      * @Route("/", name="app_default")
+     * @param \App\Controller\ActualiteController $act
+     * @param GameController $mat
+     * @param PublicationController $pub
      * @return Response
      */
-    public function index(ActualiteController $act,GameController $mat,PublicationController $pub ): Response
+    public function index(ActualiteController $act, GameController $mat, PublicationController $pub): Response
     {
-        $tab_date=$pub->LastPost();
-        $tab_date=$act->latest_date();
-        $tab_match=$mat->latest_match();
-       // $chercher= $rech ->rechercheByJeu();
+        $tab_date = $pub->LastPost();
+        $tab_date = $act->latest_date();
+        $tab_match = $mat->latest_match();
+        // $chercher= $rech ->rechercheByJeu();
         return $this->render('default/index-front.html.twig', [
             'actualites' => $tab_date,
-            'games'=> $tab_match,
+            'games' => $tab_match,
             'publications' => $tab_date,
-           // 'actualite' => $actualites
-            
+            // 'actualite' => $actualites
+
             'controller_name' => 'DefaultController',
         ]);
     }
+
     /**
      * @Route("/teammate", name="teammate")
      * @return Response
@@ -55,9 +59,13 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/blog", name="blog")
+     * @param EntityManagerInterface $entityManager
+     * @param PaginatorInterface $paginator
+     * @param PublicationRepository $pubrepo
+     * @param Request $request
      * @return Response
      */
-    public function blog(EntityManagerInterface $entityManager , PaginatorInterface $paginator,PublicationRepository $pubrepo,Request $request): Response
+    public function blog(EntityManagerInterface $entityManager, PaginatorInterface $paginator, PublicationRepository $pubrepo, Request $request): Response
     {
         $publication = $paginator->paginate(
             $donnees = $pubrepo->findAll(),
@@ -68,15 +76,7 @@ class DefaultController extends AbstractController
             'publications' => $publication,
         ]);
 
-
-
-     
     }
-   
-
- 
-
-
 
     /**
      * @Route("/gallery", name="galery")
@@ -88,6 +88,7 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
         ]);
     }
+
     /**
      * @Route("/store", name="store")
      * @return Response
@@ -109,6 +110,7 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
         ]);
     }
+
     /**
      * @Route("/admin", name="admin")
      * @return Response
@@ -119,80 +121,22 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
         ]);
     }
-    /**
-     * @Route("/teammate", name="teammate")
-     * @return Response
-     */
-    public function profile(): Response
-    {
-        return $this->render('profile.html.twig', [
-            'controller_name' => 'DefaultController',
-        ]);
-    }
-    /**
-     * @Route("/blog", name="blog")
-     * @return Response
-     */
-    public function blog(): Response
-    {
-        return $this->render('blog-grid.html.twig', [
-            'controller_name' => 'DefaultController',
-        ]);
-    }
-    /**
-     * @Route("/gallery", name="galery")
-     * @return Response
-     */
-    public function gallery(): Response
-    {
-        return $this->render('gallery.html.twig', [
-            'controller_name' => 'DefaultController',
-        ]);
-    }
-    /**
-     * @Route("/store", name="store")
-     * @return Response
-     */
-    public function store(): Response
-    {
-        return $this->render('store.html.twig', [
-            'controller_name' => 'DefaultController',
-        ]);
-    }
-    /**
-     * @Route("/product", name="product")
-     * @return Response
-     */
-    public function product(): Response
-    {
-        return $this->render('product.html.twig', [
-            'controller_name' => 'DefaultController',
-        ]);
-    }
-    /**
-     * @Route("/admin", name="admin")
-     * @return Response
-     */
-    public function admin(): Response
-    {
-        return $this->render('default/index.html.twig', [
-            'controller_name' => 'DefaultController',
-        ]);
-    }
-    
 
 
     /**
      * @Route("/watch", name="watch")
+     * @param GameController $mat
      * @return Response
      */
     public function watch(GameController $mat): Response
-    {$tab_match=$mat->latest_match();
-        
+    {
+        $tab_match = $mat->latest_match();
+
         return $this->render('watchStream.html.twig', [
-            'games'=> $tab_match
+            'games' => $tab_match
         ]);
     }
+
     /**
      * @Route("/team", name="team")
      * @return Response
@@ -203,6 +147,7 @@ class DefaultController extends AbstractController
             'controller_name' => 'EquipeController',
         ]);
     }
+
     /**
      * @Route("/tournaments", name="tournaments")
      * @return Response
@@ -213,6 +158,7 @@ class DefaultController extends AbstractController
             'controller_name' => 'EvenementController',
         ]);
     }
+
     /**
      * @Route("/signup", name="signup")
      * @return Response
@@ -223,6 +169,7 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
         ]);
     }
+
     /**
      * @Route("/blog_details", name="blog_details")
      * @return Response
@@ -233,6 +180,7 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
         ]);
     }
+
     /**
      * @Route("/checkout_form", name="checkout_form")
      * @return Response
@@ -247,36 +195,36 @@ class DefaultController extends AbstractController
 
 
 
-   /**
+    /**
      * @Route("/news", name="news", methods={"GET"})
      */
-  /*  public function news(EntityManagerInterface $entityManager): Response
-    {
-        $actualites = $entityManager
-            ->getRepository(Actualite::class)
-            ->findAll();
+    /*  public function news(EntityManagerInterface $entityManager): Response
+      {
+          $actualites = $entityManager
+              ->getRepository(Actualite::class)
+              ->findAll();
 
-        return $this->render('default/index-front.html.twig', [
-            'actualites' => $actualites,
-        ]);
-    }
-*/
+          return $this->render('default/index-front.html.twig', [
+              'actualites' => $actualites,
+          ]);
+      }
+  */
 
 
- /**
+    /**
      * @Route("/games", name="games", methods={"GET"})
      */
- /*   public function games(EntityManagerInterface $entityManager): Response
-    {
-        $games = $entityManager
-        ->getRepository(Game::class)
-        ->findAll();
+    /*   public function games(EntityManagerInterface $entityManager): Response
+       {
+           $games = $entityManager
+           ->getRepository(Game::class)
+           ->findAll();
 
-    return $this->render('default/index-front.html.twig', [
-        'games' => $games,
-    ]);
-    }
-*/
+       return $this->render('default/index-front.html.twig', [
+           'games' => $games,
+       ]);
+       }
+   */
 
 
 }
