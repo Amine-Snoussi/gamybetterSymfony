@@ -4,12 +4,17 @@ namespace App\Controller;
 
 use App\Entity\Commande;
 use App\Form\CommandeType;
+use App\Repository\CommandeRepository;
+use App\Repository\PersonneRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
 
 /**
  * @Route("/commande")
@@ -21,6 +26,7 @@ class CommandeController extends AbstractController
      */
     public function index(EntityManagerInterface $entityManager): Response
     {
+
         $commandes = $entityManager
             ->getRepository(Commande::class)
             ->findAll();
@@ -95,5 +101,31 @@ class CommandeController extends AbstractController
         }
 
         return $this->redirectToRoute('app_commande_index', [], Response::HTTP_SEE_OTHER);
+    }
+    /**
+     * @Route("/pdf/{id}", name="pdf_commande" ,  methods={"GET"})
+     */
+    public function pdf($id,CommandeRepository $repository,PersonneRepository  $personneRepository,\Swift_Mailer $mailer){
+
+        $commande=$repository->find($id);
+
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+        $dompdf = new Dompdf($pdfOptions);
+        $html = $this->renderView('commande/pdf.html.twig', [
+            'pdf' => $commande
+        ]);
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+        //  $dompdf->stream();
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("Purchase Bill.pdf", [
+            "Attachment" => true
+        ]);
     }
 }

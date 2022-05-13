@@ -2,12 +2,18 @@
 
 namespace App\Controller;
 
+use App\Entity\Commande;
 use App\Entity\Panier;
+use App\Entity\Personne;
+use App\Form\inputType;
 use App\Form\PanierType;
+use App\Repository\CommandeRepository;
+use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -16,81 +22,140 @@ use Symfony\Component\Routing\Annotation\Route;
 class PanierController extends AbstractController
 {
     /**
-     * @Route("/", name="app_panier_index", methods={"GET"})
+     * @Route("/", name="cart_index")
      */
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(SessionInterface $session, ProduitRepository $produitRepository)
     {
-        $paniers = $entityManager
-            ->getRepository(Panier::class)
-            ->findAll();
+        $panier = $session->get("panier", []);
 
-        return $this->render('panier/index.html.twig', [
-            'paniers' => $paniers,
-        ]);
-    }
+        // On "fabrique" les données
+        $dataPanier = [];
+        $total = 0;
 
-    /**
-     * @Route("/new", name="app_panier_new", methods={"GET", "POST"})
-     */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $panier = new Panier();
-        $form = $this->createForm(PanierType::class, $panier);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($panier);
-            $entityManager->flush();
 
-            return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
+        foreach($panier as $id => $quantite){
+            $produit = $produitRepository->find($id);
+            $dataPanier[] = [
+                "produit" => $produit,
+                "quantite" => $quantite
+            ];
+            $total += $produit->getPrixUnitair() * $quantite;
         }
 
-        return $this->render('panier/new.html.twig', [
-            'panier' => $panier,
-            'form' => $form->createView(),
-        ]);
+        return $this->render('panier/Cart.html.twig', compact("dataPanier", "total"));
+
     }
 
     /**
-     * @Route("/{id}", name="app_panier_show", methods={"GET"})
+     * @Route("/add/{id}", name="add")
      */
-    public function show(Panier $panier): Response
+    public function add($id, SessionInterface $session)
     {
-        return $this->render('panier/show.html.twig', [
-            'panier' => $panier,
-        ]);
-    }
 
-    /**
-     * @Route("/{id}/edit", name="app_panier_edit", methods={"GET", "POST"})
-     */
-    public function edit(Request $request, Panier $panier, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(PanierType::class, $panier);
-        $form->handleRequest($request);
+            // On récupère le panier actuel
+        $panier = $session->get("panier", []);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
 
-            return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
+        if(!empty($panier[$id])){
+            $panier[$id]++;
+
+        }else{
+            $panier[$id] = 1;
         }
 
-        return $this->render('panier/edit.html.twig', [
-            'panier' => $panier,
-            'form' => $form->createView(),
-        ]);
+        // On sauvegarde dans la session
+        $session->set("panier", $panier);
+
+        return $this->redirectToRoute("cart_index");
     }
 
     /**
-     * @Route("/{id}", name="app_panier_delete", methods={"POST"})
+     * @Route("/remove/{id}", name="remove")
      */
-    public function delete(Request $request, Panier $panier, EntityManagerInterface $entityManager): Response
+    public function remove($id, SessionInterface $session)
     {
-        if ($this->isCsrfTokenValid('delete'.$panier->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($panier);
-            $entityManager->flush();
+        // On récupère le panier actuel
+        $panier = $session->get("panier", []);
+
+
+        if(!empty($panier[$id])){
+            if($panier[$id] > 1){
+                $panier[$id]--;
+            }else{
+                unset($panier[$id]);
+            }
         }
 
-        return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
+        // On sauvegarde dans la session
+        $session->set("panier", $panier);
+
+        return $this->redirectToRoute("cart_index");
+    }
+
+    /**
+     * @Route("/delete/{id}", name="product_cart_delete")
+     */
+    public function delete($id, SessionInterface $session)
+    {
+        // On récupère le panier actuel
+        $panier = $session->get("panier", []);
+
+        if(!empty($panier[$id])){
+            unset($panier[$id]);
+        }
+
+        // On sauvegarde dans la session
+        $session->set("panier", $panier);
+
+        return $this->redirectToRoute("cart_index");
+    }
+
+    /**
+     * @Route("/delete", name="delete_all")
+     */
+    public function deleteAll(SessionInterface $session)
+    {
+        $session->remove("panier");
+
+        return $this->redirectToRoute("cart_index");
+    }
+
+    /**
+     * @Route("/save", name="save")
+     */
+    public function save(SessionInterface $session,ProduitRepository $produitRepository,EntityManagerInterface $entityManager)
+    {
+        // On récupère le panier actuel
+        $panier = $session->get("panier", []);
+        //dd($panier);
+        $total = 0;
+        $quantite = 0;
+        $p = 0;
+
+        foreach ($panier as $id => $quantite) {
+            $produit = $produitRepository->find($id);
+            $dataPanier[] = [
+                "produit" => $produit,
+                "quantite" => $quantite
+            ];
+            $total += $produit->getPrixUnitair() * $quantite;
+        }
+        //dd($dataPanier);
+
+        $com = new Commande();
+        $com->setPrixTotale($total);
+
+        $user = $this->getDoctrine()->getRepository(Personne::class)->find(1);
+        $com->setIdpersonne($user);
+        $com->setNomPersonne($user->getNom());
+        $com->setDateCommande(new \DateTime('now'));
+        $com->setEmailPersonne($user->getEmail());
+        $com->setAddressPersonne('Cité mileha ');
+        $com->setDiscount(0);
+        $entityManager->persist($com);
+        $entityManager->flush();
+        return $this->redirectToRoute("checkout");
+
     }
 }

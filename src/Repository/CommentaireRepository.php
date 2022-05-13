@@ -9,10 +9,19 @@ use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
+<<<<<<<< HEAD:src/Repository/CommentaireRepository.php
  * @method Commentaire|null find($id, $lockMode = null, $lockVersion = null)
  * @method Commentaire|null findOneBy(array $criteria, array $orderBy = null)
  * @method Commentaire[]    findAll()
  * @method Commentaire[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+========
+ * @extends ServiceEntityRepository<CoursDetails>
+ *
+ * @method CoursDetails|null find($id, $lockMode = null, $lockVersion = null)
+ * @method CoursDetails|null findOneBy(array $criteria, array $orderBy = null)
+ * @method CoursDetails[]    findAll()
+ * @method CoursDetails[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+>>>>>>>> origin/fares:src/Repository/CoursDetailsRepository.php
  */
 class CommentaireRepository extends ServiceEntityRepository
 {

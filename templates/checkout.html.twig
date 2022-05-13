@@ -1,0 +1,96 @@
+{% extends 'base-front.html.twig' %}
+
+{% block breadcrumbs%}
+<div class="nk-gap-1"></div>
+<div class="container">
+    <ul class="nk-breadcrumbs">
+
+
+        <li><a href="index.html">Home</a></li>
+
+
+        <li><span class="fa fa-angle-right"></span></li>
+
+        <li><a href="store.html">Store</a></li>
+
+
+        <li><span class="fa fa-angle-right"></span></li>
+
+        <li><a href="store-cart.html">Cart</a></li>
+
+
+        <li><span class="fa fa-angle-right"></span></li>
+
+        <li><span>Checkout</span></li>
+{%endblock%}
+
+{% block blog%}
+ <!-- START: Order Products -->
+        <div class="nk-gap-3"></div>
+        <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Your</span> Order</span></h3>
+        <div class="nk-gap"></div>
+        <div class="table-responsive">
+            <table class="nk-table nk-table-sm">
+                <thead class="thead-default">
+                    <tr>
+                        <th class="nk-product-cart-title">Product</th>
+                        <th class="nk-product-cart-total">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                        <tr>
+                            <td class="nk-product-cart-title">
+                                However, I have reason &times; 1
+                            </td>
+                            <td class="nk-product-cart-total">
+                                € 32.00
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="nk-product-cart-title">
+                                She was bouncing &times; 1
+                            </td>
+                            <td class="nk-product-cart-total">
+                                € 20.00
+                            </td>
+                        </tr>
+
+                    <tr class="nk-store-cart-totals-subtotal">
+                        <td>
+                            Subtotal
+                        </td>
+                        <td>
+                            € 52.00
+                        </td>
+                    </tr>
+                    <tr class="nk-store-cart-totals-shipping">
+                        <td>
+                            Shipping
+                        </td>
+                        <td>
+                            Free Shipping
+                        </td>
+                    </tr>
+                    <tr class="nk-store-cart-totals-total">
+                        <td>
+                            Total
+                        </td>
+                        <td>
+                            € 52.00
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- END: Order Products -->
+
+        <div class="nk-gap-2"></div>
+    <form action="/checkout" method="POST">
+        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" type="submit">Place Order</button>
+    </form>
+
+
+{%endblock%}
+

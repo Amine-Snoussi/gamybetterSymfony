@@ -45,7 +45,6 @@ class User
     private $sessions;
 
 
-
     public function __construct()
     {
         $this->cours = new ArrayCollection();

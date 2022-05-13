@@ -73,94 +73,135 @@ class Commande
      */
     private $idpersonne;
 
+    /**
+     * @return int
+     */
     public function getIdCommande(): ?int
     {
         return $this->idCommande;
     }
 
-    public function getDateCommande(): ?\DateTimeInterface
+    /**
+     * @param int $idCommande
+     */
+    public function setIdCommande(int $idCommande): void
+    {
+        $this->idCommande = $idCommande;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateCommande()
     {
         return $this->dateCommande;
     }
 
-    public function setDateCommande(\DateTimeInterface $dateCommande): self
+    /**
+     * @param \DateTime $dateCommande
+     */
+    public function setDateCommande($dateCommande): void
     {
         $this->dateCommande = $dateCommande;
-
-        return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getNomPersonne(): ?string
     {
         return $this->nomPersonne;
     }
 
-    public function setNomPersonne(string $nomPersonne): self
+    /**
+     * @param string $nomPersonne
+     */
+    public function setNomPersonne(string $nomPersonne): void
     {
         $this->nomPersonne = $nomPersonne;
-
-        return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getAddressPersonne(): ?string
     {
         return $this->addressPersonne;
     }
 
-    public function setAddressPersonne(string $addressPersonne): self
+    /**
+     * @param string $addressPersonne
+     */
+    public function setAddressPersonne(string $addressPersonne): void
     {
         $this->addressPersonne = $addressPersonne;
-
-        return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getEmailPersonne(): ?string
     {
         return $this->emailPersonne;
     }
 
-    public function setEmailPersonne(string $emailPersonne): self
+    /**
+     * @param string $emailPersonne
+     */
+    public function setEmailPersonne(string $emailPersonne): void
     {
         $this->emailPersonne = $emailPersonne;
-
-        return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getPrixTotale(): ?string
     {
         return $this->prixTotale;
     }
 
-    public function setPrixTotale(string $prixTotale): self
+    /**
+     * @param string $prixTotale
+     */
+    public function setPrixTotale(string $prixTotale): void
     {
         $this->prixTotale = $prixTotale;
-
-        return $this;
     }
 
+    /**
+     * @return int
+     */
     public function getDiscount(): ?int
     {
         return $this->discount;
     }
 
-    public function setDiscount(int $discount): self
+    /**
+     * @param int $discount
+     */
+    public function setDiscount(int $discount): void
     {
         $this->discount = $discount;
-
-        return $this;
     }
 
+    /**
+     * @return \Personne
+     */
     public function getIdpersonne(): ?Personne
     {
         return $this->idpersonne;
     }
 
-    public function setIdpersonne(?Personne $idpersonne): self
+    /**
+     * @param Personne $idpersonne
+     */
+    public function setIdpersonne(?Personne $idpersonne): void
     {
         $this->idpersonne = $idpersonne;
-
-        return $this;
     }
+
+
 
 
 }

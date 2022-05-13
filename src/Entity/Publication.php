@@ -175,6 +175,12 @@ class Publication
         return $this;
     }
 
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="image", type="string", length=50, nullable=true)
+     */
+    private $image;
 
     public function __toString()
     {

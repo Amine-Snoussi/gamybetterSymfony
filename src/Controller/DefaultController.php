@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Repository\CoursRepository;
 use App\Repository\SessionRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Produit;
+use App\Repository\ProduitRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -36,8 +38,20 @@ class DefaultController extends AbstractController
             'publications' => $tab_date,
            // 'actualite' => $actualites
             
+            'controller_name' => 'DefaultController',
         ]);
     }
+    /**
+     * @Route("/teammate", name="teammate")
+     * @return Response
+     */
+    public function profile(): Response
+    {
+        return $this->render('profile.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+
 
     /**
      * @Route("/blog", name="blog")
@@ -84,6 +98,7 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
         ]);
     }
+
     /**
      * @Route("/product", name="product")
      * @return Response
@@ -104,16 +119,7 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
         ]);
     }
-    /**
-     * @Route("/teammate", name="teammate")
-     * @return Response
-     */
-    public function profile(): Response
-    {
-        return $this->render('profile.html.twig', [
-            'controller_name' => 'DefaultController',
-        ]);
-    }
+    
 
 
     /**
@@ -167,6 +173,17 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
         ]);
     }
+    /**
+     * @Route("/checkout_form", name="checkout_form")
+     * @return Response
+     */
+    public function checkout(): Response
+    {
+        return $this->render('checkout.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+
 
 
 

@@ -8,7 +8,6 @@ use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
-
 /**
  * @method Publication|null find($id, $lockMode = null, $lockVersion = null)
  * @method Publication|null findOneBy(array $criteria, array $orderBy = null)

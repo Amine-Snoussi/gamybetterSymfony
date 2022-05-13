@@ -128,6 +128,27 @@
                                 <a href="#" data-toggle="modal" data-target="#modalSearch">
                                     <span class="fa fa-search"></span>
                                 </a>
+                                <ul class="dropdown">
+
+                                    <li>
+                                        <a href="tournaments.html">
+                                            Tournament
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            Teams
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('profile') }}">
+                                            Teammate
+
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
 
 
@@ -139,48 +160,11 @@
 
 
                             <li>
-                    <span class="nk-cart-toggle">
-                        <span class="fa fa-shopping-cart"></span>
-                        <span class="nk-badge">27</span>
-                    </span>
-                                <div class="nk-cart-dropdown">
 
-                                    <div class="nk-widget-post">
-                                        <a href="store-product.html" class="nk-post-image">
-                                            <img src="{{ asset('front/assets/images/product-5-xs.jpg') }}"
-                                                 alt="In all revolutions of">
-                                        </a>
-                                        <h3 class="nk-post-title">
-                                            <a href="#" class="nk-cart-remove-item"><span
-                                                        class="ion-android-close"></span></a>
-                                            <a href="store-product.html">In all revolutions of</a>
-                                        </h3>
-                                        <div class="nk-gap-1"></div>
-                                        <div class="nk-product-price">€ 23.00</div>
-                                    </div>
+                                    {%block cart %}{%endblock%}
 
-                                    <div class="nk-widget-post">
-                                        <a href="store-product.html" class="nk-post-image">
-                                            <img src="{{ asset('front/assets/images/product-7-xs.jpg') }}"
-                                                 alt="With what mingled joy">
-                                        </a>
-                                        <h3 class="nk-post-title">
-                                            <a href="#" class="nk-cart-remove-item"><span
-                                                        class="ion-android-close"></span></a>
-                                            <a href="store-product.html">With what mingled joy</a>
-                                        </h3>
-                                        <div class="nk-gap-1"></div>
-                                        <div class="nk-product-price">€ 14.00</div>
-                                    </div>
 
-                                    <div class="nk-gap-2"></div>
-                                    <div class="text-center">
-                                        <!-- panier button -->
-                                        <a href="#"
-                                           class="nk-btn nk-btn-rounded nk-btn-color-main-1 nk-btn-hover-color-white">Proceed
-                                            to Checkout</a>
-                                    </div>
-                                </div>
+
                             </li>
 
                         </ul>
@@ -230,10 +214,10 @@
                                         </a>
                                     </li>
                                     <li>
-                                     {#  <a href="{{ path('blog_details') }}">
+                                        <a href="{{ path('blog_details') }}">
                                             Blog Article
 
-                                        </a>#}
+                                        </a>
                                     </li>
                                 </ul>
                             </li>
@@ -257,7 +241,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="{{ path('team') }}">
                                             Teams
 
                                         </a>
@@ -290,7 +274,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="store-catalog.html">
+                                        <a href="{{ path('catalog') }}">
                                             Catalog
 
                                         </a>
@@ -1000,7 +984,7 @@
 <!-- START: Scripts -->
 
 <!-- Object Fit Polyfill -->
-<script src="front/assets/vendor/object-fit-images/dist/ofi.min.js"></script>
+<script src="{{ asset('front/assets/vendor/object-fit-images/dist/ofi.min.js') }}"></script>
 
 <!-- GSAP -->
 <script src="{{ asset('front/assets/vendor/gsap/src/minified/TweenMax.min.js') }}"></script>

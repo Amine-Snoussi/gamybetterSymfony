@@ -1,0 +1,192 @@
+{%extends 'base-front.html.twig'%}
+
+
+{% block breadcrumbs%}
+    <!-- START: Breadcrumbs -->
+    <div class="nk-gap-1"></div>
+    <div class="container">
+        <ul class="nk-breadcrumbs">
+
+
+            <li><a href="index.html">Home</a></li>
+
+
+            <li><span class="fa fa-angle-right"></span></li>
+
+            <li><a href="store.html">Store</a></li>
+
+
+            <li><span class="fa fa-angle-right"></span></li>
+
+            <li><span>Cart</span></li>
+
+        </ul>
+    </div>
+    <div class="nk-gap-1"></div>
+{%endblock%}
+
+{%block cart%}
+    <span class="nk-cart-toggle">
+                        <span class="fa fa-shopping-cart"></span>
+                        <span class="nk-badge"></span>
+                    </span>
+<div class="nk-cart-dropdown">
+{%for element in dataPanier %}
+<div class="nk-widget-post">
+    <a href="store-product.html" class="nk-post-image">
+        <img src="{{ asset('uploads/images/' ~ element.produit.image ) }}"
+             alt="In all revolutions of">
+    </a>
+    <h3 class="nk-post-title">
+        <a href="{{path('product_cart_delete',{id: element.produit.idProduit})}}" class="nk-cart-remove-item"><span
+                    class="ion-android-close"></span></a>
+        <a href="{{ path('product', {'idProduit': element.produit.idProduit}) }}">{{ element.produit.nomProduit}}</a>
+    </h3>
+    <div class="nk-gap-1"></div>
+    <div class="nk-product-price">{{element.produit.prixUnitair}} DT</div>
+</div>
+
+{% else %}
+<div >
+    <tr>
+        <div class="nk-gap-1"></div>
+        <h3 class="nk-post-title"> Your Cart is empty</h3>
+    </tr>
+</div>
+{%endfor %}
+
+<div class="nk-gap-2"></div>
+<div class="text-center">
+    <!-- panier button -->
+    <a href="{{path('save')}}"
+       class="nk-btn nk-btn-rounded nk-btn-color-main-1 nk-btn-hover-color-white">Proceed
+        to Checkout</a>
+</div>
+</div>
+{%endblock%}
+
+{% block blog %}
+    <div class="nk-store nk-store-cart">
+        <div class="table-responsive">
+
+            <!-- START: Products in Cart -->
+            <table class="table nk-store-cart-products">
+                <tbody>
+                {%for element in dataPanier%}
+                <tr>
+                    <td class="nk-product-cart-thumb">
+                        <a href="store-product.html" class="nk-image-box-1 nk-post-image">
+                            <img src="{{ asset('uploads/images/' ~ element.produit.image ) }}" alt="However, I have reason" width="115">
+                        </a>
+                    </td>
+                    <td class="nk-product-cart-title">
+                        <h5 class="h6">Product:</h5>
+                        <div class="nk-gap-1"></div>
+
+                        <h2 class="nk-post-title h4">
+                            <a href="store-product.html">{{ element.produit.nomProduit}}</a>
+                        </h2>
+                    </td>
+                    <td class="nk-product-cart-price">
+                        <h5 class="h6">Price:</h5>
+                        <div class="nk-gap-1"></div>
+
+                        <strong>{{element.produit.prixUnitair}} DT</strong>
+                    </td>
+                    <td class="nk-product-cart-quantity">
+                        <h5 class="h6">Quantity:</h5>
+                        <div class="nk-gap-1"></div>
+
+                        <div class="nk-form">
+                            <input type="number" class="form-control" value="1" min="1" max="21">
+                        </div>
+                    </td>
+                    <td class="nk-product-cart-total">
+                        <h5 class="h6">Discount:</h5>
+                        <div class="nk-gap-1"></div>
+
+                        <strong>{{ element.produit.discount}} %</strong>
+                    </td>
+                    <td class="nk-product-cart-total">
+                        <h5 class="h6">Total:</h5>
+                        <div class="nk-gap-1"></div>
+
+                        <strong>{{ (element.quantite * element.produit.prixUnitair)-(((element.quantite * element.produit.prixUnitair)*element.produit.discount)/100) }} DT</strong>
+                    </td>
+                    <td class="nk-product-cart-remove"><a href="{{path('product_cart_delete',{id: element.produit.idProduit})}}"><span class="ion-android-close"></span></a></td>
+                </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center">Votre panier est vide</td>
+                    </tr>
+
+                {%endfor %}
+
+                </tbody>
+            </table>
+            <!-- END: Products in Cart -->
+
+        </div>
+        <div class="nk-gap-1"></div>
+        <a class="nk-btn nk-btn-rounded nk-btn-color-white float-right" href="#">Update Cart</a>
+        <div class="nk-gap-1"></div>
+       <div class="row vertical-gap"><a class="nk-btn nk-btn-rounded nk-btn-color-white float-right" href="{{path('delete_all')}}">Empty Cart</a></div>
+
+
+        <div class="clearfix"></div>
+        <div class="nk-gap-2"></div>
+        <div class="row vertical-gap">
+
+            <div class="col-md-12">
+                <!-- START: Cart Totals -->
+                <h3 class="nk-title h4">Cart Totals</h3>
+                <table class="nk-table nk-table-sm">
+                    <tbody>
+                    <tr class="nk-store-cart-totals-subtotal">
+                        <td>
+                            Subtotal
+                        </td>
+                        <td>
+                            {{total}} DT
+                        </td>
+                    </tr>
+                    <tr class="nk-store-cart-totals-total">
+                        <td>
+                            Redeem code coupon
+                        </td>
+                        <td>
+                            <div class="nk-form">
+                                <input type="text" class="form-control" value="none">
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr class="nk-store-cart-totals-total">
+                        <td>
+                            Total
+                        </td>
+                        <td>
+                            {{total}} DT
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!-- END: Cart Totals -->
+            </div>
+        </div>
+
+        <div class="nk-gap-2"></div>
+        <a class="nk-btn nk-btn-rounded nk-btn-color-main-1 float-right" href="{{path('save')}}">Proceed to Checkout</a>
+        <a class="nk-btn nk-btn-rounded nk-btn-color-main-1 float-right vertical-gap " href="{{path('pdf_commande',{id: 2})}}">Print Bill</a>
+        <div class="clearfix"></div>
+    </div>
+{%endblock%}
+{%block sidebar%}{%endblock%}
+{% block bg %}
+    <!-- START: Page Background -->
+
+    <img class="nk-page-background-fixed" src="{{ asset('front/assets/images/bg-fixed-2.jpg') }}" alt="">
+
+
+    <!-- END: Page Background -->
+{% endblock %}
