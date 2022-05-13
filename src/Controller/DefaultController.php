@@ -83,7 +83,7 @@ class DefaultController extends AbstractController
      */
     public function admin(): Response
     {
-        return $this->render('default/index-front.html.twig', [
+        return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
         ]);
     }
@@ -97,6 +97,7 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
         ]);
     }
+
 
     /**
      * @Route("/watch", name="watch")
