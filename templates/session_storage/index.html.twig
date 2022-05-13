@@ -1,0 +1,8 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Nombre de visites{% endblock %}
+
+{% block body %}
+    <h1>Bonjour, c'est votre visite numero : {{ app.session.get('nbvisite') }}</h1>
+    {{ dump(app.session.get('nbvisite')) }}
+{% endblock %}

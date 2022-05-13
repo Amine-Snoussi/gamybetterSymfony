@@ -4,8 +4,11 @@
 {% block title %}New Session{% endblock %}
 
 {% block body %}
-    <h1>Nouvelle Session</h1>
-    <a href="{{ path('app_session_index') }}" class="ri-arrow-go-back-fill btn btn-outline-primary"></a>
-    {{ include('session/_form.html.twig') }}
-
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">Nouvelle Session</h1>
+            <a href="{{ path('app_session_index') }}" class="ri-arrow-go-back-fill btn btn-outline-primary"></a>
+            {{ include('session/_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}

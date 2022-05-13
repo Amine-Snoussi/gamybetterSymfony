@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CoursRepository::class)
@@ -17,24 +18,28 @@ class Cours
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("cours")
      */
     private $id;
 
     /**
      * @Assert\NotBlank(message="veillez entrer un nom")
      * @ORM\Column(type="string", length=255)
+     * @Groups("cours")
      */
     private $nom;
 
     /**
      * @Assert\NotBlank(message="veillez entrer une catégorie")
      * @ORM\Column(type="string", length=255)
+     * @Groups("cours")
      */
     private $categorie;
 
     /**
      * @Assert\NotBlank(message="veillez entrer le nom du jeu")
      * @ORM\Column(type="string", length=255)
+     * @Groups("cours")
      */
     private $jeu;
 
@@ -42,6 +47,7 @@ class Cours
      * @Assert\PositiveOrZero(message="entrez un prix supérieur à 0")
      * @Assert\NotBlank(message="veillez entrer un prix non null")
      * @ORM\Column(type="float")
+     * @Groups("cours")
      */
     private $prix;
 
@@ -49,14 +55,10 @@ class Cours
      * @Assert\NotBlank(message="veillez choisir un utilisateur")
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="cours")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("cours")
      */
     private $user;
 
-
-    /**
-     * @ORM\OneToMany(targetEntity=CoursDetails::class, mappedBy="cours")
-     */
-    private $coursDetails;
 
     /**
      * @ORM\ManyToOne(targetEntity=Session::class, inversedBy="cours_related")
@@ -75,11 +77,15 @@ class Cours
      */
     private $video;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     * @Groups("cours")
+     */
+    private $rating;
 
 
     public function __construct()
     {
-        $this->coursDetails = new ArrayCollection();
     }
 
 
@@ -150,39 +156,9 @@ class Cours
     }
 
 
-    /**
-     * @return Collection<int, CoursDetails>
-     */
-    public function getCoursDetails(): Collection
-    {
-        return $this->coursDetails->matching($criteria);
-    }
-
-    public function addCoursDetail(CoursDetails $coursDetail): self
-    {
-        if (!$this->coursDetails->contains($coursDetail)) {
-            $this->coursDetails[] = $coursDetail;
-            $coursDetail->setCours($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCoursDetail(CoursDetails $coursDetail): self
-    {
-        if ($this->coursDetails->removeElement($coursDetail)) {
-            // set the owning side to null (unless already changed)
-            if ($coursDetail->getCours() === $this) {
-                $coursDetail->setCours(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function __toString()
     {
-        return $this->getJeu();
+        return $this->getNom();
     }
 
     public function getSession(): ?Session
@@ -192,7 +168,7 @@ class Cours
 
     public function setSession(?Session $session): self
     {
-        $this->session = $session;
+        $this->session = $session ? $session : null;
 
         return $this;
     }
@@ -216,13 +192,27 @@ class Cours
 
     public function setVideo(?string $video): self
     {
-        $this->video = $video;
+        $this->video = $video ? $video : "";
 
         return $this;
     }
 
+    public function getRating(): ?float
+    {
+        return $this->rating;
+    }
 
+    public function setRating(?float $rating): self
+    {
+        $this->rating = $rating;
 
+        return $this;
+    }
+
+    public function calcTotalPrice(): float
+    {
+        return $this->quantity * $this->price;
+    }
 
 
 }

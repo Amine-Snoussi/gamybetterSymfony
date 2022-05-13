@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
@@ -18,12 +19,14 @@ class Session
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("sessions")
      */
     private $id;
 
     /**
      * @Assert\NotBlank(message="veillez spécifier une durée")
      * @ORM\Column(type="time", nullable=true)
+     * @Groups("sessions")
      */
     private $duree;
 
@@ -32,18 +35,21 @@ class Session
      * @Assert\Date(message = "La date n'est pas valide.")
      * @Assert\GreaterThan("today")
      * @ORM\Column(type="date", nullable=true)
+     * @Groups("sessions")
      */
     private $date;
 
     /**
      * @Assert\NotBlank(message="veillez entrer le nom du jeu")
      * @ORM\Column(type="string", length=255)
+     * @Groups("sessions")
      */
     private $jeu;
 
     /**
      * @Assert\NotBlank(message="veillez entrer une catégorie")
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("sessions")
      */
     private $categorie;
 
@@ -51,6 +57,7 @@ class Session
      * @Assert\PositiveOrZero(message="entrez un prix supérieur à 0")
      * @Assert\NotBlank(message="veillez entrer un prix non null")
      * @ORM\Column(type="float", nullable=true)
+     * @Groups("sessions")
      */
     private $prix;
 
@@ -63,6 +70,7 @@ class Session
     /**
      * @Assert\NotBlank(message="veillez entrer un nom de session")
      * @ORM\Column(type="string", length=255)
+     * @Groups("sessions")
      */
     private $nom;
 

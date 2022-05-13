@@ -3,41 +3,45 @@
 {% block title %}Session{% endblock %}
 
 {% block body %}
-    <h1>Session</h1>
-    <a href="{{ path('app_session_index') }}"class="ri-arrow-go-back-fill btn btn-outline-primary"></a>
-    <a href="{{ path('app_session_edit', {'id': session.id}) }}" class=" btn btn-outline-primary bi bi-pencil-square"></a>
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ session.id }}</td>
-            </tr>
-            <tr>
-                <th>Duree</th>
-                <td>{{ session.duree ? session.duree|date('H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ session.date ? session.date|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Jeu</th>
-                <td>{{ session.jeu }}</td>
-            </tr>
-            <tr>
-                <th>Categorie</th>
-                <td>{{ session.categorie }}</td>
-            </tr>
-            <tr>
-                <th>Prix</th>
-                <td>{{ session.prix }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ session.nom }}</td>
-            </tr>
-        </tbody>
-    </table>
-
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">Session</h1>
+            <a href="{{ path('app_session_index') }}" class="ri-arrow-go-back-fill btn btn-outline-primary"></a>
+            <a href="{{ path('app_session_edit', {'id': session.id}) }}"
+               class=" btn btn-outline-primary bi bi-pencil-square"></a>
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ session.id }}</td>
+                </tr>
+                <tr>
+                    <th>Duree</th>
+                    <td>{{ session.duree ? session.duree|date('H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Date</th>
+                    <td>{{ session.date ? session.date|date('Y-m-d') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Jeu</th>
+                    <td>{{ session.jeu }}</td>
+                </tr>
+                <tr>
+                    <th>Categorie</th>
+                    <td>{{ session.categorie }}</td>
+                </tr>
+                <tr>
+                    <th>Prix</th>
+                    <td>{{ session.prix }}</td>
+                </tr>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ session.nom }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
     {{ include('session/_delete_form.html.twig') }}
 {% endblock %}

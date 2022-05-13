@@ -29,7 +29,10 @@
         <!-- Template Main CSS File -->
         <link href="{{ asset('back/assets/css/style.css') }}" rel="stylesheet">
 
-                                                                                                    <!-- Template Main CSS File -->
+        <!-- Template Main CSS File -->
+        <link href="{{ asset('back/assets/css/style.css') }}" rel="stylesheet">
+
+        <!-- Template Main CSS File -->
         <link href="{{ asset('assets-back/css/style.css') }}" rel="stylesheet">
         <!-- Calendar css -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.css">
@@ -301,17 +304,17 @@
                 </a>
                 <ul id="utilisateurs-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a  href="{{ path('addPersonne') }}">
+                        <a href="{{ path('addPersonne') }}">
                             <i class="bi bi-circle"></i><span>Nouveau utilisateur</span>
                         </a>
                     </li>
                     <li>
-                        <a  href="{{ path('affichePersonne') }}">
+                        <a href="{{ path('affichePersonne') }}">
                             <i class="bi bi-circle"></i><span>Consulter liste utilisateurs</span>
                         </a>
                     </li>
                     <li>
-                        <a  href="{{ path('afficheReclamation') }}">
+                        <a href="{{ path('afficheReclamation') }}">
                             <i class="bi bi-circle"></i><span>Consulter liste reclamations</span>
                         </a>
                     </li>
@@ -327,12 +330,12 @@
                 </a>
                 <ul id="cours-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="#">
+                        <a href="{{ path('cours.create') }}">
                             <i class="bi bi-circle"></i><span>Nouveau cours</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{{ path('cours.list') }}">
                             <i class="bi bi-circle"></i><span>Consulter liste cours</span>
                         </a>
                     </li>
@@ -455,21 +458,22 @@
             <!-- Service Nav -->
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#service-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bx bxl-shopify"></i><span>Gestion services</span><i class="bi bi-chevron-down ms-auto"></i>
+                    <i class="bx bxl-shopify"></i><span>Gestion services</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="service-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
                         <a href="{{ path('app_commande_index') }}">
                             <i class="bi bi-circle"></i><span>Gestion Commandes</span>
                         </a>
-                    </li
+                    </li>
                     <li>
                         <a href="{{ path('app_produit_index') }}">
                             <i class="bi bi-circle"></i><span>Gestion Produits</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ path('app_panier_index') }}">
+                        <a href="#">
                             <i class="bi bi-circle"></i><span>Gestion Panier</span>
                         </a>
                     </li>

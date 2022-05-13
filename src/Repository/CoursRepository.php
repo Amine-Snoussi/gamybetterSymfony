@@ -7,6 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * @method Cours|null find($id, $lockMode = null, $lockVersion = null)
@@ -44,6 +45,20 @@ class CoursRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+
+    /**
+     * @return Cours[] Returns an array of Cours objects
+     */
+
+    public function findAllById(array $ids): array
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.id IN (:ids)')
+            ->setParameter('ids', $ids)
+            ->getQuery()
+            ->getResult();
+    }
+
 
 
     // /**
