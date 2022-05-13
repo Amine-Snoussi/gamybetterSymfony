@@ -89,13 +89,23 @@ class DefaultController extends AbstractController
         ]);
     }
     /**
-     * @Route("/team", name="team")
+     * @Route("/team", name="list_f")
      * @return Response
      */
     public function team(): Response
     {
         return $this->render('team.html.twig', [
-            'controller_name' => 'DefaultController',
+            'controller_name' => 'EquipeController',
+        ]);
+    }
+    /**
+     * @Route("/tournaments", name="tournaments")
+     * @return Response
+     */
+    public function tournaments(): Response
+    {
+        return $this->render('tournaments.html.twig', [
+            'controller_name' => 'EvenementController',
         ]);
     }
     /**
