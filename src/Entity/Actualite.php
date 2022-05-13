@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+use Symfony\Component\Serializer\Annotation\Groups;
+
 /**
  * Actualite
  *
@@ -24,21 +26,24 @@ class Actualite
 
     /**
      * @var string
-     * @Assert\NotBlank
+     * 
      * @ORM\Column(name="image", type="string", length=255, nullable=false)
+     * 
+     * @Groups({"actu"})
      */
     private $image;
 
     /**
      * @var string
-     * @Assert\NotBlank
+     * 
      * @ORM\Column(name="video", type="string", length=255, nullable=false)
+     * @Groups({"actu"})
      */
     private $video;
 
     /**
      * @var \Game
-     * 
+     *
      * @ORM\ManyToOne(targetEntity="Game")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_match", referencedColumnName="id_match")
@@ -54,7 +59,41 @@ class Actualite
      *   @ORM\JoinColumn(name="id_personne", referencedColumnName="id_personne")
      * })
      */
+    
     private $idPersonne;
+ 
+ /**
+     * @var string
+     * @Assert\NotBlank
+     * @ORM\Column(name="jeu", type="string", length=255, nullable=false)
+     * @Groups({"actu"})
+     */
+    private $jeu;
+
+
+     /**
+     * @var string
+     * @Assert\NotBlank
+     * @ORM\Column(name="titre", type="string", length=255, nullable=false)
+     * @Groups({"actu"})
+     */
+    private $titre;
+    /**
+     * @var string
+     * @Assert\NotBlank
+     * @ORM\Column(name="description", type="string", length=255, nullable=false)
+     * @Groups({"actu"})
+     */
+    private $description;
+   
+    /**
+     * @Assert\NotBlank(message="veillez spécifier une date")
+     * @Assert\Date(message = "La date n'est pas valide.")
+     * @Groups({"actu"})
+     
+     * @ORM\Column(type="date", nullable=false)
+     */
+    private $date;
 
     public function getIdActualite(): ?int
     {
@@ -109,5 +148,52 @@ class Actualite
         return $this;
     }
 
+    public function getJeu(): ?string
+    {
+        return $this->jeu;
+    }
+
+    public function setJeu(string $jeu): self
+    {
+        $this->jeu = $jeu;
+
+        return $this;
+    }
+    
+    public function getTitre(): ?string
+    {
+        return $this->titre;
+    }
+
+    public function setTitre(string $titre): self
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
 
 }

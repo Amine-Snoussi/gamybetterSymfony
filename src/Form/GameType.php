@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 
 
 class GameType extends AbstractType
@@ -20,12 +21,14 @@ class GameType extends AbstractType
     {
        
         $builder
-            ->add('image', FileType::class, array('data_class' => null), [
+            ->add('image1', FileType::class, array('data_class' => null), [
                 'label' => 'Image',
 
 
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => true,
+
+
                 'required' => false,
                 // unmapped fields can't define their validation using annotations
                 // in the associated entity, so you can use the PHP constraint classes
@@ -40,7 +43,32 @@ class GameType extends AbstractType
                     ])
                 ],
             ])
-            ->add('score',IntegerType::class, [
+
+
+            ->add('image2', FileType::class, array('data_class' => null), [
+                'label' => 'Image',
+
+
+                // unmapped means that this field is not associated to any entity property
+                'mapped' => true,
+
+
+                'required' => false,
+                // unmapped fields can't define their validation using annotations
+                // in the associated entity, so you can use the PHP constraint classes
+                'constraints' => [
+                    new File([
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/jpg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Image invalide : (jpg,png,jpeg)',
+                    ])
+                ],
+            ])
+
+            ->add('score',TextType::class, [
                 'attr' => [
                     'placeholder' => 'score',
                     'class' => 'form-control'
@@ -66,17 +94,32 @@ class GameType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
-            ->add('duree',ChoiceType::class, [
-                'choices'  => [
-                    '15 Minutes' => '15 Minutes',
-                    '20 Minutes' => '20 Minutes',
-                    '25 Minutes' => '25 Minutes',
-                    '30 Minutes' => '30 Minutes',
+            ->add('duree', TimeType::class, [
+                'widget' => 'single_text',
+                'by_reference' => true,
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'durée'
                 ]
             ])
-            ->add('date')
+            ->add('date', DateType::class, [
+                'widget' => 'single_text',
+                'by_reference' => true,
+                'attr' => [
+                    'class' => 'form-control',
+                ]
+            ])
+            
             ->add('idEquipe1')
             ->add('idEquipe2')
+            ->add('temps', TimeType::class, [
+                'widget' => 'single_text',
+                'by_reference' => true,
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'temps'
+                ]
+            ])
         ;
     }
 

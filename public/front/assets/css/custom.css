@@ -1,0 +1,82 @@
+/* PLACE YOU CUSTOM STYLES IN THIS FILE */
+.scrolltop-mf {
+
+
+
+    position: relative;
+
+
+
+    display: none;
+
+
+
+}
+
+
+
+.scrolltop-mf span {
+
+
+
+    z-index: 999;
+
+
+
+    position: fixed;
+
+
+
+    width: 42px;
+
+
+
+    height: 42px;
+
+
+
+    background-color: #0078ff;
+
+
+
+    opacity: 0.7;
+
+
+
+    font-size: 1.6rem;
+
+
+
+    line-height: 1.5;
+
+
+
+    text-align: center;
+
+
+
+    color: #fff;
+
+
+
+    top: auto;
+
+
+
+    left: auto;
+
+
+
+    right: 30px;
+
+
+
+    bottom: 50px;
+
+
+
+    cursor: pointer;
+
+
+
+    border-radius: 50%;}

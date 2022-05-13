@@ -1,4 +1,81 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-primary" style="float: right; margin-top: 15px; margin-bottom: 15px">{{ button_label|default('Save') }}</button>
+{{ form_start(form, {'attr':{novalidate:'novalidate', class:'needs-validation'}}) }}
+
+<div class="row g-3">
+    <!-- Nom -->
+    <div class="col-md-3">
+
+        <label for="inputNom" class="form-label">
+            {{ form_label(form.nom) }}
+        </label>
+        {{ form_errors(form.nom) }}
+        {{ form_widget(form.nom) }}
+        {{ form_help(form.nom) }}
+    </div>
+    <!-- Categorie -->
+    <div class="col-md-3">
+        <label for="inputCategory" class="form-label">
+            {{ form_label(form.categorie) }}
+        </label>
+        {{ form_errors(form.categorie) }}
+        {{ form_widget(form.categorie) }}
+        {{ form_help(form.categorie) }}
+    </div>
+    <!-- Jeu -->
+    <div class="col-md-3">
+        <label for="inputJeu" class="form-label">
+            {{ form_label(form.jeu) }}
+        </label>
+        {{ form_errors(form.jeu) }}
+        {{ form_widget(form.jeu) }}
+        {{ form_help(form.jeu) }}
+    </div>
+    <!-- Prix -->
+    <div class="col-md-3">
+        <label for="inputPrix" class="form-label">
+            {{ form_label(form.prix) }}
+        </label>
+        {{ form_errors(form.prix) }}
+        {{ form_widget(form.prix) }}
+        {{ form_help(form.prix) }}
+    </div>
+    <!-- User -->
+    <div class="col-md-12">
+        {{ form_label(form.user) }}
+        {{ form_errors(form.user) }}
+        {{ form_widget(form.user) }}
+        {{ form_help(form.user) }}
+    </div>
+
+    <!-- fileName -->
+    <div class="col-md-12">
+        {{ form_label(form.fileName) }}
+        {{ form_errors(form.fileName) }}
+        {{ form_widget(form.fileName) }}
+        {{ form_help(form.fileName) }}
+    </div>
+    <!-- Video -->
+    <div class="col-md-12">
+        {{ form_label(form.video) }}
+        {{ form_errors(form.video) }}
+        {{ form_widget(form.video) }}
+        {{ form_help(form.video) }}
+    </div>
+
+    <!-- Session -->
+    <div class="col-md-12">
+        {{ form_label(form.session) }}
+        {{ form_errors(form.session) }}
+        {{ form_widget(form.session) }}
+        {{ form_help(form.session) }}
+    </div>
+
+    {{ form_errors(form) }}
+<!-- buttons -->
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">{{ button_label|default('Submit') }}</button>
+        <button type="reset" class="btn btn-secondary">Reset</button>
+    </div>
+</div>
+
+
 {{ form_end(form) }}

@@ -21,7 +21,7 @@ class ActualiteRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Actualite::class);
     }
-    
+
     /**
      * @throws ORMException
      * @throws OptimisticLockException
@@ -74,4 +74,11 @@ class ActualiteRepository extends ServiceEntityRepository
         ;
     }
     */
+
+  
+/*public function latestdate(){
+    $query=$this->createQueryBuilder('a')
+    ->orderBy('a.date','DESC') ;
+     return  $query->getQuery()->getResult();
+}*/
 }

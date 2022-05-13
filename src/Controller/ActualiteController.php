@@ -6,9 +6,13 @@ use App\Entity\Actualite;
 use App\Form\ActualiteType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\ActualiteRepository;
+use Doctrine\ORM\EntityManager;
+
 
 /**
  * @Route("/actualite")
@@ -21,6 +25,7 @@ class ActualiteController extends AbstractController
     public function index(EntityManagerInterface $entityManager): Response
     {
         $actualites = $entityManager
+       
             ->getRepository(Actualite::class)
             ->findAll();
 
@@ -136,4 +141,83 @@ class ActualiteController extends AbstractController
 
         return $this->redirectToRoute('app_actualite_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    
+    public function latest_date(){
+      
+    {
+        $em = $this->getDoctrine()->getManager();
+        $query=$em
+        ->createQuery("Select p From App\Entity\Actualite p 
+        Order By p.date DESC");
+        return $query->getResult();
+
+
+       /* $em = $this->getDoctrine()->getManager();
+        $actualites =$em ->getRepository( Actualite::class) ->latestdate();
+        //$actualites= $repository->latestdate();
+      */
+    }
+    } 
+
+    /**
+     * @Route("/", name="rechercheDate")
+     */
+
+public function rechercheByJeu(Request $request){
+    $em = $this->getDoctrine()->getManager();
+    $actualites =$em ->getRepository( Actualite::class) ->findAll();
+if ($request->isMethod("POST")){
+
+$jeu =$request ->get('jeu');
+
+$actualites =$em ->getRepository( Actualite::class) ->findBy(array('jeu'=>$jeu));
+
 }
+return $this->render('actualite/index.html.twig', [
+        'actualites' => $actualites,
+    ]);
+}
+
+
+
+/**
+     * @Route("/Liste_pdf", name="app_publication_index_pdf", methods={"GET"})
+     */
+    public function listepdf(EntityManagerInterface $entityManager): Response
+    {
+
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+
+        $Actualite = $entityManager
+            ->getRepository(Actualite::class)
+            ->findAll();
+
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('actualite/Liste_pdf.html.twig', [
+            'Actualite' => $Actualite,
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => true
+        ]);
+    }
+
+
+    }
