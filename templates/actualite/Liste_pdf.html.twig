@@ -1,0 +1,46 @@
+{% block body %}
+<h1>Listes des Actualite </h1> 
+
+    {
+    <table>
+        <div class="card-body">
+            <table>
+
+                <tr>
+                     <th>IdActualite</th>
+                <th>Image</th>
+                <th>Video</th>
+                 <th>Jeu</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>actions</th>
+
+                </tr>
+
+                   {% for Actualite in Actualites %}
+                <tr>
+                 
+              <td>{{ actualite.idActualite }}</td>
+                <td><img src="{{ asset('uploads/images/' ~ actualite.image ) }}" height="70" width="70" ></td>
+                <td>{{ actualite.video }}</td>
+                <td>{{ actualite.jeu }}</td>
+                <td>{{ actualite.titre }}</td>
+                <td>{{ actualite.description }}</td>
+                 <td>{{ actualite.date ? actualite.date|date('Y-m-d') : ''  }}</td>
+               
+
+
+
+
+
+                </tr>
+
+               {% endfor %}
+            </table>
+
+            </form>
+        </div>
+        </td>
+    </table>
+{% endblock %}

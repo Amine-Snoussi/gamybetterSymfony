@@ -20,7 +20,7 @@ class GameRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Game::class);
     }
-    
+
     /**
      * @throws ORMException
      * @throws OptimisticLockException
@@ -73,4 +73,13 @@ class GameRepository extends ServiceEntityRepository
         ;
     }
     */
+    /**
+ * @retrun void
+ */
+public function countByDate(){
+    $query=$this->createQueryBuilder('a')
+    ->select('SUBSTRING(a.date ,1,10) as dateMatch, COUNT(a) as count') 
+     ->groupBy('dateMatch');
+     return  $query->getQuery()->getResult();
+}
 }

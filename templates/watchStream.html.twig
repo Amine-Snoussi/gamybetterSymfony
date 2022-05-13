@@ -86,99 +86,41 @@
     <div class="nk-gap-2"></div>
     <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Latest</span> Matches</span></h3>
     <div class="nk-gap"></div>
-    <div class="nk-match">
-        <div class="nk-match-team-left">
-            <a href="#">
-                        <span class="nk-match-team-logo">
-                            <img src="front/assets/images/team-1.jpg" alt="">
-                        </span>
-                <span class="nk-match-team-name">
-                            SK Telecom T1
-                        </span>
-            </a>
-        </div>
-        <div class="nk-match-status">
-            <a href="#">
-                <span class="nk-match-status-vs">VS</span>
-                <span class="nk-match-status-date">Apr 28, 2018 8:00 pm</span>
-                <span class="nk-match-score bg-danger">2 : 17</span>
-            </a>
-        </div>
-        <div class="nk-match-team-right">
-            <a href="#">
-                        <span class="nk-match-team-name">
-                            Cloud 9
-                        </span>
-                <span class="nk-match-team-logo">
-                            <img src="front/assets/images/team-2.jpg" alt="">
-                        </span>
-            </a>
-        </div>
-    </div>
 
-    <div class="nk-match">
-        <div class="nk-match-team-left">
-            <a href="#">
-                        <span class="nk-match-team-logo">
-                            <img src="front/assets/images/team-3.jpg" alt="">
-                        </span>
-                <span class="nk-match-team-name">
-                            Counted logic gaming
-                        </span>
-            </a>
-        </div>
-        <div class="nk-match-status">
-            <a href="#">
-                <span class="nk-match-status-vs">VS</span>
-                <span class="nk-match-status-date">Apr 15, 2018 9:00 pm</span>
-                <span class="nk-match-score bg-success">
-                            28 : 19
-                        </span>
-            </a>
-        </div>
-        <div class="nk-match-team-right">
-            <a href="#">
-                        <span class="nk-match-team-name">
-                            SK Telecom T1
-                        </span>
-                <span class="nk-match-team-logo">
-                            <img src="front/assets/images/team-1.jpg" alt="">
-                        </span>
-            </a>
-        </div>
-    </div>
 
+ {% for game in games %}
     <div class="nk-match">
         <div class="nk-match-team-left">
             <a href="#">
                         <span class="nk-match-team-logo">
-                            <img src="front/assets/images/team-4.jpg" alt="">
+                            <img src="{{ asset('uploads/images/' ~ game.image1 ) }}" height="70" width="70" alt="">
                         </span>
                 <span class="nk-match-team-name">
-                            Team SoloMid
+                            {{ game.idEquipe1 }}
                         </span>
             </a>
         </div>
+ 
         <div class="nk-match-status">
             <a href="#">
                 <span class="nk-match-status-vs">VS</span>
-                <span class="nk-match-status-date">Apr 28, 2018 8:00 pm</span>
-                <span class="nk-match-score bg-dark-1">
-                            13 : 13
-                        </span>
+                <span class="nk-match-status-date">{{game.date ? game.date|date('Y-m-d') : ''  }}</span>
+                <span class="nk-match-score bg-danger">{{ game.score }}</span>
+                <span class="nk-match-status-date">{{ game.duree? game.duree|date('H:i:s') : '' }}</span>
             </a>
         </div>
         <div class="nk-match-team-right">
             <a href="#">
                         <span class="nk-match-team-name">
-                            SK Telecom T1
+                           {{ game.idEquipe2 }}
                         </span>
                 <span class="nk-match-team-logo">
-                            <img src="front/assets/images/team-1.jpg" alt="">
+                            <img src="{{ asset('uploads/images/' ~ game.image2 ) }}" height="70" width="70" alt="">
                         </span>
             </a>
         </div>
     </div>
-    <!-- END: Latest Matches -->
+{% endfor %}
+   <!-- END: Latest Matches -->
 
 {% endblock %}

@@ -4,14 +4,22 @@
 
 {% block body %}
     <h1>Actualite index</h1>
+    
+<form method="POST">
+    <input type="text" name="jeu" >
+    <input type="submit" value="recherche">
 
-    <table class="table datatable ">
+</form>
+    <table class="table ">
         <thead>
             <tr>
                 <th>IdActualite</th>
                 <th>Image</th>
                 <th>Video</th>
-                <th>IdPersonne</th>
+                 <th>Jeu</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Date</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -21,7 +29,10 @@
                 <td>{{ actualite.idActualite }}</td>
                 <td><img src="{{ asset('uploads/images/' ~ actualite.image ) }}" height="70" width="70" ></td>
                 <td>{{ actualite.video }}</td>
-                <td>{{ actualite.idPersonne }}</td>
+                <td>{{ actualite.jeu }}</td>
+                <td>{{ actualite.titre }}</td>
+                <td>{{ actualite.description }}</td>
+                   <td>{{ actualite.date ? actualite.date|date('Y-m-d') : ''  }}</td>
                 <td>
                     <a href="{{ path('app_actualite_show', {'idActualite': actualite.idActualite}) }}" class=" btn btn-outline-primary bi bi-eye-fill"></a>
                     <a href="{{ path('app_actualite_edit', {'idActualite': actualite.idActualite}) }}" class=" btn btn-outline-primary bi bi-pencil-square"></a>
@@ -37,4 +48,5 @@
 
     
     <a href="{{ path('app_actualite_new') }}" class="btn btn-outline-primary">Create new</a>
+    <a href="{{ path('app_publication_index_pdf') }}" class="btn btn-outline-primary">Imprimer</a>
 {% endblock %}

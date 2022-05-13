@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\GameRepository;
 use App\Entity\Game;
 use App\Form\GameType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,6 +29,30 @@ class GameController extends AbstractController
             'games' => $games,
         ]);
     }
+    /**
+     * @Route("/stats", name="app_game_stat")
+     */
+
+    public function statistique(GameRepository $repository) 
+    {
+    
+    // On va chercher le nombre de match joue dans la date
+    $games=  $repository->countByDate();
+    
+    $dates = [];
+    $matchCount = [];
+    
+    // On "démonte" les données pour les séparer tel qu'attendu par ChartJS
+    foreach($games as $game){
+        $dates[] = $game['dateMatch'];
+        $matchCount[] = $game['count'];
+    }
+        return $this->render('statistique/stat.html.twig',[
+            'dates' => json_encode($dates),
+            'matchCount' => json_encode($matchCount),
+        ]);
+    
+    }
 
     /**
      * @Route("/new", name="app_game_new", methods={"GET", "POST"})
@@ -41,7 +66,7 @@ class GameController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
 
-            $ImageFile = $form->get('image')->getData();
+            $ImageFile = $form->get('image1','image2')->getData();
             if ($ImageFile) {
                 $originalFilename = pathinfo($ImageFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
@@ -60,17 +85,31 @@ class GameController extends AbstractController
 
                 // updates the '$produit' property to store the image file name
                 // instead of its contents
-                $game->setImage($newFilename);
+                $game->setImage1($newFilename);
+                $game->setImage2($newFilename);
             }
+            $ImageFile = $form->get('image2')->getData();
+            if ($ImageFile) {
+                $originalFilename = pathinfo($ImageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                //$safeFilename = $slugger->slug($originalFilename);
+                $newFilename = md5(uniqid()).'.'.$ImageFile->guessExtension();
 
+                // Move the file to the directory where brochures are stored
+                try {
+                    $ImageFile->move(
+                        $this->getParameter('uploads_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
 
-
-
-
-
-
-
-
+                // updates the '$produit' property to store the image file name
+                // instead of its contents
+                
+                $game->setImage2($newFilename);
+            }
 
             $entityManager->persist($game);
             $entityManager->flush();
@@ -106,7 +145,7 @@ class GameController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $ImageFile = $form->get('image')->getData();
+            $ImageFile = $form->get('image1')->getData();
             if ($ImageFile) {
                 $originalFilename = pathinfo($ImageFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
@@ -125,9 +164,31 @@ class GameController extends AbstractController
 
                 // updates the '$produit' property to store the image file name
                 // instead of its contents
-                $game->setImage($newFilename);
+                $game->setImage1($newFilename);
+                
             }
+            $ImageFile = $form->get('image2')->getData();
+            if ($ImageFile) {
+                $originalFilename = pathinfo($ImageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                //$safeFilename = $slugger->slug($originalFilename);
+                $newFilename = md5(uniqid()).'.'.$ImageFile->guessExtension();
 
+                // Move the file to the directory where brochures are stored
+                try {
+                    $ImageFile->move(
+                        $this->getParameter('uploads_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the '$produit' property to store the image file name
+                // instead of its contents
+                
+                $game->setImage2($newFilename);
+            }
 
 
 
@@ -153,5 +214,23 @@ class GameController extends AbstractController
         }
 
         return $this->redirectToRoute('app_game_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+
+    public function latest_match(){
+      
+        {
+            $em = $this->getDoctrine()->getManager();
+            $query=$em
+            ->createQuery("Select p From App\Entity\Game p 
+            Order By p.date DESC");
+            return $query->getResult();
+    
+    
+           /* $em = $this->getDoctrine()->getManager();
+            $actualites =$em ->getRepository( Actualite::class) ->latestdate();
+            //$actualites= $repository->latestdate();
+          */
+        }
     }
 }

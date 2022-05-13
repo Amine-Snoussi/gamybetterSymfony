@@ -25,16 +25,22 @@ class Game
  /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=255, nullable=false)
+     * @ORM\Column(name="image1", type="string", length=255, nullable=true)
      */
-    private $image;
+    private $image1;
 
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="image2", type="string", length=255, nullable=true)
+     */
+    private $image2;
 
 
     /**
-     * @var int|null
-     * @Assert\PositiveOrZero(message="entrez le score")
-     * @ORM\Column(name="score", type="integer", nullable=true)
+     * @var string
+     * @
+     * @ORM\Column(name="score", type="string", nullable=true)
      * @Assert\NotBlank(message="veillez entrer le score")
      */
     private $score;
@@ -62,28 +68,29 @@ class Game
      */
     private $gold;
 
-    /**
-     * 
-     * @var string|null
-     * @Assert\NotBlank
-     *
-     * @ORM\Column(name="duree", type="string", length=255, nullable=true)
+   /**
+     * @Assert\NotBlank(message="veillez spécifier une durée")
+     * @ORM\Column(type="time", nullable=true)
      */
     private $duree;
 
     /**
-     
-     *@Assert\NotBlank
-     * @ORM\Column(name="date", type="string", length=255, nullable=true)
-     * @Assert\Date
+     * @Assert\NotBlank(message="veillez spécifier une date")
+     * @Assert\Date(message = "La date n'est pas valide.")
      * @Assert\GreaterThan("today")
-     * @var null|string A "Y-m-d" formatted value
+     * @ORM\Column(type="date", nullable=true)
      */
     private $date;
 
     /**
+     * @Assert\NotBlank(message="veillez spécifier une durée")
+     * @ORM\Column(type="time", nullable=true)
+     */
+    private $temps;
+
+    /**
      * @var \Equipe
-     *@Assert\NotBlank
+     *
      * @ORM\ManyToOne(targetEntity="Equipe")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_equipe1", referencedColumnName="id_equipe")
@@ -93,7 +100,7 @@ class Game
 
     /**
      * @var \Equipe
-     *@Assert\NotBlank
+     *
      * @ORM\ManyToOne(targetEntity="Equipe")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_equipe2", referencedColumnName="id_equipe")
@@ -106,26 +113,38 @@ class Game
         return $this->idMatch;
     }
 
-    public function getImage(): ?string
+    public function getImage1(): ?string
     {
-        return $this->image;
+        return $this->image1;
     }
 
-    public function setImage(string $image): self
+    public function setImage1(string $image1): self
     {
-        $this->image = $image;
+        $this->image1 = $image1;
+
+        return $this;
+    }
+    
+    public function getImage2(): ?string
+    {
+        return $this->image2;
+    }
+
+    public function setImage2(string $image2): self
+    {
+        $this->image2 = $image2;
 
         return $this;
     }
 
 
 
-    public function getScore(): ?int
+    public function getScore(): ?string
     {
         return $this->score;
     }
 
-    public function setScore(?int $score): self
+    public function setScore(?string $score): self
     {
         $this->score = $score;
 
@@ -168,24 +187,24 @@ class Game
         return $this;
     }
 
-    public function getDuree(): ?string
+    public function getDuree(): ?\DateTimeInterface
     {
         return $this->duree;
     }
 
-    public function setDuree(?string $duree): self
+    public function setDuree(?\DateTimeInterface $duree): self
     {
         $this->duree = $duree;
 
         return $this;
     }
 
-    public function getDate(): ?string
+    public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
     }
 
-    public function setDate(?string $date): self
+    public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
 
@@ -215,7 +234,17 @@ class Game
 
         return $this;
     }
+    public function getTemps(): ?\DateTimeInterface
+    {
+        return $this->temps;
+    }
 
+    public function setTemps(?\DateTimeInterface $temps): self
+    {
+        $this->temps = $temps;
+
+        return $this;
+    }
     /**
      * @return string
      */
