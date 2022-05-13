@@ -171,7 +171,7 @@ class ProduitController extends AbstractController
                 'multiple'=>false,
                 'expanded'=>false,
             ])
-        ->add('slider', RangeType::class, [
+        ->add('price', RangeType::class, [
         'attr' => [
             'min' => 20,
             'max' => 500,
@@ -186,7 +186,7 @@ class ProduitController extends AbstractController
         if ($form->isSubmitted() ) {
             /** @var $selected game */
             $selected = $form->get('game')->getData();
-            $slide = $form->get('slider')->getData();
+            $slide = $form->get('price')->getData();
             $produits = $paginator->paginate(
                 $donnees = $produitRepository->findBySlider($slide,$selected),
                 $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
@@ -197,6 +197,7 @@ class ProduitController extends AbstractController
             return $this->render('produit/catalog.html.twig', [
                 'produits' => $produits,
                 'form' => $form->createView(),
+                'slide' => $slide,
             ]);
         }
 
@@ -230,6 +231,46 @@ class ProduitController extends AbstractController
      */
     public function Category(ProduitRepository $produitRepository,PaginatorInterface $paginator,$category, Request $request): Response
     {
+        $form = $this->createFormBuilder()
+            ->add('game',ChoiceType::class,[
+                'choices'=>[
+                    'League Of Legends'=>'League Of Legends',
+                    'Valorant'=>'Valorant',
+                    'FIFA'=>'FIFA',
+                    'None'=>'None',
+                ],
+                'multiple'=>false,
+                'expanded'=>false,
+            ])
+            ->add('price', RangeType::class, [
+                'attr' => [
+                    'min' => 20,
+                    'max' => 500,
+                    'class' => 'nk-input-slider-input',
+                ],
+
+            ])
+            ->getForm()
+            ->handleRequest($request)
+        ;
+
+        if ($form->isSubmitted() ) {
+            /** @var $selected game */
+            $selected = $form->get('game')->getData();
+            $slide = $form->get('price')->getData();
+            $produits = $paginator->paginate(
+                $donnees = $produitRepository->findBySlider($slide,$selected),
+                $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+                6 // Nombre de résultats par page
+            );
+
+            dump($selected,$slide);
+            return $this->render('produit/catalog.html.twig', [
+                'produits' => $produits,
+                'form' => $form->createView(),
+                'slide' => $slide,
+            ]);
+        }
 
         $produits = $paginator->paginate(
             $donnees = $produitRepository->findByExampleField($category),
@@ -238,6 +279,7 @@ class ProduitController extends AbstractController
         );
         return $this->render('produit/catalog.html.twig', [
             'produits' => $produits,
+            'form' => $form->createView(),
         ]);
     }
 

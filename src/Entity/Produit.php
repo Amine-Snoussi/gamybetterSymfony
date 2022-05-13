@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Produit
@@ -32,6 +33,8 @@ class Produit
      * @var string
      *
      * @ORM\Column(name="nom_produit", type="string", length=50, nullable=false)
+     * @Groups("produit")
+     *
      */
     private $nomProduit;
 
@@ -39,6 +42,7 @@ class Produit
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=200, nullable=false)
+     * @Groups("produit")
      */
     private $description;
 
@@ -46,6 +50,7 @@ class Produit
      * @var string
      *
      * @ORM\Column(name="categorie", type="string", length=50, nullable=false)
+     * @Groups("produit")
      */
     private $categorie;
 
@@ -53,6 +58,7 @@ class Produit
      * @var string
      *
      * @ORM\Column(name="game", type="string", length=50, nullable=false)
+     * @Groups("produit")
      */
     private $game;
 
@@ -60,13 +66,15 @@ class Produit
      * @var int
      *
      * @ORM\Column(name="quantite_stock", type="integer", nullable=false)
+     *
      */
     private $quantiteStock;
 
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(name="prix_unitair", type="decimal", precision=6, scale=3, nullable=false)
+     * @ORM\Column(name="prix_unitair", type="decimal", precision=6, scale=2, nullable=false)
+     *
      */
     private $prixUnitair;
 
@@ -74,6 +82,7 @@ class Produit
      * @var int
      *
      * @ORM\Column(name="discount", type="integer", nullable=false)
+     *
      */
     private $discount;
 

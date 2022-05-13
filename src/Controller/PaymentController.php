@@ -77,7 +77,7 @@ class PaymentController extends AbstractController
             //->replyTo('fabien@example.com')
             //->priority(Email::PRIORITY_HIGH)
             ->subject('Welcome to GamyBetter !')
-            ->text('thank you for your Purchase')
+            ->text('Thank you for your Purchase')
             ->html($this->renderView(
                 'commande/mail_temp.html.twig',[
                 'commande' => $commande,

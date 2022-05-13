@@ -81,66 +81,18 @@
 
                 </div>
 
-                <div class="col-md-3"><button class="nk-btn nk-btn-rounded nk-btn-color-white">{{ button_label|default('apply') }}</button></div>
+                <div class="col-md-3"><button class="nk-btn rounded nk-btn-color-main-1">{{ button_label|default('apply') }}</button></div>
 
                 {{ form_end(form) }}
-                <div class="nk-input-slider">
-                    <div class="nk-input-slider-content text-white">
-                        PRICE:
-                        <strong class="text-main-1"><span class="nk-input-slider-value-0"></span> DT </strong>
-                        -
-                        <strong class="text-main-1"> <span class="nk-input-slider-value-1"></span> DT</strong>
-                    </div>
-                    <div class="nk-input-slider-input">
-                        <input
-                                type="text"
-                                name="price-filter"
-                                data-slider-min="0"
-                                data-slider-max="500"
-                                data-slider-step="1"
-                                data-slider-value="[200, 1200]"
-                                data-slider-tooltip="hide"
-                        >
-                    </div>
-                </div>
 
-
-
-                {#<div class="col-md-8">
-                    <div class="nk-input-slider-inline">
-                        <div class="nk-input-slider">
-                            <div class="nk-input-slider-content text-white">
-                                PRICE:
-                                <strong class="text-main-1">€ <span class="nk-input-slider-value-0"></span></strong>
-                                -
-                                <strong class="text-main-1">€ <span class="nk-input-slider-value-1"></span></strong>
-                            </div>
-                            <div class="nk-input-slider-input">
-                                <input
-                                        type="text"
-                                        name="price-filter"
-                                        data-slider-min="0"
-                                        data-slider-max="1800"
-                                        data-slider-step="1"
-                                        data-slider-value="[200, 1200]"
-                                        data-slider-tooltip="hide"
-                                >
-                            </div>
-                         </div>
-                        <div>
-                            <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-white">Apply</a>
-                        </div>
-                    </div>
-                </div>#}
             </div>
         </div>
         <div class="col-lg-4">
-            <form role="search" method="get" action="{{ path('search') }}" class="nk-form" novalidate="novalidate">
+            <form role="search" method="post" action="" class="nk-form" novalidate="novalidate">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Type something..." name="search">
+                    <input type="text" class="form-control" placeholder="Type something..." name="search" id="myInput">
                     <button type="submit" name="sub" class="nk-btn nk-btn-color-main-1" ><span class="ion-search"></span></button>
                 </div>
-
             </form>
         </div>
         <div id="search-results" class="example-wrapper"></div>
@@ -150,9 +102,10 @@
 
     <div class="nk-gap-2"></div>
     <!-- START: Products -->
-    <div class="row vertical-gap">
+    <div class="row vertical-gap" id="myTable">
         {%for produit in produits %}
-        <div class="col-lg-6">
+
+        <div class="col-lg-6" >
             <div class="nk-product-cat-2">
                 <a class="nk-product-image" href="{{ path('product', {'idProduit': produit.idProduit}) }}">
                     <img src="{{ asset('uploads/images/' ~ produit.image ) }}" alt="So saying he unbuckled">
@@ -189,50 +142,18 @@
     </div>
 
     <!-- END: Pagination -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-    <script type="text/javascript">
-
-        jQuery(document).ready(function($){
-
-            $('#search-form').submit(function(e){
-
-                e.preventDefault();
-                $('#search-results').html("");
-
-                $.get("{{ path('search') }}/" + input, function(data, textStatus, xhr){
-
-                    if ("object" !== typeof data || null === data) {
-                        alert("Unexpected response from server.");
-                        return;
-                    }
-
-                    if (!data.hasOwnProperty("html") || typeof data.html != "string" || (data.html = data.html.trim()).length < 1) {
-                        alert("Empty response from server.");
-                        return;
-                    }
-
-                    $('#search-results').html(data.html);
-
-                }).fail(function(xhr, textStatus, errorThrown){
-
-                    var error = "Unknown error occurred.";
-                    if ("object" === typeof xhr && null !== xhr && xhr.hasOwnProperty("responseJSON") && "object" === typeof xhr.responseJSON && xhr.responseJSON.hasOwnProperty("error") && "string" === typeof xhr.responseJSON.error && xhr.responseJSON.error.trim().length >= 1) {
-                        error = xhr.responseJSON.error.trim();
-                    } else if ("string" === typeof errorThrown && errorThrown.trim().length >= 1) {
-                        error = errorThrown.trim();
-                    }
-
-                    alert(error);
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script >
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                //console.log(value);
+                $("#myTable .col-lg-6").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                 });
-
             });
-
         });
-
-        </script>
-
+    </script>
 
 {% endblock %}
 

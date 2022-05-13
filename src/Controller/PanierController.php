@@ -33,6 +33,7 @@ class PanierController extends AbstractController
         $total = 0;
 
 
+
         foreach($panier as $id => $quantite){
             $produit = $produitRepository->find($id);
             $dataPanier[] = [
