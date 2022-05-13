@@ -20,7 +20,7 @@ class GameRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Game::class);
     }
-
+    
     /**
      * @throws ORMException
      * @throws OptimisticLockException

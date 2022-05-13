@@ -20,12 +20,8 @@ class ActualiteType extends AbstractType
         $builder
             ->add('image',  FileType::class, array('data_class' => null), [
                 'label' => 'Image',
-
-
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => true,
-
-
                 'required' => false,
                 // unmapped fields can't define their validation using annotations
                 // in the associated entity, so you can use the PHP constraint classes

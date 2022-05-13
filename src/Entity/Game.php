@@ -63,6 +63,7 @@ class Game
     private $gold;
 
     /**
+     * 
      * @var string|null
      * @Assert\NotBlank
      *
@@ -75,7 +76,7 @@ class Game
      *@Assert\NotBlank
      * @ORM\Column(name="date", type="string", length=255, nullable=true)
      * @Assert\Date
-
+     * @Assert\GreaterThan("today")
      * @var null|string A "Y-m-d" formatted value
      */
     private $date;

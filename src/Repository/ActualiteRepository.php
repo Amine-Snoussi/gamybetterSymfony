@@ -21,7 +21,7 @@ class ActualiteRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Actualite::class);
     }
-
+    
     /**
      * @throws ORMException
      * @throws OptimisticLockException

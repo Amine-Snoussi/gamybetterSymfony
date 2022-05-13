@@ -38,7 +38,7 @@ class Actualite
 
     /**
      * @var \Game
-     * @Assert\NotBlank
+     * 
      * @ORM\ManyToOne(targetEntity="Game")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_match", referencedColumnName="id_match")
@@ -48,7 +48,7 @@ class Actualite
 
     /**
      * @var \Personne
-     * @Assert\NotBlank
+     * 
      * @ORM\ManyToOne(targetEntity="Personne")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_personne", referencedColumnName="id_personne")
