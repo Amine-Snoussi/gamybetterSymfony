@@ -5,6 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 /**
  * Publication
  *
@@ -19,6 +22,7 @@ class Publication
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups({"post:read"})
      */
     private $id;
 
@@ -27,6 +31,8 @@ class Publication
      *
      * @ORM\Column(name="publication", type="string", length=255, nullable=false)
      * @Assert\NotBlank (message="veuillez remplir tous les champs")
+          * @Groups ("post:read")
+
      */
     private $publication;
 
@@ -35,6 +41,7 @@ class Publication
      *
      * @ORM\Column(name="titre", type="string", length=50, nullable=false)
      * @Assert\NotBlank (message="veuillez remplir tous les champs")
+     * @Groups ("post:read")
      */
     private $titre;
 
@@ -46,16 +53,18 @@ class Publication
     private $nbrcommentaire;
 
     /**
-     * @var \DateTime|null
+     * @var \DateTime
      *
-     * @ORM\Column(name="date", type="date", nullable=true)
+     * @ORM\Column(name="date", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
+     * @Groups ("post:read")
      */
-    private $date;
+    private $date = 'CURRENT_TIMESTAMP';
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="image", type="string", length=50, nullable=true)
+     * @Groups ("post:read")
      */
     private $image;
 
@@ -68,6 +77,7 @@ class Publication
 
     /**
      * @var \Personne
+     * 
      *
      * @ORM\ManyToOne(targetEntity="Personne")
      * @ORM\JoinColumns({
@@ -153,7 +163,7 @@ class Publication
         return $this;
     }
 
-    public function getIdPersonne(): Personne
+    public function getIdPersonne(): ?Personne
     {
         return $this->idPersonne;
     }
@@ -164,6 +174,8 @@ class Publication
 
         return $this;
     }
+
+
     public function __toString()
     {
         return $this->titre;

@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Publication;
+use App\Entity\Personne;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,9 +28,9 @@ class PublicationType extends AbstractType
         ])
             ->add('titre',ChoiceType::class,[
                 'choices'=>[
-                    'valo'=>true,
-                    'fifa'=>true,
-                    'lol'=>true,
+                    'valo'=>'valo',
+                    'fifa'=>'fifa',
+                    'lol'=>'lol',
                 ],
                 'multiple'=>false,
                 'expanded'=>true,
@@ -58,7 +60,16 @@ class PublicationType extends AbstractType
                 ],
             ])
             
-            ->add('idPersonne')
+            ->add('idpersonne',EntityType::class,
+                ['class'=>
+                    Personne::class,
+                    'choice_label'=> 'id_personne',
+                    'multiple'=> false,
+                    'expanded'=> false,
+                    'attr' => [
+                        'class' => 'form-select'
+                    ]
+                ])
         ;
     }
 

@@ -8,6 +8,7 @@ use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
+
 /**
  * @method Publication|null find($id, $lockMode = null, $lockVersion = null)
  * @method Publication|null findOneBy(array $criteria, array $orderBy = null)
@@ -73,4 +74,28 @@ class PublicationRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function TriParLike()
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.nbrlike','ASC ')
+            ->getQuery()->getResult();
+    }
+
+   public function TriParLikeD()
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.nbrlike','DESC ')
+            ->getQuery()->getResult();
+    }
+
+
+
+    public function countByCom (){
+        $query = $this->createQueryBuilder('a')
+        ->select('SUBSTRING(a.date,1,7)as date_poste , count(a) as count')
+        ->groupBy('nbrcommentaire');
+    return $query->getQuery()->getResult();
+
+}
 }

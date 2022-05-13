@@ -183,7 +183,7 @@
                     <div class="nk-news-box-item-text">
                         <p>With what mingled joy and sorrow do I take up the pen to write to my dearest friend! Oh, what a change between to-day and yesterday! Now I am friendless and alone...</p>
                     </div>
-                    
+                    <a href="blog-article.html" class="nk-news-box-item-more">Read More</a>
                     <div class="nk-news-box-item-date">
                         <span class="fa fa-calendar"></span> Sep 18, 2018
                     </div>
@@ -309,52 +309,34 @@
     <div class="nk-gap"></div>
     <div class="nk-blog-grid">
         <div class="row">
-
-
+ 
+ {% for publication in publications|slice(0, 3) %}
             <div class="col-md-6">
                 <!-- START: Post -->
                 <div class="nk-blog-post">
                     <a href="blog-article.html" class="nk-post-img">
                         <img src="front/assets/images/post-5-mid.jpg" alt="He made his passenger captain of one">
-                        <span class="nk-post-comments-count">13</span>
+                        <span class="nk-post-comments-count">{{ publication.nbrcommentaire }}</span>
                     </a>
                     <div class="nk-gap"></div>
-                    <h2 class="nk-post-title h4"><a href="blog-article.html">He made his passenger captain of one</a></h2>
+                    <h2 class="nk-post-title h4"><a href="blog-article.html">{{ publication.titre }}</a></h2>
                     <div class="nk-post-by">
-                        <img src="front/assets/images/avatar-3.jpg" alt="Wolfenstein" class="rounded-circle" width="35"> by <a href="#">Wolfenstein</a> in Jul 23, 2018
+                        <img src="{{ asset('uploads/images/' ~ publication.image ) }}" alt="Wolfenstein" class="rounded-circle" width="35"> by <a href="#">Wolfenstein</a> 
+                        <p>{{ publication.date ? publication.date|date('Y-m-d') : '' }}</p>
                     </div>
                     <div class="nk-gap"></div>
                     <div class="nk-post-text">
-                        <p>Just then her head struck against the roof of the hall: in fact she was now more than nine feet high, and she at once took up the little golden key and hurried off to the garden door...</p>
+                        <p>{{ publication.publication }}</p>
                     </div>
                     <div class="nk-gap"></div>
                     <a href="blog-article.html" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">Read More</a>
                 </div>
                 <!-- END: Post -->
             </div>
+              {% endfor %}
 
 
-            <div class="col-md-6">
-                <!-- START: Post -->
-                <div class="nk-blog-post">
-                    <a href="blog-article.html" class="nk-post-img">
-                        <img src="front/assets/images/post-6-mid.jpg" alt="At first, for some time, I was not able to answer">
-                        <span class="nk-post-comments-count">0</span>
-                    </a>
-                    <div class="nk-gap"></div>
-                    <h2 class="nk-post-title h4"><a href="blog-article.html">At first, for some time, I was not able to answer</a></h2>
-                    <div class="nk-post-by">
-                        <img src="front/assets/images/avatar-3.jpg" alt="Wolfenstein" class="rounded-circle" width="35"> by <a href="#">Wolfenstein</a> in Jul 3, 2018
-                    </div>
-                    <div class="nk-gap"></div>
-                    <div class="nk-post-text">
-                        <p>This little wandering journey, without settled place of abode, had been so unpleasant to me, that my own house, as I called it to myself, was a perfect settlement to me compared to that...</p>
-                    </div>
-                    <div class="nk-gap"></div>
-                    <a href="blog-article.html" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">Read More</a>
-                </div>
-                <!-- END: Post -->
-            </div>
+           
 
         </div>
     </div>

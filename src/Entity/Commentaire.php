@@ -21,13 +21,13 @@ class Commentaire
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
+    
     /**
-     * @var \DateTime|null
+     * @var \DateTime
      *
-     * @ORM\Column(name="date", type="date", nullable=true)
+     * @ORM\Column(name="date", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
      */
-    private $date;
+    private $date = 'CURRENT_TIMESTAMP';
 
     /**
      * @var string

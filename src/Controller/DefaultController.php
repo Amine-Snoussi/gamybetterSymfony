@@ -11,12 +11,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Controller\CoursController;
 use App\Controller\ActualiteController;
 
-
+use App\Repository\PublicationRepository;
 use App\Entity\Actualite;
 use App\Entity\Game;
 use Symfony\Component\HttpFoundation\Request;
-
-
+use App\Entity\Publication;
+use Knp\Component\Pager\PaginatorInterface;
 
 class DefaultController extends AbstractController
 {
@@ -24,14 +24,16 @@ class DefaultController extends AbstractController
      * @Route("/", name="app_default")
      * @return Response
      */
-    public function index(ActualiteController $act,GameController $mat): Response
+    public function index(ActualiteController $act,GameController $mat,PublicationController $pub ): Response
     {
+        $tab_date=$pub->LastPost();
         $tab_date=$act->latest_date();
         $tab_match=$mat->latest_match();
        // $chercher= $rech ->rechercheByJeu();
         return $this->render('default/index-front.html.twig', [
             'actualites' => $tab_date,
             'games'=> $tab_match,
+            'publications' => $tab_date,
            // 'actualite' => $actualites
             
         ]);
@@ -41,12 +43,27 @@ class DefaultController extends AbstractController
      * @Route("/blog", name="blog")
      * @return Response
      */
-    public function blog(): Response
+    public function blog(EntityManagerInterface $entityManager , PaginatorInterface $paginator,PublicationRepository $pubrepo,Request $request): Response
     {
+        $publication = $paginator->paginate(
+            $donnees = $pubrepo->findAll(),
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            3 // Nombre de résultats par page
+        );
         return $this->render('blog-grid.html.twig', [
-            'controller_name' => 'DefaultController',
+            'publications' => $publication,
         ]);
+
+
+
+     
     }
+   
+
+ 
+
+
+
     /**
      * @Route("/gallery", name="galery")
      * @return Response
