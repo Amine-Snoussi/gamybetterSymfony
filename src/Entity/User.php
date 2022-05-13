@@ -44,10 +44,7 @@ class User
      */
     private $sessions;
 
-    /**
-     * @ORM\OneToMany(targetEntity=CoursDetails::class, mappedBy="user")
-     */
-    private $coursDetails;
+
 
     public function __construct()
     {
@@ -157,35 +154,8 @@ class User
         return $this;
     }
 
-    /**
-     * @return Collection<int, CoursDetails>
-     */
-    public function getCoursDetails(): Collection
-    {
-        return $this->coursDetails;
-    }
 
-    public function addCoursDetail(CoursDetails $coursDetail): self
-    {
-        if (!$this->coursDetails->contains($coursDetail)) {
-            $this->coursDetails[] = $coursDetail;
-            $coursDetail->setUser($this);
-        }
 
-        return $this;
-    }
-
-    public function removeCoursDetail(CoursDetails $coursDetail): self
-    {
-        if ($this->coursDetails->removeElement($coursDetail)) {
-            // set the owning side to null (unless already changed)
-            if ($coursDetail->getUser() === $this) {
-                $coursDetail->setUser(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function __toString()
     {
