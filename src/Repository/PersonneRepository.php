@@ -71,4 +71,12 @@ class PersonneRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    function orderbyname(){
+        $qb = $this->createQueryBuilder('Personne')
+                   ->orderby('Personne.nom','ASC')
+                  ;
+ 
+        return $qb->getQuery()->getResult();                        
+    }
 }

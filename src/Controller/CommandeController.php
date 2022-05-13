@@ -26,7 +26,6 @@ class CommandeController extends AbstractController
      */
     public function index(EntityManagerInterface $entityManager): Response
     {
-
         $commandes = $entityManager
             ->getRepository(Commande::class)
             ->findAll();
