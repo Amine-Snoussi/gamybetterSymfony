@@ -1,0 +1,47 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Game index{% endblock %}
+
+{% block body %}
+    <h1>Game index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdMatch</th>
+                <th>Image</th>
+                <th>Score</th>
+                <th>LienStreaming</th>
+                <th>Status</th>
+                <th>Gold</th>
+                <th>Duree</th>
+                <th>Date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for game in games %}
+            <tr>
+                <td>{{ game.idMatch }}</td>
+                <td><img src="{{ asset('uploads/images/' ~ game.image ) }}" height="70" width="70" ></td>
+                <td>{{ game.score }}</td>
+                <td>{{ game.lienStreaming }}</td>
+                <td>{{ game.status }}</td>
+                <td>{{ game.gold }}</td>
+                <td>{{ game.duree }}</td>
+                <td>{{ game.date }}</td>
+                <td>
+                     <a href="{{ path('app_game_show', {'idMatch': game.idMatch}) }}" class=" btn btn-outline-primary bi bi-eye-fill"></a>
+                    <a href="{{ path('app_game_edit', {'idMatch': game.idMatch}) }}" class=" btn btn-outline-primary bi bi-pencil-square"></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_game_new') }}" class="btn btn-outline-primary">Create new</a>
+{% endblock %}

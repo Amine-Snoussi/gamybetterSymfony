@@ -1,13 +1,11 @@
 <?php
 
 namespace App\Repository;
-
 use App\Entity\Personne;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
-
 /**
  * @method Personne|null find($id, $lockMode = null, $lockVersion = null)
  * @method Personne|null findOneBy(array $criteria, array $orderBy = null)
@@ -73,4 +71,12 @@ class PersonneRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    function orderbyname(){
+        $qb = $this->createQueryBuilder('Personne')
+                   ->orderby('Personne.nom','ASC')
+                  ;
+ 
+        return $qb->getQuery()->getResult();                        
+    }
 }

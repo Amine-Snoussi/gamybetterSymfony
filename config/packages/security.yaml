@@ -23,8 +23,8 @@ security:
                 check_path: login
                 default_target_path: profile
             logout:
-                path: logout
-                target: personne
+                path: app_logout
+                target: app_default
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

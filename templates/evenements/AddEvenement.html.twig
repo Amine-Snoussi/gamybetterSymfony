@@ -1,0 +1,58 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Créer Évenements{% endblock %}
+
+{% block body %}
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-outline card-info">
+                    <div class="card-header">
+                        <br>
+                        <div class="card-body pad">
+                            {% form_theme format 'bootstrap_4_layout.html.twig' %}
+                            {% form_theme format 'bootstrap_4_layout.html.twig' %}
+                            {{ form_start(format) }}
+                            {{ form_errors(format) }}
+                            <div class="form-group">
+                                {{ form_label(format.nbEq) }}
+                                {{ form_widget(format.nbEq) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(format.nomEvent) }}
+                                {{ form_widget(format.nomEvent) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(format.descriptionEvent) }}
+                                {{ form_widget(format.descriptionEvent) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(format.dateDebutEvent) }}
+                                {{ form_widget(format.dateDebutEvent) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(format.dateFinEvent) }}
+                                {{ form_widget(format.dateFinEvent) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(format.prix) }}
+                                {{ form_widget(format.prix) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(format.etat) }}
+                                {{ form_widget(format.etat) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(format.listeEquipe) }}
+                                {{ form_widget(format.listeEquipe) }}
+                            </div>
+
+
+                            {{ form_end(format) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

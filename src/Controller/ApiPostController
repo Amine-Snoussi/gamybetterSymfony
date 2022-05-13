@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Controller;
+
+use App\Repository\PersonneRepository;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+class ApiPostController extends AbstractController
+{
+    /**
+     * @Route("/api/post", name="api_post_index", methods={"GET"})
+     */
+    public function index( PersonneRepository $personneRepository)
+    {
+        $personne = $personneRepository->findAll();
+        dd($personne);
+        return $this->render('api_post/index.html.twig', [
+            'controller_name' => 'ApiPostController',
+        ]);
+    }
+}
+ 

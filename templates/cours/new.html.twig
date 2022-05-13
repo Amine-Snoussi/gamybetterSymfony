@@ -1,0 +1,13 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}New Cours{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">Nouveau Cours</h1>
+            <a href="{{ path('cours.list') }}" class="ri-arrow-go-back-fill btn btn-outline-primary"> </a>
+            {{ include('cours/_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

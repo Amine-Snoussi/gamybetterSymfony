@@ -34,6 +34,7 @@ class Reclamation
 
     /**
      * @ORM\ManyToOne(targetEntity=Personne::class, inversedBy="reclamations")
+     * @ORM\JoinColumn(name="id_personne", referencedColumnName="id_personne")
      */
     private $personne;
 

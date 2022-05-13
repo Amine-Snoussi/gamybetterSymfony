@@ -1,87 +1,228 @@
-<?php
+<?php /** @noinspection ALL */
 
 namespace App\Entity;
 
+use App\Repository\CoursRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Cours
- *
- * @ORM\Table(name="cours", indexes={@ORM\Index(name="cours_session", columns={"id_session"}), @ORM\Index(name="cours_coach", columns={"id_coach"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=CoursRepository::class)
  */
 class Cours
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="email_coach", type="string", length=50, nullable=false)
+     * @Assert\NotBlank(message="veillez entrer un nom")
+     * @ORM\Column(type="string", length=255)
      */
-    private $emailCoach;
+    private $nom;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="categorie", type="string", length=50, nullable=false)
+     * @Assert\NotBlank(message="veillez entrer une catégorie")
+     * @ORM\Column(type="string", length=255)
      */
     private $categorie;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="jeu", type="string", length=50, nullable=false)
+     * @Assert\NotBlank(message="veillez entrer le nom du jeu")
+     * @ORM\Column(type="string", length=255)
      */
     private $jeu;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=false)
+     * @Assert\PositiveOrZero(message="entrez un prix supérieur à 0")
+     * @Assert\NotBlank(message="veillez entrer un prix non null")
+     * @ORM\Column(type="float")
      */
     private $prix;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="lien_session", type="string", length=200, nullable=false)
+     * @Assert\NotBlank(message="veillez choisir un utilisateur")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="cours")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $lienSession;
+    private $user;
+
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="liste_personnes", type="string", length=200, nullable=false)
+     * @ORM\OneToMany(targetEntity=CoursDetails::class, mappedBy="cours")
      */
-    private $listePersonnes;
+    private $coursDetails;
 
     /**
-     * @var \Session
-     *
-     * @ORM\ManyToOne(targetEntity="Session")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_session", referencedColumnName="id")
-     * })
+     * @ORM\ManyToOne(targetEntity=Session::class, inversedBy="cours_related")
      */
-    private $idSession;
+    private $session;
 
     /**
-     * @var \Personne
-     *
-     * @ORM\ManyToOne(targetEntity="Personne")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_coach", referencedColumnName="id_personne")
-     * })
+     * mimeTypes = {"image/jpeg", "image/png", "image/jpg"},
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $idCoach;
+    private $fileName;
+
+    /**
+     * mimeTypes = {"video/mp4"}
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $video;
+
+
+
+    public function __construct()
+    {
+        $this->coursDetails = new ArrayCollection();
+    }
+
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+
+    public function getCategorie(): ?string
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(string $categorie): self
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function getJeu(): ?string
+    {
+        return $this->jeu;
+    }
+
+    public function setJeu(string $jeu): self
+    {
+        $this->jeu = $jeu;
+
+        return $this;
+    }
+
+    public function getPrix(): ?float
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(float $prix): self
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+
+    /**
+     * @return Collection<int, CoursDetails>
+     */
+    public function getCoursDetails(): Collection
+    {
+        return $this->coursDetails->matching($criteria);
+    }
+
+    public function addCoursDetail(CoursDetails $coursDetail): self
+    {
+        if (!$this->coursDetails->contains($coursDetail)) {
+            $this->coursDetails[] = $coursDetail;
+            $coursDetail->setCours($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCoursDetail(CoursDetails $coursDetail): self
+    {
+        if ($this->coursDetails->removeElement($coursDetail)) {
+            // set the owning side to null (unless already changed)
+            if ($coursDetail->getCours() === $this) {
+                $coursDetail->setCours(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getJeu();
+    }
+
+    public function getSession(): ?Session
+    {
+        return $this->session;
+    }
+
+    public function setSession(?Session $session): self
+    {
+        $this->session = $session;
+
+        return $this;
+    }
+
+    public function getFileName(): ?string
+    {
+        return $this->fileName;
+    }
+
+    public function setFileName(?string $fileName): self
+    {
+        $this->fileName = $fileName;
+
+        return $this;
+    }
+
+    public function getVideo(): ?string
+    {
+        return $this->video;
+    }
+
+    public function setVideo(?string $video): self
+    {
+        $this->video = $video;
+
+        return $this;
+    }
+
+
+
 
 
 }

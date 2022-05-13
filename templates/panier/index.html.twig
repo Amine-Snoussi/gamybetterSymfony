@@ -1,0 +1,38 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Panier index{% endblock %}
+
+{% block body %}
+    <h1>Panier index</h1>
+
+    <table class="table table-borderless">
+        <thead>
+            <tr>
+               {#  <th>Id</th> #}
+                <th scope="col">QuantiteOrdered</th>
+                <th scope="col">PrixUnitaire</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for panier in paniers %}
+            <tr>
+
+                {# <td class="text-primary fw-bold">{{ panier.id }}</td> #}
+                <td class="text-primary fw-bold">{{ panier.quantiteOrdered }}</td>
+                <td class="text-primary fw-bold">{{ panier.prixUnitaire }} DT</td>
+                <td>
+                    <a href="{{ path('app_panier_show', {'id': panier.id}) }}" class=" btn btn-outline-primary bi bi-eye-fill"></a>
+                    <a href="{{ path('app_panier_edit', {'id': panier.id}) }}" class=" btn btn-outline-primary bi bi-pencil-square"></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_panier_new') }}"  class="btn btn-outline-primary">Create new</a>
+{% endblock %}

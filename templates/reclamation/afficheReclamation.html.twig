@@ -2,13 +2,23 @@
 
 {% block body%}
     <h1>liste des reclamations</h1>
-    {%for n in reclamation %}
-   <form method="post" action="{{ path('recherche1',{'personne.username':n.personne.username} )}}">
-    {%endfor%}
         <label>Recherche</label>
-        <input type="text" name="search1"><input type="submit" value="Recherche">
-    </form> 
-   <table border="1">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js
+"></script>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+<input id="myInput" type="text" placeholder="Search.." class="form-control">
+  
+   <table border="1" id="myTable">
    <tr> 
    
     <th>ID</th>
@@ -21,7 +31,7 @@
 </tr>
 {%for n in reclamation %}
 <td>{{n.id}}</td>
-<td>{{n.personne.username}}</td>
+<td>{{n.personne.nom}}</td>
 <td>{{n.titre}}</td>
 <td>{{n.description}}</td>
 <td>{{n.emailsender}}</td>

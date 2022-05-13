@@ -1,0 +1,11 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}New Commande{% endblock %}
+
+{% block body %}
+    <h1>Create new Commande</h1>
+    <a href="{{ path('app_commande_index') }}" class="ri-arrow-go-back-fill btn btn-outline-primary"></a>
+    {{ include('commande/_form.html.twig') }}
+
+
+{% endblock %}

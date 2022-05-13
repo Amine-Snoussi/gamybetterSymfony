@@ -2,30 +2,45 @@
 
 {% block body%}
     <h1>liste des personnes</h1>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js
+"></script>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+    <input id="myInput" type="text" placeholder="Search.." class="form-control">
+
+    <form method="post" action="{{path('AfficheListbyname')}}">
+      <input type="submit" value="Sort by name">
+    </form>
     
-   <table border="1">
+   <table border="1" id="myTable">
    <tr> 
    
     <th>IMAGE</th>
     <th>Name</th> 
     <th>CONTACT</th>
-    <th>MOT DE PASSE</th>
     <th>EMAIL</th>
-    <th>ROLE</th>
     <th>DESCRIPTION</th>
+    <th>Date of birth</th>
     <th>Delete</th>
     <th>Update</th>
 </tr>
 {%for n in personne %}
 <td><img src="{{ asset('uploads/images/' ~ n.image ) }}" width="70" height="70"></td>
-<td>{{n.username}}</td>
+<td>{{n.nom}}</td>
 <td>{{n.contact}}</td>
-<td>{{n.password}}</td>
 <td>{{n.email}}</td>
-<td>{{n.role}}</td>
 <td>{{n.description}}</td>
-<td><a href="{{ path('deletePersonne',{'id':n.id} )}}" >Delete</a></td>
-<td><a href="{{ path('updatePersonne',{'id':n.id} )}}" >Update</a></td>
+<td>{{n.dateofbirth|date}}</td>
+<td><a href="{{ path('deletePersonne',{'id':n.idPersonne} )}}" >Delete</a></td>
+<td><a href="{{ path('updatePersonne',{'id':n.idPersonne} )}}" >Update</a></td>
 
 <tr >
 </tr>
