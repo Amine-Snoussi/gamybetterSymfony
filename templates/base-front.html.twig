@@ -128,44 +128,43 @@
                                 <a href="#" data-toggle="modal" data-target="#modalSearch">
                                     <span class="fa fa-search"></span>
                                 </a>
-                                <ul class="dropdown">
 
-                                    <li>
-                                        <a href="tournaments.html">
-                                            Tournament
-
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            Teams
-
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ path('profile') }}">
-                                            Teammate
-
-                                        </a>
-                                    </li>
-                                </ul>
                             </li>
 
-
+{% if not app.user %}
                             <li>
                                 <a href="#" data-toggle="modal" data-target="#modalLogin">
                                     <span class="fa fa-user"></span>
                                 </a>
                             </li>
-
-
+{% else%}
+                            <li>
+                                <a href="{{path('app_logout')}}" >
+                                    LOG Out
+                                </a>
+                            </li>
+                            {% endif%}
                             <li>
 
-                                    {%block cart %}{%endblock%}
+                                    {%block cart %}
+                                <span class="nk-cart-toggle">
+                        <span class="fa fa-shopping-cart"></span>
+                        <span class="nk-badge"></span>
+                    </span>
+                                        <div class="nk-cart-dropdown">
+                                            <div >
+                                                <tr>
+                                                    <div class="nk-gap-1"></div>
+                                                    <h3 class="nk-post-title"> Your Cart is empty</h3>
+                                                </tr>
+                                            </div>
+                                        </div>
+                                    {%endblock%}
 
 
 
                             </li>
+
 
                         </ul>
                     </div>
@@ -242,7 +241,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ path('profile') }}">
+                                        <a href="">
                                             Teammate
 
                                         </a>
@@ -276,24 +275,7 @@
 
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="store-catalog-alt.html">
-                                            Catalog Alt
 
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="store-checkout.html">
-                                            Checkout
-
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="store-cart.html">
-                                            Cart
-
-                                        </a>
-                                    </li>
                                 </ul>
                             </li>
                             <li class=" nk-drop-item">
@@ -316,13 +298,13 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ path('profile') }}">
+                                        <a href="">
                                             My Courses
 
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ path('profile') }}">
+                                        <a href="">
                                             My Sessions
 
                                         </a>

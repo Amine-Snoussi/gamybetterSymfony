@@ -49,17 +49,14 @@ use Doctrine\Common\Collections\ArrayCollection;
      */
     private $prenom;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="prenom", type="string", length=255, nullable=false)
-     */
-    private $prenom;
+
 
       /**
        * @ORM\Column(name="username" , type="string", length=255)
        */
-      private $username;
+      private $pseudo;
+
+
 
       /**
        * @ORM\Column(type="integer")
@@ -84,14 +81,7 @@ use Doctrine\Common\Collections\ArrayCollection;
       private $reclamations;
 
 
-      /**
-     * @var string
-     *@Assert\NotBlank
-     * @ORM\Column(name="username", type="string", length=30, nullable=false)
-         
 
-     */
-    private $pseudo;
 
      
 
@@ -116,7 +106,7 @@ use Doctrine\Common\Collections\ArrayCollection;
      * @var \DateTime
      *@Assert\NotBlank
      * @Assert\Type("\DateTime")
-     * @ORM\Column(name="DateOfBirth", type="date", nullable=false)
+     * @ORM\Column(name="DateOfBirth", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
      */
     private $dateofbirth;
 
@@ -194,7 +184,7 @@ use Doctrine\Common\Collections\ArrayCollection;
         return $this->dateofbirth;
     }
 
-    public function setDateofbirth(\DateTimeInterface $dateofbirth): self
+    public function setDateofbirth(?\DateTimeInterface $dateofbirth): self
     {
         $this->dateofbirth = $dateofbirth;
 
@@ -302,35 +292,6 @@ use Doctrine\Common\Collections\ArrayCollection;
         return $this;
     }
 
-    /**
-     * @return Collection<int, Reclamation>
-     */
-    public function getReclamations(): Collection
-    {
-        return $this->reclamations;
-    }
-
-    public function addReclamation(Reclamation $reclamation): self
-    {
-        if (!$this->reclamations->contains($reclamation)) {
-            $this->reclamations[] = $reclamation;
-            $reclamation->setPersonne($this);
-        }
-
-        return $this;
-    }
-
-    public function removeReclamation(Reclamation $reclamation): self
-    {
-        if ($this->reclamations->removeElement($reclamation)) {
-            // set the owning side to null (unless already changed)
-            if ($reclamation->getPersonne() === $this) {
-                $reclamation->setPersonne(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @see UserInterface

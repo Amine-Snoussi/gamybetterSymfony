@@ -124,17 +124,14 @@
     </div>
     <!-- END: Categories -->
     <!-- START: Latest News -->
-
-    <div class="product-filter">
-        <div class="widget widget-price-filter">
-            <form name="" method="post" id="send-search">
-                <div class="email">
-                    <input style="background-color: #ffff" type="text" title="Search" name="search" placeholder="Search"
-                           id="myInput">
-                    <button class="button" title="Submit" type="submit"><i class="fa fa-search"></i></button>
-                </div>
-            </form>
-        </div>
+    <div class="nk-gap-2"></div>
+    <div class="col-lg-4">
+        <form role="search" method="post" action="" class="nk-form" novalidate="novalidate">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Type something..." name="search" id="myInput">
+                <button type="submit" name="sub" class="nk-btn nk-btn-color-main-1" ><span class="ion-search"></span></button>
+            </div>
+        </form>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -143,7 +140,7 @@
             $("#myInput").on("keyup", function () {
                 var value = $(this).val().toLowerCase();
                 //console.log(value);
-                $("#myTable .product-content").filter(function () {
+                $("#myTable .nk-news-box-item-active").filter(function () {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                 });
             });
@@ -160,7 +157,6 @@
             <div class="nano">
                 <div class="nano-content">
 
-
                     {% for actualite in actualites %}
                         <div id="myTable">
                             <div class="nk-news-box-item nk-news-box-item-active">
@@ -173,7 +169,7 @@
 
                                 <span class="nk-news-box-item-categories">
                             <span class="bg-main-4">{{ actualite.jeu }}</span>
-                        </span>
+                         </span>
 
                                 <div class="nk-news-box-item-text">
                                     <p>{{ actualite.description }}</p>

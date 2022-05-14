@@ -155,7 +155,7 @@ class PanierController extends AbstractController
         $com->setDiscount(0);
         $entityManager->persist($com);
         $entityManager->flush();
-        return $this->redirectToRoute("checkout");
+        return $this->redirectToRoute("checkoutCommande ");
 
     }
 }

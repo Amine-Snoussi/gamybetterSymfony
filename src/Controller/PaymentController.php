@@ -25,7 +25,7 @@ class PaymentController extends AbstractController
     }
 
     /**
-     * @Route("/checkout", name="checkout")
+     * @Route("/checkoutCommande", name="checkoutCommande")
      */
     public function checkout($stripeSK,SessionInterface $session,ProduitRepository $produitRepository): Response
     {
@@ -50,9 +50,9 @@ class PaymentController extends AbstractController
             ]],
 
             'mode' => 'payment',
-            'success_url' => $this->generateUrl('success_url',[],
+            'success_url' => $this->generateUrl('success_urlCommande',[],
             UrlGeneratorInterface::ABSOLUTE_URL),
-            'cancel_url' => $this->generateUrl('cancel_url',[],
+            'cancel_url' => $this->generateUrl('cancel_urlCommande',[],
             UrlGeneratorInterface::ABSOLUTE_URL),
         ]);
         }
@@ -62,7 +62,7 @@ class PaymentController extends AbstractController
     }
 
     /**
-     * @Route("/success-url", name="success_url")
+     * @Route("/success-urlCommande", name="success_urlCommande")
      */
     public function successURL(MailerInterface $mailer,CommandeRepository $repository): Response
     {
@@ -88,7 +88,7 @@ class PaymentController extends AbstractController
         return $this->render('payment/success.html.twig', []);
     }
     /**
-     * @Route("/cancel-url", name="cancel_url")
+     * @Route("/cancel-urlCommande", name="cancel_urlCommande")
      */
     public function cancelURL(): Response
     {

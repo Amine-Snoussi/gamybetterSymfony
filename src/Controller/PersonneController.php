@@ -172,59 +172,54 @@ class PersonneController extends AbstractController
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
-    
+
+
+
 
     /**
-     * @Route("/profile" , name="profile")
-     */
-    public function profil (){
-        return $this->render ('default/index-front.html.twig');
-    }
-
-     /**
      * @Route("/sign", name="inscription")
      */
-    public function inscription (Request $request,UserPasswordEncoderInterface $encoder){
-        $personne = new Personne();
-        $form = $this->createForm(PersonneType::class,$personne);
-        $form->add("S'inscrire",SubmitType::class);
-        $form->handleRequest($request);
-        
-        if (  $form ->isSubmitted() && $form -> isValid()){
-            $ImageFile = $form->get('image')->getData();
-            if ($ImageFile) {
-                $originalFilename = pathinfo($ImageFile->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
-                //$safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $originalFilename.'-'.uniqid().'.'.$ImageFile->guessExtension();
+    /*  public function inscription (Request $request,UserPasswordEncoderInterface $encoder){
+          $personne = new Personne();
+          $form = $this->createForm(PersonneType::class,$personne);
+          $form->add("S'inscrire",SubmitType::class);
+          $form->handleRequest($request);
 
-                // Move the file to the directory where brochures are stored
-                try {
-                    $ImageFile->move(
-                        $this->getParameter('uploads_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                }
-                // updates the '$personne' property to store the image file name
-                // instead of its contents
-                $personne->setImage($newFilename);
-            }
+          if (  $form ->isSubmitted() && $form -> isValid()){
+              $ImageFile = $form->get('image')->getData();
+              if ($ImageFile) {
+                  $originalFilename = pathinfo($ImageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                  // this is needed to safely include the file name as part of the URL
+                  //$safeFilename = $slugger->slug($originalFilename);
+                  $newFilename = $originalFilename.'-'.uniqid().'.'.$ImageFile->guessExtension();
 
-            
-            $hash = $encoder ->encodePassword($personne,$personne->getPassword());
-            $personne ->setPassword($hash);
-            $em = $this->getDoctrine()->getManager();
-            $em ->persist($personne);
-            $em->flush();
-            return $this->redirectToRoute('#');
-        }
-            return $this -> render ('signin.html.twig',[
-                'form' => $form->createView()
+                  // Move the file to the directory where brochures are stored
+                  try {
+                      $ImageFile->move(
+                          $this->getParameter('uploads_directory'),
+                          $newFilename
+                      );
+                  } catch (FileException $e) {
+                      // ... handle exception if something happens during file upload
+                  }
+                  // updates the '$personne' property to store the image file name
+                  // instead of its contents
+                  $personne->setImage($newFilename);
+              }
 
-            ]);
-        }
+
+              $hash = $encoder ->encodePassword($personne,$personne->getPassword());
+              $personne ->setPassword($hash);
+              $em = $this->getDoctrine()->getManager();
+              $em ->persist($personne);
+              $em->flush();
+              return $this->redirectToRoute('#');
+          }
+          return $this -> render ('signin.html.twig',[
+              'form' => $form->createView()
+
+          ]);
+      }*/
         /**
      * @Route("/registration", name="app_user_new", methods={"GET", "POST"})
      */
@@ -241,7 +236,7 @@ class PersonneController extends AbstractController
                     $user,
                     $form->get('plainPassword')->getData()
                 ));
-                $user->setImage("");
+
             // generer un activation token
             $user->setActivationToken(md5(uniqid()));
 

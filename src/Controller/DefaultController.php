@@ -31,14 +31,14 @@ class DefaultController extends AbstractController
      */
     public function index(ActualiteController $act, GameController $mat, PublicationController $pub): Response
     {
-        $tab_date = $pub->LastPost();
+        $tab_pub = $pub->LastPost();
         $tab_date = $act->latest_date();
         $tab_match = $mat->latest_match();
         // $chercher= $rech ->rechercheByJeu();
         return $this->render('default/index-front.html.twig', [
             'actualites' => $tab_date,
             'games' => $tab_match,
-            'publications' => $tab_date,
+            'publications' => $tab_pub,
             // 'actualite' => $actualites
 
             'controller_name' => 'DefaultController',
@@ -117,7 +117,7 @@ class DefaultController extends AbstractController
      */
     public function admin(): Response
     {
-        return $this->render('default/index-front.html.twig', [
+        return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
         ]);
     }
