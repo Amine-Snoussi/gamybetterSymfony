@@ -11,11 +11,13 @@ class ApiPostController extends AbstractController
 {
     /**
      * @Route("/api/post", name="api_post_index", methods={"GET"})
+     * @param PersonneRepository $personneRepository
+     * @return Response
      */
-    public function index( PersonneRepository $personneRepository)
+    public function index( PersonneRepository $personneRepository): Response
     {
         $personne = $personneRepository->findAll();
-        dd($personne);
+
         return $this->render('api_post/index.html.twig', [
             'controller_name' => 'ApiPostController',
         ]);
